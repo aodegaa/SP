@@ -2,5 +2,5 @@
 
 function Update () 
 {
-	transform.localPosition.y += 20 * Time.deltaTime;
+	transform.localPosition.y += 25 * Time.deltaTime;
 }
