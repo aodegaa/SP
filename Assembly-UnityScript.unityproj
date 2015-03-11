@@ -46,9 +46,13 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\TextMove.js" />
+     <Compile Include="Assets\CharacterCreation.js" />
+     <Compile Include="Assets\mayorWindow.js" />
+     <Compile Include="Assets\scrollTextUpwards.js" />
      <Compile Include="Assets\switchToIntroScene.js" />
      <Compile Include="Assets\switchToOptionsScene.js" />
+     <Compile Include="Assets\switchToPubScene.js" />
+     <Compile Include="Assets\switchToStartScene.js" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
