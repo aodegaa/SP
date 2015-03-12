@@ -26,6 +26,7 @@ function OnGUI()
     windowRect0 = Rect( windowX, windowY, windowWidth, windowHeight );
  
     GUILayout.Window( 0, windowRect0, UserForm, "Musher Registration Form #" + gameSeed );
+
 }
  
 function UserForm()
@@ -35,14 +36,30 @@ function UserForm()
     // First Name
     GUILayout.BeginHorizontal();
     GUILayout.Label("First Name", GUILayout.Width(80));
+    GUI.SetNextControlName("FirstNameText");
     firstName = GUILayout.TextField( firstName );
     GUILayout.EndHorizontal();
+    
+           // clear dat default text on click
+    if(UnityEngine.Event.current.type == EventType.Repaint){
+    	if( GUI.GetNameOfFocusedControl()=="FirstNameText"){
+    		if(firstName=="First Name") firstName = "";
+    	}
+    	else{
+    		if( firstName=="") firstName = "First Name";
+    	}
+    }
+ 
      
     // Last Name
     GUILayout.BeginHorizontal();
     GUILayout.Label("Last Name", GUILayout.Width(80));
+    GUI.SetNextControlName("LastNameText");
     lastName = GUILayout.TextField( lastName );
     GUILayout.EndHorizontal();
+    
+
+    
      
     if ( GUILayout.Button( "Submit" ) )
     {
