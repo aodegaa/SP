@@ -46,15 +46,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CharacterCreation.js" />
-     <Compile Include="Assets\mayorWindow.js" />
-     <Compile Include="Assets\previousScene.js" />
-     <Compile Include="Assets\scrollTextUpwards.js" />
-     <Compile Include="Assets\switchToIntroScene.js" />
-     <Compile Include="Assets\switchToOptionsScene.js" />
-     <Compile Include="Assets\switchToPubScene.js" />
-     <Compile Include="Assets\switchToStartScene.js" />
-     <Compile Include="Assets\variabletest.js" />
+     <Compile Include="Assets\Scripts\CharacterCreation.js" />
+     <Compile Include="Assets\Scripts\mayorWindow.js" />
+     <Compile Include="Assets\Scripts\previousScene.js" />
+     <Compile Include="Assets\Scripts\scrollTextUpwards.js" />
+     <Compile Include="Assets\Scripts\switchToIntroScene.js" />
+     <Compile Include="Assets\Scripts\switchToOptionsScene.js" />
+     <Compile Include="Assets\Scripts\switchToPubScene.js" />
+     <Compile Include="Assets\Scripts\switchToStartScene.js" />
+     <Compile Include="Assets\Scripts\variabletest.js" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
