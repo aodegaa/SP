@@ -7,7 +7,7 @@ var repairKitCount : int = 0;
 var workingSled : boolean = false;
 var render : boolean = false;
 
-
+private var windowRect0 = Rect(400, 400, 250, 0);
 
 function DoMyWindow (windowID : int) {
 	if (GUI.Button (Rect (100,20,100,25), "OK"))
@@ -17,12 +17,14 @@ function DoMyWindow (windowID : int) {
 function OnGUI () 
 {
 
+windowRect0 = GUILayout.Window( 0, windowRect0, WindowFunction, "Inventory");
+
 var screenWidth = Screen.width;
 var screenHeight = Screen.height;
 var windowRect : Rect = Rect (screenWidth/2 -150, screenHeight/2 -25, 300, 50);
 
 if(render){
-	windowRect = GUI.Window (0, windowRect, DoMyWindow, "You must buy a sled and at least one dog first!");
+	windowRect = GUI.Window (1, windowRect, DoMyWindow, "You must buy a sled and at least one dog first!");
 
 }
 
@@ -57,4 +59,25 @@ workingSled = true;            // Give item to the player scriptness goes here
 }
 }
 
+
+function WindowFunction()
+{
+	GUILayout.BeginVertical();
+    
+    GUILayout.BeginHorizontal();
+    GUILayout.Label("Money");
+    GUILayout.Label("Food");
+    GUILayout.Label("Dogs");
+    GUILayout.Label("Repair Kits");
+    GUILayout.EndHorizontal();
+   
+    GUILayout.BeginHorizontal();
+   	GUILayout.Label("$" + playerMoney.ToString());
+   	GUILayout.Label(foodCount.ToString() +" LBS");
+   	GUILayout.Label(dogCount.ToString());
+    GUILayout.Label(repairKitCount.ToString());
+   	GUILayout.EndHorizontal();
+   
+    GUILayout.EndVertical();
+}
 
