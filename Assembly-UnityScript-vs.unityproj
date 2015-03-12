@@ -53,6 +53,7 @@
      <Compile Include="Assets\switchToOptionsScene.js" />
      <Compile Include="Assets\switchToPubScene.js" />
      <Compile Include="Assets\switchToStartScene.js" />
+     <Compile Include="Assets\variabletest.js" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>

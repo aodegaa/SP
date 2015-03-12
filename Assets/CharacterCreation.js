@@ -54,6 +54,11 @@ function UserForm()
         GUILayout.Label(firstName);
         GUILayout.Label(lastName);
         GUILayout.Label(gameSeed.ToString());
+        PlayerPrefs.SetString("FirstName", firstName);
+        PlayerPrefs.SetString("LastName", lastName);
+        PlayerPrefs.SetInt("GameSeed", gameSeed);
+        Application.LoadLevel(5);
+        return;
     }
      
     GUILayout.EndVertical();

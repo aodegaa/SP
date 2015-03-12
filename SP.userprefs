@@ -1,10 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\switchToPubScene.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\variabletest.js">
     <Files>
+      <File FileName="Assets\mayorWindow.js" Line="1" Column="1" />
+      <File FileName="Assets\CharacterCreation.js" Line="31" Column="20" />
       <File FileName="Assets\switchToPubScene.js" Line="1" Column="1" />
-      <File FileName="Assets\CharacterCreation.js" Line="1" Column="1" />
       <File FileName="Assets\switchToIntroScene.js" Line="1" Column="1" />
+      <File FileName="Assets\variabletest.js" Line="18" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
