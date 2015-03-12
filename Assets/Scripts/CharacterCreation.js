@@ -31,6 +31,13 @@ function OnGUI()
  
 function UserForm()
 {
+	if (GUI.GetNameOfFocusedControl() == "LastNameText") {
+		if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.KeypadEnter || Event.current.keyCode == KeyCode.Return))
+		// make sure the defaults aren't there and make sure they actually entered a last name
+			if(firstName!="First Name" && lastName!="Last Name" && lastName!=""){
+				submitted = true;
+			}
+ }
     GUILayout.BeginVertical();
      
     // First Name
@@ -67,6 +74,8 @@ function UserForm()
     		if( lastName=="") lastName = "Last Name";
     	}
     }
+    
+    
     
      
     if ( GUILayout.Button( "Submit" ) )
