@@ -25,7 +25,6 @@ var windowRect : Rect = Rect (screenWidth/2 -150, screenHeight/2 -25, 300, 50);
 
 if(render){
 	windowRect = GUI.Window (1, windowRect, DoMyWindow, "You must buy a sled and at least one dog first!");
-
 }
 
 if (GUI.Button (Rect (10,10,200,30), "Buy Dog ($10)") && playerMoney >= 10) 
@@ -48,7 +47,7 @@ if (GUI.Button (Rect (10,90,200,30), "Buy Repair Kit ($8)") && playerMoney >= 8)
 if(!workingSled || dogCount==0) render = true;
 else{
 playerMoney -= 8;    // Take away some of the player's coins.
- foodCount += 1;            // Give item to the player scriptness goes here
+repairKitCount += 1;            // Give item to the player scriptness goes here
 }
 }
 
