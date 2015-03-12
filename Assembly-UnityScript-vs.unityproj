@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\CharacterCreation.js" />
      <Compile Include="Assets\mayorWindow.js" />
+     <Compile Include="Assets\previousScene.js" />
      <Compile Include="Assets\scrollTextUpwards.js" />
      <Compile Include="Assets\switchToIntroScene.js" />
      <Compile Include="Assets\switchToOptionsScene.js" />

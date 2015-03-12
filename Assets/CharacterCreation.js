@@ -57,6 +57,7 @@ function UserForm()
         PlayerPrefs.SetString("FirstName", firstName);
         PlayerPrefs.SetString("LastName", lastName);
         PlayerPrefs.SetInt("GameSeed", gameSeed);
+        PlayerPrefs.SetInt("PreviousScene", Application.loadedLevel);
         Application.LoadLevel(5);
         return;
     }
