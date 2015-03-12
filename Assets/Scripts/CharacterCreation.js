@@ -58,7 +58,15 @@ function UserForm()
     lastName = GUILayout.TextField( lastName );
     GUILayout.EndHorizontal();
     
-
+     // clear dat default text on click
+    if(UnityEngine.Event.current.type == EventType.Repaint){
+    	if( GUI.GetNameOfFocusedControl()=="LastNameText"){
+    		if(lastName=="Last Name") lastName = "";
+    	}
+    	else{
+    		if( lastName=="") lastName = "Last Name";
+    	}
+    }
     
      
     if ( GUILayout.Button( "Submit" ) )
