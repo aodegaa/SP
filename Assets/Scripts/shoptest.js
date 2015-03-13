@@ -13,13 +13,25 @@ var dogNumberWarning : boolean = false;
 
 var dogs = new Array();
 
-class Doge{
+// begin Doge class definition
+/*
+class Doge extends ScriptableObject {
+
 	var hungerLevel : int;
 	var health : int;
 	var fatigue : int;
 	var dogName : String;
+	// initializes dog variables
+function init(newName : String){
+	dogName = newName;
+	hungerLevel = 0;
+	health = 100;
+	fatigue = 0;
 }
-
+	
+}
+*/
+// end Doge class definition
 
 private var inventoryWindow = Rect(400, 400, 250, 0);
 
@@ -63,9 +75,30 @@ if(dogCount==8){
 	dogNumberWarning=true;
 }
 else{
-dogs.push(new Doge());
+var tempDog : Doge = ScriptableObject.CreateInstance("Doge") as Doge;
+/* begin testing code
+if(dogCount ==0){
+	tempDog.init("Scott");
+	print (tempDog.dogName);
+}
+if(dogCount ==1){
+	tempDog.init("Alex");
+	print (tempDog.dogName);
+}
+if(dogCount ==2){
+	tempDog.init("Ryan");
+	print (tempDog.dogName);
+}
+if(dogCount ==3){
+		for(var value : Doge in dogs){
+			print(value.dogName + " "+ value.health);
+		}
+}
+
+*/ end testing code
+dogs.push(tempDog);
 playerMoney -= 10;    // Take away some of the player's coins.
- dogCount += 1;            // Give item to the player scriptness goes here
+dogCount += 1;            // Give item to the player scriptness goes here
 }
 }
 
