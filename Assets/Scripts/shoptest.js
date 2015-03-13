@@ -5,8 +5,12 @@ var dogCount : int = 0;
 var foodCount : int = 0;
 var repairKitCount : int = 0;
 var workingSled : boolean = false;
-var render : boolean = false;
-var showSledWarning : boolean = false;
+
+// popup window booleans
+var render : boolean = false; // controls sled dog/sled warning
+var showSledWarning : boolean = false; // controls multiple sled warning
+var dogNumberWarning : boolean = false;
+
 var dogs = new Array();
 
 class Doge{
@@ -23,6 +27,7 @@ function DoMyWindow (windowID : int) {
 	if (GUI.Button (Rect (100,20,100,25), "OK")){
 		render = false;
 		showSledWarning = false;
+		dogNumberWarning = false;
 		}
 }
 
@@ -34,25 +39,34 @@ inventoryWindow = GUILayout.Window( 0, inventoryWindow, WindowFunction, "Invento
 
 var screenWidth = Screen.width;
 var screenHeight = Screen.height;
-var sledDogWindow : Rect = Rect (screenWidth/2 -150, screenHeight/2 -25, 300, 50);
-var sledWindow : Rect = Rect (screenWidth/2 -150, screenHeight/2 -25, 300, 50);
+var thePopUpWindow : Rect = Rect (screenWidth/2 -150, screenHeight/2 -25, 300, 50);
 
 
 // show the warning window
 if(render){
-	sledDogWindow = GUI.Window (1, sledDogWindow, DoMyWindow, "You must buy a sled and at least one dog first!");
+	thePopUpWindow = GUI.Window (1, thePopUpWindow, DoMyWindow, "You must buy a sled and at least one dog first!");
 }
 // show the other warning window
 if(showSledWarning){
-	sledWindow = GUI.Window (2, sledWindow, DoMyWindow, "You may only purchase one sled.");
+	thePopUpWindow = GUI.Window (2, thePopUpWindow, DoMyWindow, "You may only purchase one sled.");
 }
+// show the dog number warning
+if(dogNumberWarning){
+	thePopUpWindow = GUI.Window (3, thePopUpWindow, DoMyWindow, "You may have, at most, 8 dogs.");
+}
+
 
 
 if (GUI.Button (Rect (10,10,200,30), "Buy Dog ($10)") && playerMoney >= 10) 
 {
+if(dogCount==8){
+	dogNumberWarning=true;
+}
+else{
 dogs.push(new Doge());
 playerMoney -= 10;    // Take away some of the player's coins.
  dogCount += 1;            // Give item to the player scriptness goes here
+}
 }
 
 if (GUI.Button (Rect (10,50,200,30), "Buy Food ($1)") && playerMoney >= 1) 
