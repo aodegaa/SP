@@ -12,8 +12,8 @@ function OnGUI ()
 function WindowFunction()
 {
 	GUILayout.Label(PlayerPrefs.GetInt("PlayerMoney").ToString());
-    GUILayout.Label(PlayerPrefs.GetString("dog0name"));
-    GUILayout.Label(PlayerPrefs.GetInt("dog0health").ToString());
-    GUILayout.Label(PlayerPrefs.GetString("dog1name"));
-    GUILayout.Label(PlayerPrefs.GetInt("dog1health").ToString());
+    GUILayout.Label(PlayerPrefs.GetString("dogName0"));
+    GUILayout.Label(PlayerPrefs.GetInt("dogHealth0").ToString());
+    GUILayout.Label(PlayerPrefs.GetString("dogName1"));
+    GUILayout.Label(PlayerPrefs.GetInt("dogHealth1").ToString());
 }

@@ -9,7 +9,7 @@ var workingSled : boolean = false;
 
 
 //
-var dogName : String = "doggy";
+var dogName : String = "new name";
 
 //
 PlayerPrefs.SetInt("DogCount", dogCount);
@@ -22,27 +22,7 @@ var dogNumberWarning : boolean = false;
 
 var dogs = new Array();
 
-// begin Dog class definition
-/*
-class Dog extends ScriptableObject {
-
-	var hungerLevel : int;
-	var health : int;
-	var fatigue : int;
-	var dogName : String;
-	// initializes dog variables
-function init(newName : String){
-	dogName = newName;
-	hungerLevel = 0;
-	health = 100;
-	fatigue = 0;
-}
-	
-}
-*/
-// end Dog class definition
-
-
+// function for creating notification windows
 function DoMyWindow (windowID : int) 
 {
 	if (GUI.Button (Rect (100,20,100,25), "OK"))
@@ -73,12 +53,26 @@ function NameDogWindow ()
 	GUILayout.EndHorizontal();
 	
 	GUILayout.BeginHorizontal();
+	GUI.SetNextControlName("DogNameText"); // input text field
     dogName = GUILayout.TextField( dogName );
+    
+    // clear text in dog name input field on click
+    if(UnityEngine.Event.current.type == EventType.Repaint){
+    	if( GUI.GetNameOfFocusedControl()=="DogNameText"){
+    		if(dogName=="new name") dogName = "";
+    	}
+    	else{
+    		if( dogName=="") dogName = "new name";
+    	}
+    }
    
 	if (GUILayout.Button("Submit"))
 	{
 		additionalDog.init(dogName);
+		dogs.push(additionalDog);
 		renderthe = false;
+		// reset the dog name to default values
+		dogName = "new name";
 	}
 	GUILayout.EndHorizontal();
 	GUILayout.EndVertical();
@@ -87,6 +81,7 @@ function NameDogWindow ()
 
 function OnGUI () 
 {
+
 var inventoryWindow = Rect(250, 10, 250, 0);
 var additionalDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
 
@@ -151,7 +146,7 @@ if(dogCount ==3){
 
 playerMoney -= 10;    // Take away some of the player's coins.
 dogCount += 1;            // Give item to the player scriptness goes here
-dogs.push(additionalDog);
+// dogs.push(additionalDog);
 PlayerPrefs.SetInt("DogCount", dogCount);
 renderthe = true;
 
@@ -188,7 +183,17 @@ workingSled = true;            // Give item to the player scriptness goes here
 }
 if (GUI.Button (Rect (10,170,200,30), "Exit Shop"))
 {
+var count : int =0;
 PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+for(var doge : Dog in dogs){
+	var tempName : String = "dogName" +count.ToString();
+	var tempHealth : String = "dogHealth" + count.ToString();
+	PlayerPrefs.SetString(tempName.ToString(), doge.dogName);
+	print(tempName);
+	PlayerPrefs.SetInt(tempHealth.ToString(), doge.health);
+	print(tempHealth);
+	count+=1;
+}
 Application.LoadLevel(7);
 }
 
