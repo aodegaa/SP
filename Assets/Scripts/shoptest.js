@@ -1,13 +1,22 @@
 ﻿#pragma strict
 
+//
 var playerMoney : int = 100;
 var dogCount : int = 0;
 var foodCount : int = 0;
 var repairKitCount : int = 0;
 var workingSled : boolean = false;
 
+
+//
+var dogName : String = "doggy";
+
+//
+PlayerPrefs.SetInt("DogCount", dogCount);
+
 // popup window booleans
 var render : boolean = false; // controls sled dog/sled warning
+var renderthe : boolean = false;
 var showSledWarning : boolean = false; // controls multiple sled warning
 var dogNumberWarning : boolean = false;
 
@@ -33,26 +42,62 @@ function init(newName : String){
 */
 // end Dog class definition
 
-private var inventoryWindow = Rect(400, 400, 250, 0);
 
-function DoMyWindow (windowID : int) {
-	if (GUI.Button (Rect (100,20,100,25), "OK")){
+function DoMyWindow (windowID : int) 
+{
+	if (GUI.Button (Rect (100,20,100,25), "OK"))
+	{
 		render = false;
 		showSledWarning = false;
 		dogNumberWarning = false;
-		}
+	}
+}
+
+function NameDogWindow ()
+{
+	var cw = Resources.Load("cw");
+	var additionalDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
+
+	GUILayout.BeginVertical();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label(cw);
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Why Don't You Name It?");
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+    dogName = GUILayout.TextField( dogName );
+   
+	if (GUILayout.Button("Submit"))
+	{
+		additionalDog.init(dogName);
+		renderthe = false;
+	}
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
 }
 
 
 function OnGUI () 
 {
+var inventoryWindow = Rect(250, 10, 250, 0);
+var additionalDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
+
+
 // inventory window declaration
-inventoryWindow = GUILayout.Window( 0, inventoryWindow, WindowFunction, "Inventory");
+inventoryWindow = GUILayout.Window(0, inventoryWindow, WindowFunction, "Inventory");
 
 var screenWidth = Screen.width;
 var screenHeight = Screen.height;
 var thePopUpWindow : Rect = Rect (screenWidth/2 -150, screenHeight/2 -25, 300, 50);
-
+var thePopUpWindow3 : Rect = Rect (250, 100, 200, 200);
 
 // show the warning window
 if(render){
@@ -67,41 +112,49 @@ if(dogNumberWarning){
 	thePopUpWindow = GUI.Window (3, thePopUpWindow, DoMyWindow, "You may have, at most, 8 dogs.");
 }
 
+if(renderthe)
+{
+thePopUpWindow3 = GUI.Window(4, thePopUpWindow3, NameDogWindow, "I See You Bought A Dog.");
+}
+
 
 
 if (GUI.Button (Rect (10,10,200,30), "Buy Dog ($10)") && playerMoney >= 10) 
 {
-if(dogCount==8){
-	dogNumberWarning=true;
+if(dogCount ==8){
+dogNumberWarning=true;
 }
 else{
-var tempDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
+//var additionalDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
  //begin testing code
-if(dogCount ==0){
-	tempDog.init("Scott");
-	print (tempDog.dogName);
-	PlayerPrefs.SetString("dog0name", tempDog.dogName);
-	PlayerPrefs.SetInt("dog0health", tempDog.health);
+/*if(dogCount ==0){
+	additionalDog.init("Scott");
+	print (additionalDog.dogName);
+	PlayerPrefs.SetString("dog0name", additionalDog.dogName);
+	PlayerPrefs.SetInt("dog0health", additionalDog.health);
 }
 if(dogCount ==1){
-	tempDog.init("Alex");
-	print (tempDog.dogName);
-	PlayerPrefs.SetString("dog1name", tempDog.dogName);
-	PlayerPrefs.SetInt("dog1health", tempDog.health);
+	additionalDog.init("Alex");
+	print (additionalDog.dogName);
+	PlayerPrefs.SetString("dog1name", additionalDog.dogName);
+	PlayerPrefs.SetInt("dog1health", additionalDog.health);
 }
 if(dogCount ==2){
-	tempDog.init("Ryan");
-	print (tempDog.dogName);
+	additionalDog.init("Ryan");
+	print (additionalDog.dogName);
 }
 if(dogCount ==3){
 		for(var value : Dog in dogs){
 			print(value.dogName + " "+ value.health);
 		}
-}
+}*/
 
 playerMoney -= 10;    // Take away some of the player's coins.
 dogCount += 1;            // Give item to the player scriptness goes here
-dogs.push(tempDog);
+dogs.push(additionalDog);
+PlayerPrefs.SetInt("DogCount", dogCount);
+renderthe = true;
+
 }
 }
 
@@ -143,15 +196,21 @@ Application.LoadLevel(7);
 
 
 
+//Inventory
 function WindowFunction()
 {
 	GUILayout.BeginVertical();
     
     GUILayout.BeginHorizontal();
+    GUILayout.FlexibleSpace();
     GUILayout.Label("Money");
+    GUILayout.FlexibleSpace();
     GUILayout.Label("Food");
+    GUILayout.FlexibleSpace();
     GUILayout.Label("Dogs");
+    GUILayout.FlexibleSpace();
     GUILayout.Label("Repair Kits");
+    GUILayout.FlexibleSpace();
     GUILayout.EndHorizontal();
    
     GUILayout.BeginHorizontal();

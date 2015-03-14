@@ -2,8 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\shoptest.js">
     <Files>
-      <File FileName="Assets\Scripts\arrayvariabletest.js" Line="18" Column="45" />
-      <File FileName="Assets\Scripts\shoptest.js" Line="87" Column="23" />
+      <File FileName="Assets\Scripts\shoptest.js" Line="11" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
