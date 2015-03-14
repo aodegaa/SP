@@ -76,14 +76,18 @@ if(dogCount==8){
 }
 else{
 var tempDog : Doge = ScriptableObject.CreateInstance("Doge") as Doge;
-/* begin testing code
+ //begin testing code
 if(dogCount ==0){
 	tempDog.init("Scott");
 	print (tempDog.dogName);
+	PlayerPrefs.SetString("dog0name", tempDog.dogName);
+	PlayerPrefs.SetInt("dog0health", tempDog.health);
 }
 if(dogCount ==1){
 	tempDog.init("Alex");
 	print (tempDog.dogName);
+	PlayerPrefs.SetString("dog1name", tempDog.dogName);
+	PlayerPrefs.SetInt("dog1health", tempDog.health);
 }
 if(dogCount ==2){
 	tempDog.init("Ryan");
@@ -95,10 +99,9 @@ if(dogCount ==3){
 		}
 }
 
-*/ end testing code
-dogs.push(tempDog);
 playerMoney -= 10;    // Take away some of the player's coins.
 dogCount += 1;            // Give item to the player scriptness goes here
+dogs.push(tempDog);
 }
 }
 
@@ -130,7 +133,14 @@ playerMoney -= 50;    // Take away some of the player's coins.
 workingSled = true;            // Give item to the player scriptness goes here
 }
 }
+if (GUI.Button (Rect (10,170,200,30), "Exit Shop"))
+{
+PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+Application.LoadLevel(7);
 }
+
+}
+
 
 
 function WindowFunction()
@@ -153,4 +163,3 @@ function WindowFunction()
    
     GUILayout.EndVertical();
 }
-
