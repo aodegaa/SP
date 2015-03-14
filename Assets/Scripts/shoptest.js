@@ -188,10 +188,15 @@ PlayerPrefs.SetInt("PlayerMoney", playerMoney);
 for(var doge : Dog in dogs){
 	var tempName : String = "dogName" +count.ToString();
 	var tempHealth : String = "dogHealth" + count.ToString();
+	var tempFatigue : String = "dogFatigue"+count.ToString();
+	var tempHunger : String = "dogHunger"+count.ToString();
+	
 	PlayerPrefs.SetString(tempName.ToString(), doge.dogName);
-	print(tempName);
 	PlayerPrefs.SetInt(tempHealth.ToString(), doge.health);
-	print(tempHealth);
+	PlayerPrefs.SetInt(tempFatigue.ToString(), doge.fatigue);
+	PlayerPrefs.SetInt(tempHunger.ToString(), doge.hunger);
+	PlayerPrefs.SetInt("dogIsDead"+count, 0); // dog is not dead
+	
 	count+=1;
 }
 Application.LoadLevel(7);
