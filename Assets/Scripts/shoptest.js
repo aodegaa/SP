@@ -20,7 +20,7 @@ var renderthe : boolean = false;
 var showSledWarning : boolean = false; // controls multiple sled warning
 var dogNumberWarning : boolean = false;
 
-var dogs = new Array();
+static var dogs = new Array();
 
 // function for creating notification windows
 function DoMyWindow (windowID : int) 
@@ -54,7 +54,7 @@ function NameDogWindow ()
 	
 	GUILayout.BeginHorizontal();
 	GUI.SetNextControlName("DogNameText"); // input text field
-    dogName = GUILayout.TextField( dogName );
+    dogName = GUILayout.TextField( dogName , 15);
     
     // clear text in dog name input field on click
     if(UnityEngine.Event.current.type == EventType.Repaint){
