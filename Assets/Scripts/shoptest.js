@@ -13,9 +13,9 @@ var dogNumberWarning : boolean = false;
 
 var dogs = new Array();
 
-// begin Doge class definition
+// begin Dog class definition
 /*
-class Doge extends ScriptableObject {
+class Dog extends ScriptableObject {
 
 	var hungerLevel : int;
 	var health : int;
@@ -31,7 +31,7 @@ function init(newName : String){
 	
 }
 */
-// end Doge class definition
+// end Dog class definition
 
 private var inventoryWindow = Rect(400, 400, 250, 0);
 
@@ -75,7 +75,7 @@ if(dogCount==8){
 	dogNumberWarning=true;
 }
 else{
-var tempDog : Doge = ScriptableObject.CreateInstance("Doge") as Doge;
+var tempDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
  //begin testing code
 if(dogCount ==0){
 	tempDog.init("Scott");
@@ -94,7 +94,7 @@ if(dogCount ==2){
 	print (tempDog.dogName);
 }
 if(dogCount ==3){
-		for(var value : Doge in dogs){
+		for(var value : Dog in dogs){
 			print(value.dogName + " "+ value.health);
 		}
 }
