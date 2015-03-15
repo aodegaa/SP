@@ -9,7 +9,7 @@ var workingSled : boolean = false;
 
 
 //
-var dogName : String = "new name";
+private var dogName : String = "new name";
 
 //
 PlayerPrefs.SetInt("DogCount", dogCount);
