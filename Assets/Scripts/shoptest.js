@@ -120,30 +120,6 @@ if(dogCount ==8){
 dogNumberWarning=true;
 }
 else{
-//var additionalDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
- //begin testing code
-/*if(dogCount ==0){
-	additionalDog.init("Scott");
-	print (additionalDog.dogName);
-	PlayerPrefs.SetString("dog0name", additionalDog.dogName);
-	PlayerPrefs.SetInt("dog0health", additionalDog.health);
-}
-if(dogCount ==1){
-	additionalDog.init("Alex");
-	print (additionalDog.dogName);
-	PlayerPrefs.SetString("dog1name", additionalDog.dogName);
-	PlayerPrefs.SetInt("dog1health", additionalDog.health);
-}
-if(dogCount ==2){
-	additionalDog.init("Ryan");
-	print (additionalDog.dogName);
-}
-if(dogCount ==3){
-		for(var value : Dog in dogs){
-			print(value.dogName + " "+ value.health);
-		}
-}*/
-
 playerMoney -= 10;    // Take away some of the player's coins.
 dogCount += 1;            // Give item to the player scriptness goes here
 // dogs.push(additionalDog);
@@ -185,21 +161,16 @@ if (GUI.Button (Rect (10,170,200,30), "Exit Shop"))
 {
 var count : int =0;
 PlayerPrefs.SetInt("PlayerMoney", playerMoney);
-for(var doge : Dog in dogs){
-	var tempName : String = "dogName" +count.ToString();
-	var tempHealth : String = "dogHealth" + count.ToString();
-	var tempFatigue : String = "dogFatigue"+count.ToString();
-	var tempHunger : String = "dogHunger"+count.ToString();
-	
-	PlayerPrefs.SetString(tempName.ToString(), doge.dogName);
-	PlayerPrefs.SetInt(tempHealth.ToString(), doge.health);
-	PlayerPrefs.SetInt(tempFatigue.ToString(), doge.fatigue);
-	PlayerPrefs.SetInt(tempHunger.ToString(), doge.hunger);
+for(var doge : Dog in dogs){	
+	PlayerPrefs.SetString("dogName" +count, doge.dogName);
+	PlayerPrefs.SetInt("dogHealth" + count, doge.health);
+	PlayerPrefs.SetInt("dogFatigue"+count, doge.fatigue);
+	PlayerPrefs.SetInt("dogHunger"+count, doge.hunger);
 	PlayerPrefs.SetInt("dogIsDead"+count, 0); // dog is not dead
 	
 	count+=1;
 }
-Application.LoadLevel(7);
+Application.LoadLevel(6);
 }
 
 }
