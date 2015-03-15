@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-private var windowRect0 = Rect(410, 400, 150, 0);
+private var windowRect0 = Rect(200, 200, 150, 0);
  
 function OnGUI () 
 {
