@@ -1,19 +1,23 @@
-﻿class Dog extends ScriptableObject {
+﻿#pragma strict
 
-	var hungerLevel : int;
-	var health : int;
-	var fatigue : int;
+class Dog extends ScriptableObject 
+{
 	var dogName : String;
-	// initializes dog variables
-function init(newName : String){
-	dogName = newName;
-	hungerLevel = 0;
-	health = 100;
-	fatigue = 0;
-}
+	var health : int;
+	var hunger : int;
+	var fatigue : int;
 
-function toString(){
-	return dogName;
-}
+	function init(newName : String)
+	{
+		dogName = newName;
+		health = 100;
+		hunger = 0;
+		fatigue = 0;
+	}
+	
+	function toString()
+	{
+		return dogName;
+	}
 	
 }

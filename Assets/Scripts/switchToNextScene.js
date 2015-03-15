@@ -3,6 +3,6 @@
 function OnMouseDown () 
 {
 	PlayerPrefs.SetInt("PreviousScene", Application.loadedLevel);
-	Application.LoadLevel(6);
+	Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene") + 1);
 	return;
 }
