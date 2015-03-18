@@ -1,16 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\startNewGame.js">
-    <Files>
-      <File FileName="Assets\Scripts\switchToNextScene.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\startNewGame.js" Line="7" Column="26" />
-    </Files>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-UnityScript" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="startNewGame.js" selected="True" />
+              <Node name="Intro.js" selected="True" />
             </Node>
           </Node>
         </State>

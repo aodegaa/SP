@@ -162,11 +162,11 @@ if (GUI.Button (Rect (10,170,200,30), "Exit Shop"))
 var count : int =0;
 PlayerPrefs.SetInt("PlayerMoney", playerMoney);
 for(var doge : Dog in dogs){	
-	PlayerPrefs.SetString("dogName" +count, doge.dogName);
+	PlayerPrefs.SetString("dogName" + count, doge.dogName);
 	PlayerPrefs.SetInt("dogHealth" + count, doge.health);
-	PlayerPrefs.SetInt("dogFatigue"+count, doge.fatigue);
-	PlayerPrefs.SetInt("dogHunger"+count, doge.hunger);
-	PlayerPrefs.SetInt("dogIsDead"+count, 0); // dog is not dead
+	PlayerPrefs.SetInt("dogFatigue"+ count, doge.fatigue);
+	PlayerPrefs.SetInt("dogHunger" + count, doge.hunger);
+	PlayerPrefs.SetInt("dogIsDead" + count, 0); // dog is not dead
 	
 	count+=1;
 }
