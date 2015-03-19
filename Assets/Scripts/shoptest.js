@@ -1,6 +1,11 @@
 ﻿#pragma strict
 
-//
+
+var firstTime : boolean = false;
+// if the player hasn't been here before, give them some moeny
+if(!PlayerPrefs.HasKey("PlayerMoney")){
+	firstTime = true;
+}
 var playerMoney : int = 100;
 var dogCount : int = 0;
 var foodCount : int = 0;
@@ -78,6 +83,17 @@ function NameDogWindow ()
 	GUILayout.EndVertical();
 }
 
+function TutorialWindow(){
+	GUILayout.BeginVertical();
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("I see this is your first time in the shop! Why don't you start by buying a dog and a sled?");
+	GUILayout.EndHorizontal();
+	if(GUILayout.Button("Ok")){
+		firstTime = false;
+	}
+	GUILayout.EndVertical();
+}
+
 
 function OnGUI () 
 {
@@ -91,7 +107,11 @@ inventoryWindow = GUILayout.Window(0, inventoryWindow, WindowFunction, "Inventor
 var screenWidth = Screen.width;
 var screenHeight = Screen.height;
 var thePopUpWindow : Rect = Rect (screenWidth/2 -150, screenHeight/2 -25, 300, 50);
+var thePopUpWindow2 : Rect = Rect(screenWidth/2-150, screenHeight/2-50, 300,100); // popup for tutorial window
 var thePopUpWindow3 : Rect = Rect (250, 100, 200, 200);
+if(firstTime){
+	thePopUpWindow2 = GUI.Window(5, thePopUpWindow2, TutorialWindow, "Tutorial Window");
+}
 
 // show the warning window
 if(render){
@@ -108,8 +128,8 @@ if(dogNumberWarning){
 
 if(renderthe)
 {
-GUI.enabled = false;
 thePopUpWindow3 = GUI.Window(4, thePopUpWindow3, NameDogWindow, "I See You Bought A Dog.");
+GUI.enabled = false;
 }
 
 
@@ -123,7 +143,6 @@ else{
 playerMoney -= 10;    // Take away some of the player's coins.
 dogCount += 1;            // Give item to the player scriptness goes here
 // dogs.push(additionalDog);
-PlayerPrefs.SetInt("DogCount", dogCount);
 renderthe = true;
 
 }
@@ -170,6 +189,12 @@ for(var doge : Dog in dogs){
 	
 	count+=1;
 }
+PlayerPrefs.SetInt("RepairKitCount",repairKitCount);
+PlayerPrefs.SetInt("FoodCount",foodCount);
+PlayerPrefs.SetInt("DogCount",dogCount);
+if(workingSled) PlayerPrefs.SetInt("WorkingSled", 1);
+else PlayerPrefs.SetInt("WorkingSled", 0);
+
 Application.LoadLevel(6);
 }
 if(!renderthe){
