@@ -81,7 +81,6 @@ function NameDogWindow ()
 
 function OnGUI () 
 {
-
 var inventoryWindow = Rect(250, 10, 250, 0);
 var additionalDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
 
@@ -109,6 +108,7 @@ if(dogNumberWarning){
 
 if(renderthe)
 {
+GUI.enabled = false;
 thePopUpWindow3 = GUI.Window(4, thePopUpWindow3, NameDogWindow, "I See You Bought A Dog.");
 }
 
@@ -172,7 +172,9 @@ for(var doge : Dog in dogs){
 }
 Application.LoadLevel(6);
 }
-
+if(!renderthe){
+	GUI.enabled = true;
+}
 }
 
 
