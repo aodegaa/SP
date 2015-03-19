@@ -9,7 +9,7 @@ function OnGUI()
 	{
 	
 		// For Testing Purposes - Delete Later
-		if (GUI.Button(Rect((Screen.width/2 - 340), (Screen.height/2), 80, 50), GUIContent("Delete")))
+		if (GUI.Button(Rect((Screen.width/2 + 260), (Screen.height/2 + 120), 80, 50), GUIContent("Delete")))
 		{
 			PlayerPrefs.DeleteAll();
 			return;
