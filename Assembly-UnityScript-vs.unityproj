@@ -51,11 +51,13 @@
      <Compile Include="Assets\Scripts\Intro.js" />
      <Compile Include="Assets\Scripts\Inventory.js" />
      <Compile Include="Assets\Scripts\Player.js" />
+     <Compile Include="Assets\Scripts\TestSceneScript.js" />
      <Compile Include="Assets\Scripts\TimeScript.js" />
+     <Compile Include="Assets\Scripts\Title.js" />
+     <Compile Include="Assets\Scripts\WindowScript.js" />
      <Compile Include="Assets\Scripts\arrayvariabletest.js" />
      <Compile Include="Assets\Scripts\mayorWindow.js" />
      <Compile Include="Assets\Scripts\shoptest.js" />
-     <Compile Include="Assets\Scripts\startNewGame.js" />
      <Compile Include="Assets\Scripts\switchToNextScene.js" />
      <Compile Include="Assets\Scripts\switchToOptionsScene.js" />
      <Compile Include="Assets\Scripts\switchToPreviousScene.js" />
