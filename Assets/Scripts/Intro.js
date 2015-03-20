@@ -8,7 +8,7 @@ function Update()
 	transform.localPosition.y += 25 * Time.deltaTime;
 
 	// adjust based on time taken for all text to pass
-	if (Time.time >= 60)
+	if (Time.time >= 34)
 	{
 		buttonText = "Continue";
 	}

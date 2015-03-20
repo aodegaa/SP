@@ -1,15 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\towntest.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Intro.js">
     <Files>
-      <File FileName="Assets\Scripts\towntest.js" Line="71" Column="36" />
+      <File FileName="Assets\Scripts\Intro.js" Line="11" Column="21" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-UnityScript" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="towntest.js" selected="True" />
+              <Node name="Intro.js" selected="True" />
             </Node>
           </Node>
         </State>
