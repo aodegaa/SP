@@ -9,19 +9,25 @@ function OnGUI()
 	{
 	
 		// For Testing Purposes - Delete Later
-		if (GUI.Button(Rect((Screen.width/2 + 260), (Screen.height/2 + 120), 80, 50), GUIContent("Delete")))
+		if (GUI.Button(Rect((Screen.width/2 - 340), (Screen.height/2), 80, 50), GUIContent("Delete")))
 		{
 			PlayerPrefs.DeleteAll();
 			return;
 		}
 		// For Testing Purposes - Delete Later
 	
+		// if they don't have a save file yet, don't let them continue
+		if (!PlayerPrefs.HasKey("PreviousScene"))
+		{
+		GUI.enabled = false;
+		}
 		// Continue
 		if (GUI.Button(Rect((Screen.width/2 - 340), (Screen.height - 60), 80, 50), GUIContent("Continue")))
 		{
 			Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene"));
 			return;
 		}
+		GUI.enabled = true;
 	
 		// Options
 		if (GUI.Button(Rect((Screen.width/2 + 260), (Screen.height - 60), 80, 50), GUIContent("Options")))
