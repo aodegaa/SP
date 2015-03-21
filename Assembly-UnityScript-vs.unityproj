@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Title.js" />
      <Compile Include="Assets\Scripts\WindowScript.js" />
      <Compile Include="Assets\Scripts\arrayvariabletest.js" />
+     <Compile Include="Assets\Scripts\icefishessss.js" />
      <Compile Include="Assets\Scripts\mayorWindow.js" />
      <Compile Include="Assets\Scripts\shoptest.js" />
      <Compile Include="Assets\Scripts\switchToNextScene.js" />
