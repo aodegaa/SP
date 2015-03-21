@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\switchToNextScene.js" />
      <Compile Include="Assets\Scripts\switchToOptionsScene.js" />
      <Compile Include="Assets\Scripts\switchToPreviousScene.js" />
+     <Compile Include="Assets\Scripts\testshop.js" />
      <Compile Include="Assets\Scripts\towntest.js" />
      <Compile Include="Assets\Scripts\variabletest.js" />
  <Reference Include="UnityEngine.UI">
