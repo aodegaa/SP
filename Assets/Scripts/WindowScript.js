@@ -6,6 +6,7 @@ static var button2clicked : boolean;
 static var button3clicked : boolean;
 static var button4clicked : boolean;
 static var button5clicked : boolean;
+static var button6clicked : boolean;
 
 
 
@@ -41,6 +42,7 @@ static function createManageWindow(){
 	}
 	button5clicked = GUILayout.Button("Options");
 	GUI.enabled=true;
+	button6clicked = GUILayout.Button("X", GUILayout.Width(25));
 	GUILayout.EndHorizontal();
 	// end tab area
 	
