@@ -1,5 +1,11 @@
 ﻿#pragma strict
 
+var townName : String = "Beginnings Burg";
+var townTime : String = "13:00";
+var townDate : String = "June 6th, 1969";
+var shopMessage : String = "Welcome!";
+
+var playerIsShopping : boolean = false;
 
 var firstTime : boolean = false;
 // if the player hasn't been here before, give them some moeny
@@ -97,12 +103,21 @@ function TutorialWindow(){
 
 function OnGUI () 
 {
-var inventoryWindow = Rect(250, 10, 250, 0);
+var inventoryWindow = Rect(Screen.width/2 - 125, Screen.height - 90, 250, 80);
 var additionalDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
 
 
 // inventory window declaration
-inventoryWindow = GUILayout.Window(0, inventoryWindow, WindowFunction, "Inventory");
+inventoryWindow = GUILayout.Window(9, inventoryWindow, WindowFunction, "Inventory");
+
+var townWindow : Rect = Rect(10, 10, 160, 70);
+	townWindow = GUI.Window(0, townWindow, TownInformation, townName + " Store");
+
+	var shopChoicesWindow : Rect = Rect(10, 90, 160, 110);
+	shopChoicesWindow = GUI.Window(1, shopChoicesWindow, ShopChoices, "");
+	
+	var shopDialogWindow : Rect = Rect(Screen.width/2 - 120, 10, 240, 60);
+	shopDialogWindow = GUI.Window(2, shopDialogWindow, ShopDialog, "");
 
 var screenWidth = Screen.width;
 var screenHeight = Screen.height;
@@ -110,31 +125,31 @@ var thePopUpWindow : Rect = Rect (screenWidth/2 -150, screenHeight/2 -25, 300, 5
 var thePopUpWindow2 : Rect = Rect(screenWidth/2-150, screenHeight/2-50, 300,100); // popup for tutorial window
 var thePopUpWindow3 : Rect = Rect (250, 100, 200, 200);
 if(firstTime){
-	thePopUpWindow2 = GUI.Window(5, thePopUpWindow2, TutorialWindow, "Tutorial Window");
+	thePopUpWindow2 = GUI.Window(4, thePopUpWindow2, TutorialWindow, "Tutorial Window");
 }
 
 // show the warning window
 if(render){
-	thePopUpWindow = GUI.Window (1, thePopUpWindow, DoMyWindow, "You must buy a sled and at least one dog first!");
+	thePopUpWindow = GUI.Window (5, thePopUpWindow, DoMyWindow, "You must buy a sled and at least one dog first!");
 }
 // show the other warning window
 if(showSledWarning){
-	thePopUpWindow = GUI.Window (2, thePopUpWindow, DoMyWindow, "You may only purchase one sled.");
+	thePopUpWindow = GUI.Window (6, thePopUpWindow, DoMyWindow, "You may only purchase one sled.");
 }
 // show the dog number warning
 if(dogNumberWarning){
-	thePopUpWindow = GUI.Window (3, thePopUpWindow, DoMyWindow, "You may have, at most, 8 dogs.");
+	thePopUpWindow = GUI.Window (7, thePopUpWindow, DoMyWindow, "You may have, at most, 8 dogs.");
 }
 
 if(renderthe)
 {
-thePopUpWindow3 = GUI.Window(4, thePopUpWindow3, NameDogWindow, "I See You Bought A Dog.");
+thePopUpWindow3 = GUI.Window(8, thePopUpWindow3, NameDogWindow, "I See You Bought A Dog.");
 GUI.enabled = false;
 }
 
 
 
-if (GUI.Button (Rect (10,10,200,30), "Buy Dog ($10)") && playerMoney >= 10) 
+if (GUI.Button (Rect (10,210,160,30), "Buy Dog ($10)") && playerMoney >= 10) 
 {
 if(dogCount ==8){
 dogNumberWarning=true;
@@ -148,7 +163,7 @@ renderthe = true;
 }
 }
 
-if (GUI.Button (Rect (10,50,200,30), "Buy Food ($1)") && playerMoney >= 1) 
+if (GUI.Button (Rect (10,250,160,30), "Buy Food ($1)") && playerMoney >= 1) 
 {
 if(!workingSled || dogCount==0) render = true;
 else{
@@ -157,7 +172,7 @@ playerMoney -= 1;    // Take away some of the player's coins.
 }
 }
 
-if (GUI.Button (Rect (10,90,200,30), "Buy Repair Kit ($8)") && playerMoney >= 8) 
+if (GUI.Button (Rect (10,290,160,30), "Buy Repair Kit ($8)") && playerMoney >= 8) 
 {
 if(!workingSled || dogCount==0) render = true;
 else{
@@ -166,7 +181,7 @@ repairKitCount += 1;            // Give item to the player scriptness goes here
 }
 }
 
-if (GUI.Button (Rect (10,130,200,30), "Buy Sled ($50)") && playerMoney >= 50) 
+if (GUI.Button (Rect (10,330,160,30), "Buy Sled ($50)") && playerMoney >= 50) 
 {
 if (workingSled){
 	showSledWarning = true;
@@ -176,7 +191,7 @@ playerMoney -= 50;    // Take away some of the player's coins.
 workingSled = true;            // Give item to the player scriptness goes here
 }
 }
-if (GUI.Button (Rect (10,170,200,30), "Exit Shop"))
+if (GUI.Button (Rect (10,370,160,30), "Exit Shop"))
 {
 var count : int =0;
 PlayerPrefs.SetInt("PlayerMoney", playerMoney);
@@ -229,4 +244,77 @@ function WindowFunction()
    	GUILayout.EndHorizontal();
    
     GUILayout.EndVertical();
+}
+
+function ShopChoices()
+{
+	GUILayout.BeginVertical();
+	
+	GUILayout.BeginHorizontal();
+	if(GUILayout.Button("Browse Wares"))
+	{
+		playerIsShopping = true;
+		shopMessage = "What would you like?";
+		//
+		// Spawn Browse Wares Overlay
+		//
+	}
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	if(GUILayout.Button("Trades"))
+	{
+		shopMessage = "How does this sound?";
+		//
+		// Spawn mini-window Trade dialog
+		//
+	}
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	if(GUILayout.Button("Leave Store"))
+	{
+		shopMessage = "Thanks for shopping.";
+		//
+		// leave store
+		//
+	}
+	GUILayout.EndHorizontal();
+	
+	GUILayout.EndVertical();
+}
+
+function TownInformation()
+{
+	var myClock = Resources.Load("clock");
+
+	GUILayout.BeginVertical();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label(townDate);
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label(myClock);
+	GUILayout.Label(townTime);
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.EndVertical();
+}
+
+function ShopDialog()
+{
+	GUILayout.BeginVertical();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label(shopMessage);
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.EndVertical();
 }

@@ -1,16 +1,20 @@
 ﻿#pragma strict
  
-// The initial position and size of the window.
-private var windowRect0 = Rect(410, 400, 150, 0);
- 
 function OnGUI () 
 {
-    // Render the window with ID 0.
-    windowRect0 = GUILayout.Window( 0, windowRect0, WindowFunction, "The Mayor" );   
+	var tutorialWindow = Rect(Screen.width/2 - 75, Screen.height/2 - 75, 150, 150);
+    tutorialWindow= GUILayout.Window(0, tutorialWindow, TutorialDialog, "The Mayor");   
 }
  
-// Window 0's callback function
-function WindowFunction()
+function TutorialDialog()
 {
-    GUILayout.Label( "Welcome. \n\nHead to the Pub to register." );
+	if(Application.loadedLevel == 2)
+	{
+    	GUILayout.Label( "Welcome. \n\nHead to the Pub to register." );
+    }
+    
+    if(Application.loadedLevel == 4)
+	{
+    	GUILayout.Label( "Here is some money. \n\nHead to the Store for supplies." );
+    }
 }
