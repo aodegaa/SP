@@ -11,6 +11,20 @@ var firstName : String = "First Name";
 var lastName : String = "Last Name";
 var gameSeed : int;
 var submitted : boolean = false;
+var renderCreateCharacter : boolean = false;
+
+//
+
+var rumorMessage : String;
+var messageNumber : int;
+var previousMessageNumber : int;
+var renderRumor : boolean = false;
+
+//
+
+var renderJob : boolean = false;
+
+//
 
 function Start()
 {
@@ -20,7 +34,7 @@ function Start()
 function OnGUI()
 {
 	var townWindow : Rect = Rect(10, 10, 160, 70);
-	townWindow = GUI.Window(0, townWindow, TownInformation, townName + " Store");
+	townWindow = GUI.Window(0, townWindow, TownInformation, townName + " Pub");
 
 	var pubChoicesWindow : Rect = Rect(10, 90, 160, 140);
 	pubChoicesWindow = GUI.Window(1, pubChoicesWindow, PubChoices, "");
@@ -28,9 +42,17 @@ function OnGUI()
 	var pubDialogWindow : Rect = Rect(Screen.width/2 - 70, 10, 280, 60);
 	pubDialogWindow = GUI.Window(2, pubDialogWindow, PubDialog, "");
 	
-	var createCharacterWindow : Rect = Rect(Screen.width/2 - 70, 80, 280, 150);
-	createCharacterWindow = GUI.Window(3, createCharacterWindow, CreateCharacter, "Musher Registration Form #" + gameSeed);
+	if(renderRumor)
+	{
+		var rumorWindow : Rect = Rect(Screen.width/2 - 70, 80, 280, 150);
+		rumorWindow = GUI.Window(3, rumorWindow, RumorDialog, "");
+	}
 	
+	if(renderCreateCharacter)
+	{
+		var createCharacterWindow : Rect = Rect(Screen.width/2 - 70, 80, 280, 150);
+		createCharacterWindow = GUI.Window(4, createCharacterWindow, CreateCharacter, "Musher Registration Form #" + gameSeed);
+	}
 }
 
 function PubChoices()
@@ -43,6 +65,7 @@ function PubChoices()
     	if(GUILayout.Button("Registration"))
     	{
     		pubMessage = "You're going to make the trip? \nMany have left, never to return.";
+    		renderCreateCharacter = true;
     	}
     	GUILayout.EndHorizontal();
     } 
@@ -51,9 +74,8 @@ function PubChoices()
 	if(GUILayout.Button("Rumors"))
 	{
 		pubMessage = "Have you heard the latest?";
-		//
-		// Spawn rumors mini window dialog
-		//
+		SpawnRumor();
+		renderRumor = true;
 	}
 	GUILayout.EndHorizontal();
 	
@@ -176,33 +198,86 @@ function CreateCharacter()
     GUILayout.EndHorizontal();
     
      // clear dat default text on click
-    if(UnityEngine.Event.current.type == EventType.Repaint){
-    	if( GUI.GetNameOfFocusedControl()=="LastNameText"){
-    		if(lastName=="Last Name") lastName = "";
+    if(UnityEngine.Event.current.type == EventType.Repaint)
+    {
+    	if(GUI.GetNameOfFocusedControl()=="LastNameText")
+    	{
+    		if(lastName=="Last Name") 
+    		{
+    			lastName = "";
+    		}
     	}
-    	else{
-    		if( lastName=="") lastName = "Last Name";
+    	
+    	else
+    	{
+    		if(lastName=="") 
+    		{
+    			lastName = "Last Name";
+    		}
     	}
     }
     
-    
-    
+    ///
      
-    if ( GUILayout.Button( "Submit" ) )
+    if (GUILayout.Button("Submit"))
     {
         submitted = true;
     }
      
-    if ( submitted )
+    if(submitted)
     {
-        //GUILayout.Label(firstName);
-        //GUILayout.Label(lastName);
-       // GUILayout.Label(gameSeed.ToString());
         PlayerPrefs.SetString("FirstName", firstName);
         PlayerPrefs.SetString("LastName", lastName);
         PlayerPrefs.SetInt("GameSeed", gameSeed);
         PlayerPrefs.SetInt("Registration", 1);
+        renderCreateCharacter = false;
     }
      
     GUILayout.EndVertical();
+}
+
+function RumorDialog()
+{
+	GUILayout.BeginVertical();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label(rumorMessage);
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.EndVertical();
+}
+
+function SpawnRumor()
+{
+	
+	messageNumber = Random.Range(1, 6);
+	
+	// Logic To Prevent Same Rumor Appearing Twice In a Row
+	if(messageNumber == previousMessageNumber)
+	{
+		messageNumber = Random.Range(1, 6);
+	}
+	
+	switch(messageNumber)
+	{
+		case 1:
+			rumorMessage = "You'll find the fairest prices around at the local shop.";
+			break;
+		case 2:
+			rumorMessage = "You'll tire far faster than your dogs. Be sure to rest once in awhile.";
+			break;
+		case 3:
+			rumorMessage = "rumor 3";
+			break;
+		case 4:
+			rumorMessage = "rumor 4";
+			break;
+		case 5:
+			rumorMessage = "rumor 5";
+			break;
+	}
+	
+	previousMessageNumber = messageNumber;
 }

@@ -1,7 +1,7 @@
 ﻿#pragma strict
  
 // The initial position and size of the window.
-private var windowRect0 = Rect(410, 400, 150, 0);
+private var windowRect0 = Rect(10, 10, 150, 0);
  
 function OnGUI () 
 {
@@ -15,4 +15,5 @@ function WindowFunction()
     GUILayout.Label(PlayerPrefs.GetString("FirstName"));
     GUILayout.Label(PlayerPrefs.GetString("LastName"));
     GUILayout.Label(PlayerPrefs.GetInt("GameSeed").ToString());
+    GUILayout.Label(PlayerPrefs.GetInt("Difficulty").ToString());
 }

@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\pubtest.js">
     <Files>
-      <File FileName="Assets\Scripts\pubtest.js" Line="31" Column="74" />
+      <File FileName="Assets\Scripts\pubtest.js" Line="25" Column="33" />
       <File FileName="Assets\Scripts\Title.js" Line="1" Column="1" />
     </Files>
     <Pads>
