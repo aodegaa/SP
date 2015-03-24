@@ -30,7 +30,7 @@ function Update () {
 		if(Input.GetButton("Left")){
 			transform.Translate(Vector3(speed*-1,0,0) * Time.deltaTime);
 		} 
-		// not moving a direction
+		// not moving left or right, so make sure the sled moves the correct amount left or right on its own
 		if(!(Input.GetButton("Left")) || (Input.GetButton("Right"))){
 			transform.position.x += 3*Time.deltaTime;
 		}

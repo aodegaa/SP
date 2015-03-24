@@ -8,31 +8,55 @@ var rest : boolean;
 var viewMap : boolean;
 var leaveTown : boolean;
 
+function Update(){
+	Time.timeScale = WindowScript.timeScale;
+}
+
+function FixedUpdate(){
+	if(WindowScript.beginRest){
+		if(WindowScript.restTime>0){
+			WindowScript.restTime--;
+		}
+		else{
+			WindowScript.timeScale = 0;
+			WindowScript.beginRest = false;
+		}
+	}
+}
 
 function OnGUI() 
 {
-// hax
-	if(Event.current.type == EventType.Layout){
-		if(manage){
-			if(!ManageScreen.close){
-	 			ManageScreen.createManageWindow();
-			}
-			else{
-				manage = false;
-				ManageScreen.close = false;
-			}
-		}
-		else
-		{
-			var townWindow : Rect = Rect(10, 10, 120, 70);
-			townWindow = GUI.Window(0, townWindow, TownInformation, townName);
-		
-			var playerChoicesWindow : Rect = Rect(10, 90, 120, 140);
-			playerChoicesWindow = GUI.Window(1, playerChoicesWindow, PlayerChoices, "");
-		}
-	}	
+	renderTabs();	
 }
 
+function renderTabs(){
+	if(manage){
+		if(!ManageScreen.close){
+	 		ManageScreen.createManageWindow();
+		}
+		else{
+			manage = false;
+			ManageScreen.close = false;
+		}
+	}
+	else if(rest){
+		if(!RestScreen.close){
+			RestScreen.createRestWindow();
+		}
+		else{
+			rest = false;
+			RestScreen.close = false;
+		}
+	}
+	else
+	{
+		var townWindow : Rect = Rect(10, 10, 120, 70);
+		townWindow = GUI.Window(0, townWindow, TownInformation, townName);
+	
+		var playerChoicesWindow : Rect = Rect(10, 90, 120, 140);
+		playerChoicesWindow = GUI.Window(1, playerChoicesWindow, PlayerChoices, "");
+	}
+}
 
 function TownInformation()
 {

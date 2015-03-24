@@ -17,14 +17,16 @@ function winWindow(){
 }
 
 function OnGUI(){
+	renderWindows();
+}
+
+function renderWindows(){
 	var popupwindow : Rect = Rect(Screen.width/2-25,Screen.height/2-50,100,50);
-	if(Event.current.type == EventType.layout){
-		if(Musher.collision){
-			popupwindow = GUILayout.Window(0,popupwindow, crashWindow, "");
-		}
-		if(done){
-			popupwindow = GUILayout.Window(0,popupwindow, winWindow, "");
-		}
+	if(Musher.collision){
+		popupwindow = GUILayout.Window(0,popupwindow, crashWindow, "");
+	}
+	if(done){
+		popupwindow = GUILayout.Window(0,popupwindow, winWindow, "");
 	}
 }
 	
@@ -48,6 +50,7 @@ function Update () {
 		}
 		else {
 			done=true;
+			// load the next level here
 		}
 	}
 }

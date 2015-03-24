@@ -119,6 +119,49 @@ static function createInventoryTab(){
 	GUILayout.EndVertical();
 }
 
+
+
+// static variables associated with restWindow
+
+static var restTime : int;
+static var timeScale : float = 0;
+static var closeRestWindow : boolean;
+static var beginRest : boolean;
+static function restWindow(){
+if(beginRest) GUI.enabled=false;
+else GUI.enabled=true;
+	GUILayout.BeginVertical();
+	GUILayout.Label("");
+	
+	// rest time slider
+	GUILayout.BeginHorizontal(GUILayout.Height(30));
+	GUILayout.Label("");
+	restTime = GUILayout.HorizontalSlider(restTime, 0.0, 12.0, GUILayout.Width(100));
+	GUILayout.Label(restTime.ToString() + " hours", GUILayout.Width(100));
+	GUILayout.EndHorizontal();
+	
+	// town time
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("");
+	GUILayout.Label("June 6th, 1969 13:00"); // eventually update this to a static time variable
+	GUILayout.Label("");
+	GUILayout.EndHorizontal();
+	
+	// buttons
+	GUILayout.BeginHorizontal();
+	if(GUILayout.Button("Rest")){
+		beginRest = true;
+		timeScale = .02;
+		// rest
+	}
+	if(GUILayout.Button("Cancel")){
+		RestScreen.close = true;
+		// cancel
+	}
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}
+
 static function createOptionsTab(){
 	GUILayout.BeginVertical();
 	// finish this one too

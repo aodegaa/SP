@@ -26,6 +26,11 @@ var renderJob : boolean = false;
 
 //
 
+private var easy : boolean = false;
+private var medium : boolean = false;
+private var hard : boolean = false;
+
+//
 function Start()
 {
 	gameSeed = Random.Range(1,1001);
@@ -33,6 +38,11 @@ function Start()
 
 function OnGUI()
 {
+	if(renderCreateCharacter)
+	{
+		var createCharacterWindow : Rect = Rect(Screen.width/2 - 70, 80, 280, 150);
+		createCharacterWindow = GUI.Window(4, createCharacterWindow, CreateCharacter, "Musher Registration Form #" + gameSeed);
+	}
 	var townWindow : Rect = Rect(10, 10, 160, 70);
 	townWindow = GUI.Window(0, townWindow, TownInformation, townName + " Pub");
 
@@ -47,16 +57,15 @@ function OnGUI()
 		var rumorWindow : Rect = Rect(Screen.width/2 - 70, 80, 280, 150);
 		rumorWindow = GUI.Window(3, rumorWindow, RumorDialog, "");
 	}
-	
-	if(renderCreateCharacter)
-	{
-		var createCharacterWindow : Rect = Rect(Screen.width/2 - 70, 80, 280, 150);
-		createCharacterWindow = GUI.Window(4, createCharacterWindow, CreateCharacter, "Musher Registration Form #" + gameSeed);
-	}
+
 }
 
 function PubChoices()
-{
+{	
+	// disable the GUI while character selection is made
+	if(renderCreateCharacter){
+		GUI.enabled=false;
+	}
 	GUILayout.BeginVertical();
 	
 	if(!PlayerPrefs.HasKey("Registration"))
@@ -103,6 +112,7 @@ function PubChoices()
 	GUILayout.EndHorizontal();
 	
 	GUILayout.EndVertical();
+	GUI.enabled=true; // renenable the GUI now that registration is complete
 }
 
 function TownInformation()
@@ -144,13 +154,21 @@ function PubDialog()
 
 function CreateCharacter()
 {
+	// allow for enter to submit form
+	// don't actually like this option right now. make them click submit.
+	/*
 	if (GUI.GetNameOfFocusedControl() == "LastNameText") {
-		if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.KeypadEnter || Event.current.keyCode == KeyCode.Return))
+		if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.KeypadEnter || Event.current.keyCode == KeyCode.Return)){
 		// make sure the defaults aren't there and make sure they actually entered a last name
 			if(firstName!="First Name" && lastName!="Last Name" && lastName!=""){
-				submitted = true;
+				// make sure they've selected a difficulty as well. 
+				if(PlayerPrefs.HasKey("Difficulty")){
+					submitted = true;			
+				}
 			}
- }
+		}
+	}
+	*/
     GUILayout.BeginVertical();
     
        
@@ -179,22 +197,49 @@ function CreateCharacter()
     lastName = GUILayout.TextField( lastName );
     GUILayout.EndHorizontal();
     
+    
+    // difficulty selection
     GUILayout.BeginHorizontal();
     GUILayout.Label("Difficulty", GUILayout.Width(80));
+    
+    // easy 
+    if(easy){
+        GUI.enabled=false;
+    }
     if(GUILayout.Button("Easy"))
     {
+    	easy = true;
+    	medium = false;
+    	hard = false;
     	PlayerPrefs.SetInt("Difficulty", 1);
     }
+    GUI.enabled=true;
     
+    //medium 
+    if(medium){
+        GUI.enabled=false;
+    }
     if(GUILayout.Button("Medium"))
     {
+    	easy = false;
+    	medium = true;
+    	hard = false;
     	PlayerPrefs.SetInt("Difficulty", 2);
     }
+    GUI.enabled=true;
     
+    // hard
+    if(hard){
+   		GUI.enabled=false;
+    }
     if(GUILayout.Button("Hard"))
     {
+    	easy = false;
+    	medium = false;
+    	hard = true;
     	PlayerPrefs.SetInt("Difficulty", 3);
     }
+    GUI.enabled=true;
     GUILayout.EndHorizontal();
     
      // clear dat default text on click
