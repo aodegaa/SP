@@ -6,7 +6,7 @@ static var renderTab2 : boolean = false;
 static var renderTab3 : boolean = false;
 static var renderTab4 : boolean = false;
 static var renderTab5 : boolean = false;
-static var close : boolean = false;
+static var close : boolean;
 
 static function createManageWindow(){
 	var myWindow : Rect = Rect(0,0,Screen.width, 50);
@@ -52,8 +52,6 @@ static function createManageWindow(){
 		renderTab3=false;
 		renderTab4=false;
 		renderTab5=false;
-
-		close = true;
 	}
 
 

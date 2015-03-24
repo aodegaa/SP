@@ -43,6 +43,9 @@ static function createManageWindow(){
 	button5clicked = GUILayout.Button("Options");
 	GUI.enabled=true;
 	button6clicked = GUILayout.Button("X", GUILayout.Width(25));
+	if(button6clicked){
+		ManageScreen.close=true;
+	}
 	GUILayout.EndHorizontal();
 	// end tab area
 	
@@ -127,6 +130,7 @@ static var restTime : int;
 static var timeScale : float = 0;
 static var closeRestWindow : boolean;
 static var beginRest : boolean;
+// restWindow function
 static function restWindow(){
 if(beginRest) GUI.enabled=false;
 else GUI.enabled=true;
@@ -142,9 +146,9 @@ else GUI.enabled=true;
 	
 	// town time
 	GUILayout.BeginHorizontal();
-	GUILayout.Label("");
+	GUILayout.Label("", GUILayout.Width(70));
 	GUILayout.Label("June 6th, 1969 13:00"); // eventually update this to a static time variable
-	GUILayout.Label("");
+	GUILayout.Label("", GUILayout.Width(70));
 	GUILayout.EndHorizontal();
 	
 	// buttons
@@ -159,6 +163,16 @@ else GUI.enabled=true;
 		// cancel
 	}
 	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}
+
+// static variables associated with viewMapWindow()
+
+// viewMapWindow
+static function viewMapWindow(){
+	var map = Resources.Load("Map");
+	GUILayout.BeginVertical();
+	GUILayout.Label(map);
 	GUILayout.EndVertical();
 }
 
