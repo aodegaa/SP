@@ -136,8 +136,6 @@ static var theTime : gameTime;
 
 // restWindow function
 static function restWindow(){
-if(beginRest) GUI.enabled=false;
-else GUI.enabled=true;
 
 
 	GUILayout.BeginVertical();
@@ -158,13 +156,16 @@ else GUI.enabled=true;
 	GUILayout.EndHorizontal();
 	
 	// buttons
+	if(beginRest) GUI.enabled=false;
 	GUILayout.BeginHorizontal();
 	if(GUILayout.Button("Rest")){
 		beginRest = true;
 		timeScale = .02;
 		// rest
 	}
+	GUI.enabled=true;
 	if(GUILayout.Button("Cancel")){
+		beginRest = false;
 		RestScreen.close = true;
 		// cancel
 	}

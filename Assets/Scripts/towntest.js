@@ -2,7 +2,7 @@
 
 var townName : String = "Beginnings Burg";
 var townTime : String = "13:00";
-var townDate : String = "June 6th, 1969";
+var townDate : String = "June 1st, 1969";
 var manage : boolean;
 var rest : boolean;
 var viewMap : boolean;
