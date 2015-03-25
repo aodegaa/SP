@@ -130,10 +130,16 @@ static var restTime : int;
 static var timeScale : float = 0;
 static var closeRestWindow : boolean;
 static var beginRest : boolean;
+static var gameDate : String = "June 6th, 1969 13:00";
+static var theTime : gameTime;
+
+
 // restWindow function
 static function restWindow(){
 if(beginRest) GUI.enabled=false;
 else GUI.enabled=true;
+
+
 	GUILayout.BeginVertical();
 	GUILayout.Label("");
 	
@@ -147,7 +153,7 @@ else GUI.enabled=true;
 	// town time
 	GUILayout.BeginHorizontal();
 	GUILayout.Label("", GUILayout.Width(70));
-	GUILayout.Label("June 6th, 1969 13:00"); // eventually update this to a static time variable
+	GUILayout.Label(theTime.ToString()); // eventually update this to a static time variable
 	GUILayout.Label("", GUILayout.Width(70));
 	GUILayout.EndHorizontal();
 	

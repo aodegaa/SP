@@ -8,14 +8,22 @@ var rest : boolean;
 var viewMap : boolean;
 var leaveTown : boolean;
 
+
 function Update(){
 	Time.timeScale = WindowScript.timeScale;
+}
+
+function Start(){
+	WindowScript.theTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
+	WindowScript.theTime.init(townDate+" "+townTime);
 }
 
 function FixedUpdate(){
 	if(WindowScript.beginRest){
 		if(WindowScript.restTime>0){
 			WindowScript.restTime--;
+			WindowScript.theTime.addHour(1);
+			Debug.Log(WindowScript.theTime.ToString());
 		}
 		else{
 			WindowScript.timeScale = 0;
