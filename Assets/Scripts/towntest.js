@@ -34,6 +34,12 @@ function FixedUpdate(){
 
 function OnGUI() 
 {
+	if(Application.loadedLevel == 2 || Application.loadedLevel == 4 || Application.loadedLevel == 6)
+	{
+	var tutorialWindow = Rect(Screen.width/2 - 75, Screen.height/2 - 75, 150, 150);
+    tutorialWindow= GUILayout.Window(99, tutorialWindow, TutorialDialog, "The Mayor");
+    } 
+
 	renderTabs();	
 }
 
@@ -161,4 +167,22 @@ function PlayerChoices()
 	GUILayout.EndHorizontal();
 	
 	GUILayout.EndVertical();
+}
+
+function TutorialDialog()
+{
+	if(Application.loadedLevel == 2)
+	{
+    	GUILayout.Label( "Welcome. \n\nHead to the Pub to register." );
+    }
+    
+    if(Application.loadedLevel == 4)
+	{
+    	GUILayout.Label( "Here is some money. \n\nHead to the Store for supplies." );
+    }
+    
+    if(Application.loadedLevel == 6)
+    {
+    	GUILayout.Label( "It's been a long day. \n\nGet some rest at the inn. \n\nIt's on me." );
+    }
 }
