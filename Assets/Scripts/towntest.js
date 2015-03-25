@@ -14,6 +14,7 @@ function Update(){
 }
 
 function Start(){
+	PlayerPrefs.SetInt("PreviousScene", Application.loadedLevel);
 	WindowScript.theTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
 	WindowScript.theTime.init(townDate+" "+townTime);
 }

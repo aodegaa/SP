@@ -2,6 +2,11 @@
 
 var buttonText : String = "Skip";
 
+function Start()
+{
+	PlayerPrefs.SetInt("PreviousScene", Application.loadedLevel);
+}
+
 function Update()
 {
 	// scrolls position of attached item upwards
@@ -18,7 +23,6 @@ function OnGUI()
 {
 	if (GUI.Button(Rect((Screen.width - 110),(Screen.height - 70), 80, 50),GUIContent(buttonText)))
 	{
-		PlayerPrefs.SetInt("PreviousScene", Application.loadedLevel);
 		Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene") + 1);
 		return;
 	}
