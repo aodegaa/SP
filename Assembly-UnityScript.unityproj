@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\icefishessss.js" />
      <Compile Include="Assets\Scripts\mapppp.js" />
      <Compile Include="Assets\Scripts\pubtest.js" />
+     <Compile Include="Assets\Scripts\shopppp.js" />
      <Compile Include="Assets\Scripts\shoptest.js" />
      <Compile Include="Assets\Scripts\switchToNextScene.js" />
      <Compile Include="Assets\Scripts\switchToOptionsScene.js" />

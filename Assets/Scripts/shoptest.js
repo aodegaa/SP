@@ -309,12 +309,10 @@ function TownInformation()
 function ShopDialog()
 {
 	GUILayout.BeginVertical();
-	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	GUILayout.Label(shopMessage);
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
-	
 	GUILayout.EndVertical();
 }
