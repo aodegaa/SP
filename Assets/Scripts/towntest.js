@@ -174,7 +174,7 @@ function TutorialDialog()
 {
 	if(Application.loadedLevel == 2)
 	{
-    	GUILayout.Label("You plan to make the journey to Haven for the cure and want my help? \n\nFine... \n\nRegister at the pub and I'll take you seriously.");
+    	GUILayout.Label("You plan to make the journey to Haven for the cure and want my help? \n\nRegister at the pub and I'll take you seriously.");
     }
     
     if(Application.loadedLevel == 4)

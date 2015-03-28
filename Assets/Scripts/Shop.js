@@ -7,7 +7,7 @@ private var shopChoicesWindow : Rect = Rect(10, 90, 160, 110);
 private var inventoryWindow : Rect = Rect(100, 500, 760, 80);
 //
 
-var dogPopUpWindow : Rect = Rect (Screen.width/2 -150, Screen.height/2 -150, 300, 300);
+private var dogPopUpWindow : Rect = Rect (0, 0, 960, 600);
 
 var townName : String = "Beginnings Burg";
 var townTime : String = "13:00";
@@ -49,7 +49,7 @@ var bulletsPrice : int = 1;
 
 // array to store the newly bought dogs
 static var dogs = new Array();
-private var dogName : String = "new name";
+private var dogName : String = "New Dog";
 
 function Start () 
 {
@@ -77,7 +77,7 @@ function showPopups()
 {
 	if(dogPurchased)
 	{
-		dogPopUpWindow = GUI.Window(5, dogPopUpWindow, NameDogWindow, "I See You Bought A Dog.");
+		dogPopUpWindow = GUI.Window(5, dogPopUpWindow, NameDogWindow, "");
 	}
 }
 
@@ -237,52 +237,60 @@ function createInventoryWindow()
 
 function NameDogWindow ()
 {
-	var cw = Resources.Load("cw");
+	var sleddogIcon = Resources.Load("sleddog");
 	var additionalDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
 
 	GUILayout.BeginVertical();
 	
 	GUILayout.BeginHorizontal();
+	GUILayout.Label("");
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
-	GUILayout.Label(cw);
+	GUILayout.Label(sleddogIcon);
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
-	GUILayout.Label("Why Don't You Name It?");
+	GUILayout.Label("Why don't you give your dog a name?");
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
 	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
 	GUI.SetNextControlName("DogNameText"); // input text field
-    dogName = GUILayout.TextField( dogName , 15);
+    dogName = GUILayout.TextField(dogName, GUILayout.Width(100));
     
     // clear text in dog name input field on click
     if(UnityEngine.Event.current.type == EventType.Repaint)
     {
-    	if( GUI.GetNameOfFocusedControl()=="DogNameText")
+    	if(GUI.GetNameOfFocusedControl()=="DogNameText")
     	{
-    		if(dogName=="new name") dogName = "";
+    		if(dogName=="New Dog") dogName = "";
     	}
     	
     	else
     	{
     		if(dogName=="") 
     		{
-    			dogName = "new name";
+    			dogName = "New Dog";
     		}
     	}
     }
-   
-	if (GUILayout.Button("Submit"))
+    
+	GUILayout.Label("", GUILayout.Width(20));
+   	
+	if (GUILayout.Button("Submit", GUILayout.Width(100)))
 	{
 		additionalDog.init(dogName);
 		dogs.push(additionalDog);
 		dogPurchased = false;
 		// reset the dog name to default values
-		dogName = "new name";
+		dogName = "New Dog";
 	}
+	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	GUILayout.EndVertical();
 }
