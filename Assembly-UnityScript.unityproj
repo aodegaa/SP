@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Musher.js" />
      <Compile Include="Assets\Scripts\Player.js" />
      <Compile Include="Assets\Scripts\RestScreen.js" />
+     <Compile Include="Assets\Scripts\Shop.js" />
      <Compile Include="Assets\Scripts\TimeScript.js" />
      <Compile Include="Assets\Scripts\Title.js" />
      <Compile Include="Assets\Scripts\ViewMap.js" />
