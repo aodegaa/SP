@@ -7,6 +7,8 @@ private var shopChoicesWindow : Rect = Rect(10, 90, 160, 110);
 private var inventoryWindow : Rect = Rect(100, 500, 760, 80);
 //
 
+var dogPopUpWindow : Rect = Rect (Screen.width/2 -150, Screen.height/2 -150, 300, 300);
+
 var townName : String = "Beginnings Burg";
 var townTime : String = "13:00";
 var townDate : String = "June 6th, 1969";
@@ -73,8 +75,6 @@ function OnGUI()
 // displays the particular popup window based on user's choices
 function showPopups()
 {
-	var dogPopUpWindow : Rect = Rect (Screen.width/2 -150, Screen.height/2 -150, 300, 300);
-
 	if(dogPurchased)
 	{
 		dogPopUpWindow = GUI.Window(5, dogPopUpWindow, NameDogWindow, "I See You Bought A Dog.");

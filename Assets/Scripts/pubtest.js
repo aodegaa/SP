@@ -10,6 +10,9 @@ private var createCharacterWindow : Rect = Rect(350, 80, 260, 130);
 var townName : String = "Beginnings Burg";
 var townTime : String = "13:00";
 var townDate : String = "June 6th, 1969";
+//
+
+//
 var pubMessage : String = "Welcome!";
 //
 
@@ -45,6 +48,7 @@ function OnGUI()
 	setUpPub();
 }
 
+// major GUI function.
 function setUpPub()
 {
 	if(renderCreateCharacter)
