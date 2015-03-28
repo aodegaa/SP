@@ -174,16 +174,39 @@ function TutorialDialog()
 {
 	if(Application.loadedLevel == 2)
 	{
-    	GUILayout.Label( "Welcome. \n\nHead to the Pub to register." );
+    	GUILayout.Label("You plan to make the journey to Haven for the cure and want my help? \n\nFine... \n\nRegister at the pub and I'll take you seriously.");
     }
     
     if(Application.loadedLevel == 4)
 	{
-    	GUILayout.Label( "Here is some money. \n\nHead to the Store for supplies." );
+    	GUILayout.Label("Well, it turns out you were serious after all... \n\nHere is $500 to get you started. \n\nUse it to purchase supplies for your journey. I've told the shopkeeper to give you a discount.");
+    	//Initialize Player Inventory.
+    	var playerMoney : int = 500;
+    	var sledCount : int = 0;
+    	var dogCount : int = 0;
+    	var fishingpoleCount : int = 0;
+    	var gunCount : int = 0;
+    	var repairkitCount : int = 0;
+    	var foodCount : int = 0;
+    	var baitCount : int = 0;
+    	var bulletsCount : int = 0;
+    	var medicineCount : int = 0;
+    	
+    	//Create PlayerPrefs.
+    	PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+    	PlayerPrefs.SetInt("SledCount", sledCount);
+    	PlayerPrefs.SetInt("DogCount", dogCount);
+    	PlayerPrefs.SetInt("FishingPoleCount", fishingpoleCount);
+    	PlayerPrefs.SetInt("GunCount", gunCount);
+    	PlayerPrefs.SetInt("RepairKitCount", repairkitCount);
+    	PlayerPrefs.SetInt("FoodCount", foodCount);
+    	PlayerPrefs.SetInt("BaitCount", baitCount);
+    	PlayerPrefs.SetInt("BulletsCount", bulletsCount);
+    	PlayerPrefs.SetInt("MedicineCount", medicineCount);
     }
     
     if(Application.loadedLevel == 6)
     {
-    	GUILayout.Label( "It's been a long day. \n\nGet some rest at the inn. \n\nIt's on me." );
+    	GUILayout.Label("Great work. \n\nHopefully these supplies will help you in your journey to Haven. \n\nFor now you should get some rest at the inn, and plan on leaving at dawn." );
     }
 }
