@@ -1,15 +1,20 @@
 ﻿#pragma strict
 
+private var townInfoWindow : Rect = Rect(10, 10, 160, 70);
+private var pubDialogWindow : Rect = Rect(240, 10, 480, 60);
+private var pubChoicesWindow : Rect = Rect(10, 90, 160, 135);
+private var rumorWindow : Rect = Rect(350, 80, 260, 130);
+private var createCharacterWindow : Rect = Rect(350, 80, 260, 130);
+
+//
 var townName : String = "Beginnings Burg";
 var townTime : String = "13:00";
 var townDate : String = "June 6th, 1969";
 var pubMessage : String = "Welcome!";
-
 //
 
 var firstName : String = "First Name";
 var lastName : String = "Last Name";
-var gameSeed : int;
 var submitted : boolean = false;
 var renderCreateCharacter : boolean = false;
 
@@ -33,39 +38,40 @@ private var hard : boolean = false;
 //
 function Start()
 {
-	gameSeed = Random.Range(1,1001);
 }
 
 function OnGUI()
 {
+	setUpPub();
+}
+
+function setUpPub()
+{
 	if(renderCreateCharacter)
 	{
-		var createCharacterWindow : Rect = Rect(Screen.width/2 - 70, 80, 280, 150);
-		createCharacterWindow = GUI.Window(4, createCharacterWindow, CreateCharacter, "Musher Registration Form #" + gameSeed);
+		createCharacterWindow = GUI.Window(4, createCharacterWindow, CreateCharacter, "Musher Registration Form");
 	}
-	var townWindow : Rect = Rect(10, 10, 160, 70);
-	townWindow = GUI.Window(0, townWindow, TownInformation, townName + " Pub");
+	
+	townInfoWindow = GUI.Window(0, townInfoWindow, TownInformation, townName + " Pub");
 
-	var pubChoicesWindow : Rect = Rect(10, 90, 160, 140);
 	pubChoicesWindow = GUI.Window(1, pubChoicesWindow, PubChoices, "");
 	
-	var pubDialogWindow : Rect = Rect(Screen.width/2 - 70, 10, 280, 60);
 	pubDialogWindow = GUI.Window(2, pubDialogWindow, PubDialog, "");
 	
 	if(renderRumor)
 	{
-		var rumorWindow : Rect = Rect(Screen.width/2 - 70, 80, 280, 150);
 		rumorWindow = GUI.Window(3, rumorWindow, RumorDialog, "");
 	}
-
 }
 
 function PubChoices()
 {	
-	// disable the GUI while character selection is made
-	if(renderCreateCharacter){
-		GUI.enabled=false;
+	// disable the GUI while character creation is active.
+	if(renderCreateCharacter)
+	{
+		GUI.enabled = false;
 	}
+	
 	GUILayout.BeginVertical();
 	
 	if(!PlayerPrefs.HasKey("Registration"))
@@ -92,61 +98,72 @@ function PubChoices()
 	if(GUILayout.Button("Jobs"))
 	{
 		pubMessage = "These are the available jobs.";
-		//
-		// Spawn mini-window Trade dialog
-		//
+		// TODO - Jobs Logic.
 	}
 	GUILayout.EndHorizontal();
+	
+	if(PlayerPrefs.HasKey("Registration"))
+	{
+		GUILayout.BeginHorizontal();
+		if(GUILayout.Button("View Map"))
+    	{
+    		// TODO - Map Logic.
+    	}
+		GUILayout.EndHorizontal();
+	}
 	
 	GUILayout.BeginHorizontal();
 	if(GUILayout.Button("Leave Pub"))
 	{
 		pubMessage = "Safe travels.";
-		//
-		// leave pub
-		//
-		PlayerPrefs.SetInt("PreviousScene", Application.loadedLevel);
-        Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene") + 1);
+		
+		if((PlayerPrefs.GetInt("PreviousScene")) == 2)							//if the previous scene was 2, load the scene after this.
+		{
+			Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene") + 2);
+		}
+		
+		else																	//else, load the scene we were at.
+		{
+			Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene"));
+		}
 		
 	}
 	GUILayout.EndHorizontal();
 	
 	GUILayout.EndVertical();
-	GUI.enabled=true; // renenable the GUI now that registration is complete
+	
+	GUI.enabled = true; // renenable the GUI now that registration is complete
 }
 
+// town name and time.
 function TownInformation()
 {
 	var myClock = Resources.Load("clock");
 
 	GUILayout.BeginVertical();
-	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	GUILayout.Label(townDate);
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
-	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	GUILayout.Label(myClock);
 	GUILayout.Label(townTime);
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
-	
 	GUILayout.EndVertical();
 }
 
+// dialog with pubkeeper, based on pub choices.
 function PubDialog()
 {
 	GUILayout.BeginVertical();
-	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	GUILayout.Label(pubMessage);
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
-	
 	GUILayout.EndVertical();
 }
 
@@ -259,7 +276,6 @@ function CreateCharacter()
     {
         PlayerPrefs.SetString("FirstName", firstName);
         PlayerPrefs.SetString("LastName", lastName);
-        PlayerPrefs.SetInt("GameSeed", gameSeed);
         PlayerPrefs.SetInt("Registration", 1);
         renderCreateCharacter = false;
         pubMessage = "If you manage to make it back, stop by for a drink on me.";
@@ -268,25 +284,24 @@ function CreateCharacter()
     GUILayout.EndVertical();
 }
 
+// rumor window.
 function RumorDialog()
 {
 	GUILayout.BeginVertical();
-	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	GUILayout.Label(rumorMessage);
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
-	
 	GUILayout.EndVertical();
 }
 
+// spawns rumor.
 function SpawnRumor()
 {
-	
 	messageNumber = Random.Range(1, 21);
 	
-	// Logic To Prevent Same Rumor Appearing Twice In a Row
+	// logic to prevent same rumor appearing twice in a row.
 	if(messageNumber == previousMessageNumber)
 	{
 		messageNumber = Random.Range(1, 21);

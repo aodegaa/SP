@@ -7,6 +7,11 @@ private var shopChoicesWindow : Rect = Rect(10, 90, 160, 110);
 private var inventoryWindow : Rect = Rect(100, 500, 760, 80);
 //
 
+var townName : String = "Beginnings Burg";
+var townTime : String = "13:00";
+var townDate : String = "June 6th, 1969";
+
+
 //
 var isBrowsing : boolean = false;
 var dogPurchased : boolean = false;
@@ -92,7 +97,7 @@ function setUpShop()
 	else
 	{
 		// town name and time.
-		townInfoWindow = GUI.Window(0, townInfoWindow, TownInformation, "Beginnings Burg" + " Store");
+		townInfoWindow = GUI.Window(0, townInfoWindow, TownInformation, townName + " Store");
 		
 		// shop choices.
 		shopChoicesWindow = GUILayout.Window(1, shopChoicesWindow, ShopChoices, "");
@@ -115,14 +120,14 @@ function TownInformation()
 	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
-	GUILayout.Label("June 6th, 1969"); // this needs to be updated to display the date stored in player prefs
+	GUILayout.Label(townDate);
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	GUILayout.Label(myClock);
-	GUILayout.Label("13:00"); // likewise, update to be based on player prefs
+	GUILayout.Label(townTime);
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
