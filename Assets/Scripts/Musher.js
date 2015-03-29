@@ -9,7 +9,9 @@ function Start () {
 
 }
 
-function Update () {
+function Update () 
+{
+	Time.timeScale = 1.0;
 	if(!collision){
 		if(scenePosition<115){
 			scenePosition+=3*Time.deltaTime;

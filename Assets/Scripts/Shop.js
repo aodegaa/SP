@@ -29,23 +29,41 @@ var sledCount : int;
 var dogCount : int;
 var fishingPoleCount : int;
 var gunCount : int;
-var repairkitCount : int;
+var repairKitCount : int;
 var foodCount : int;
 var baitCount : int;
 var bulletsCount : int;
 var medicineCount : int;
 //
 
-// prices.
-var sledPrice : int = 100;
-var dogPrice : int = 25;
-var foodPrice : int = 2;
-var repairkitPrice : int = 15;
+// other sled variables.
+var sledLoad : float;
+var sledCapacity : float;
+var railsHealth : int = 100;
+var basketHealth : int = 100;
+
+// base prices.
+var sledPrice : int = 135;
+var dogPrice : int = 55;
+var foodPrice : int = 5;
+var repairKitPrice : int = 15;
 var fishingPolePrice : int = 30;
-var baitPrice : int = 1;
-var gunPrice : int = 30;
+var baitPrice : int = 3;
+var gunPrice : int = 40;
 var bulletsPrice : int = 1;
 //
+
+// item weights
+var fishingPoleWeight : float = 5.0;
+var gunWeight : float = 2.5;
+var repairKitWeight : float = 10.0;
+var foodWeight : float = 1.0;
+var baitWeight : float = 0.4;
+var bulletsWeight : float = 0.2;
+var medicineWeight : float = 4.0;
+// ???
+var packageWeight : float;
+
 
 // array to store the newly bought dogs
 static var dogs = new Array();
@@ -58,11 +76,13 @@ function Start ()
 	dogCount = PlayerPrefs.GetInt("DogCount");
     fishingPoleCount = PlayerPrefs.GetInt("FishingPoleCount");
     gunCount = PlayerPrefs.GetInt("GunCount");
-    repairkitCount = PlayerPrefs.GetInt("RepairKitCount");
+    repairKitCount = PlayerPrefs.GetInt("RepairKitCount");
     foodCount = PlayerPrefs.GetInt("FoodCount");
     baitCount = PlayerPrefs.GetInt("BaitCount");
     bulletsCount = PlayerPrefs.GetInt("BulletsCount");
     medicineCount = PlayerPrefs.GetInt("MedicineCount");
+    sledLoad = PlayerPrefs.GetFloat("SledLoad");
+    sledCapacity = PlayerPrefs.GetFloat("SledCapacity");
 }
 
 function OnGUI()
@@ -194,7 +214,7 @@ function createInventoryWindow()
 	var sledIcon = Resources.Load("sled");
 	var dogIcon = Resources.Load("dog");
 	var foodIcon = Resources.Load("food");
-	var repairkitIcon = Resources.Load("repairkit");
+	var repairKitIcon = Resources.Load("repairkit");
 	var fishingPoleIcon = Resources.Load("fishingpole");
 	var baitIcon = Resources.Load("bait");
 	var gunIcon = Resources.Load("gun");
@@ -210,7 +230,7 @@ function createInventoryWindow()
 	GUILayout.Label(dogIcon, GUILayout.Width(80));
 	GUILayout.Label(fishingPoleIcon, GUILayout.Width(80));
 	GUILayout.Label(gunIcon, GUILayout.Width(80));
-	GUILayout.Label(repairkitIcon, GUILayout.Width(80));
+	GUILayout.Label(repairKitIcon, GUILayout.Width(80));
 	GUILayout.Label(foodIcon, GUILayout.Width(80));
 	GUILayout.Label(baitIcon, GUILayout.Width(80));
 	GUILayout.Label(bulletsIcon);
@@ -220,11 +240,11 @@ function createInventoryWindow()
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	GUILayout.Label("$" + playerMoney.ToString(), GUILayout.Width(80));
-	GUILayout.Label(sledCount.ToString(), GUILayout.Width(80));
+	GUILayout.Label(sledLoad.ToString() + "/" + sledCapacity.ToString(), GUILayout.Width(80));
 	GUILayout.Label(dogCount.ToString(), GUILayout.Width(80));
 	GUILayout.Label(fishingPoleCount.ToString(), GUILayout.Width(80));
 	GUILayout.Label(gunCount.ToString(), GUILayout.Width(80));
-	GUILayout.Label(repairkitCount.ToString(), GUILayout.Width(80));
+	GUILayout.Label(repairKitCount.ToString(), GUILayout.Width(80));
 	GUILayout.Label(foodCount.ToString(), GUILayout.Width(80));
 	GUILayout.Label(baitCount.ToString(), GUILayout.Width(80));
 	GUILayout.Label(bulletsCount.ToString());
@@ -254,7 +274,7 @@ function NameDogWindow ()
 	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
-	GUILayout.Label("Why don't you give your dog a name?");
+	GUILayout.Label("Why don't you give your new dog a name?");
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
@@ -298,10 +318,13 @@ function NameDogWindow ()
 // major shopping GUI and functionality.
 function BrowseWares()
 {
+	sledLoad = PlayerPrefs.GetFloat("SledLoad");
+    sledCapacity = PlayerPrefs.GetFloat("SledCapacity");
+
 	var sledIcon = Resources.Load("sled");
 	var dogIcon = Resources.Load("dog");
 	var foodIcon = Resources.Load("food");
-	var repairkitIcon = Resources.Load("repairkit");
+	var repairKitIcon = Resources.Load("repairkit");
 	var fishingPoleIcon = Resources.Load("fishingpole");
 	var baitIcon = Resources.Load("bait");
 	var gunIcon = Resources.Load("gun");
@@ -396,7 +419,10 @@ function BrowseWares()
 		sledCount = sledCount + 1;
 		PlayerPrefs.SetInt("PlayerMoney", playerMoney);
     	PlayerPrefs.SetInt("SledCount", sledCount);
-    	// TODO = add capacity, other sled variables. //
+    	PlayerPrefs.SetFloat("SledLoad", 0);
+    	PlayerPrefs.SetFloat("SledCapacity", 250);
+    	PlayerPrefs.SetInt("RailsHealth", railsHealth);
+    	PlayerPrefs.SetInt("BasketHealth", basketHealth);
 	}
 	
 	GUILayout.FlexibleSpace();
@@ -411,6 +437,8 @@ function BrowseWares()
 		
 			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
 			PlayerPrefs.SetInt("DogCount", dogCount);
+			
+			// TODO - PlayerPrefs Solution.
 		}
 	}
 	
@@ -423,11 +451,14 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if((GUILayout.Button("Buy ($" + fishingPolePrice + ")", GUILayout.Width(120))) && playerMoney >= fishingPolePrice)
+		if((GUILayout.Button("Buy ($" + fishingPolePrice + ")", GUILayout.Width(120))) && playerMoney >= fishingPolePrice && sledLoad + fishingPoleWeight <= sledCapacity)
 		{
 			playerMoney -= fishingPolePrice;
 			fishingPoleCount = fishingPoleCount + 1;
+			sledLoad += fishingPoleWeight;
+			
 			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
 			PlayerPrefs.SetInt("FishingPoleCount", fishingPoleCount);
 		}
 	}
@@ -441,12 +472,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if((GUILayout.Button("Buy ($" + gunPrice + ")", GUILayout.Width(120))) && playerMoney >= gunPrice)
+		if((GUILayout.Button("Buy ($" + gunPrice + ")", GUILayout.Width(120))) && playerMoney >= gunPrice && sledLoad + gunWeight <= sledCapacity)
 		{
 			playerMoney -= gunPrice;
 			gunCount = gunCount + 1;
+			sledLoad += gunWeight;
+			
 			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
-			PlayerPrefs.SetInt("gunCount", gunCount);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("GunCount", gunCount);
 		}
 	}
 	
@@ -469,7 +503,7 @@ function BrowseWares()
 	if(dogCount > 0)
 	{
 		GUILayout.Label("Repair Kit", GUILayout.Width(80));
-		GUILayout.Label(repairkitIcon, GUILayout.Width(80));
+		GUILayout.Label(repairKitIcon, GUILayout.Width(80));
 		GUILayout.Label("Slightly improves sled health.", GUILayout.MaxWidth(120));
 	}
 	
@@ -477,7 +511,7 @@ function BrowseWares()
 	{
 		GUILayout.Label("", GUILayout.Width(80));
 		GUILayout.Label("", GUILayout.Width(80));
-		GUILayout.Label("",GUILayout.MaxWidth(120));
+		GUILayout.Label("", GUILayout.MaxWidth(120));
 	}
 	GUILayout.EndVertical();
 	
@@ -495,7 +529,7 @@ function BrowseWares()
 	{
 		GUILayout.Label("", GUILayout.Width(80));
 		GUILayout.Label("", GUILayout.Width(80));
-		GUILayout.Label("",GUILayout.MaxWidth(120));
+		GUILayout.Label("", GUILayout.MaxWidth(120));
 	}
 	GUILayout.EndVertical();
 	
@@ -513,7 +547,7 @@ function BrowseWares()
 	{
 		GUILayout.Label("", GUILayout.Width(80));
 		GUILayout.Label("", GUILayout.Width(80));
-		GUILayout.Label("",GUILayout.MaxWidth(120));
+		GUILayout.Label("", GUILayout.MaxWidth(120));
 	}
 	GUILayout.EndVertical();
 	
@@ -531,7 +565,7 @@ function BrowseWares()
 	{
 		GUILayout.Label("", GUILayout.Width(80));
 		GUILayout.Label("", GUILayout.Width(80));
-		GUILayout.Label("",GUILayout.MaxWidth(120));
+		GUILayout.Label("", GUILayout.MaxWidth(120));
 	}
 	GUILayout.EndVertical();
 	
@@ -545,9 +579,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy ($" + repairkitPrice + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy ($" + repairKitPrice + ")", GUILayout.Width(120)) && playerMoney >= repairKitPrice && sledLoad + repairKitWeight <= sledCapacity))
 		{
-			playerMoney -= repairkitPrice;
+			playerMoney -= repairKitPrice;
+			repairKitCount = repairKitCount + 1;
+			sledLoad += repairKitWeight;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("RepairKitCount", repairKitCount);
 		}
 	}
 	
@@ -560,9 +600,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy ($" + foodPrice + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy ($" + foodPrice + ")", GUILayout.Width(120)) && playerMoney >= foodPrice && sledLoad + foodWeight <= sledCapacity))
 		{
 			playerMoney -= foodPrice;
+			foodCount = foodCount + 1;
+			sledLoad += foodWeight;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("FoodCount", foodCount);
 		}
 	}
 	
@@ -575,9 +621,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy ($" + baitPrice + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy ($" + baitPrice + ")", GUILayout.Width(120)) && playerMoney >= baitPrice && sledLoad + baitWeight <= sledCapacity))
 		{
 			playerMoney -= baitPrice;
+			baitCount = baitCount + 1;
+			sledLoad += baitWeight;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("BaitCount", baitCount);
 		}
 	}
 	
@@ -590,9 +642,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy ($" + bulletsPrice + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy ($" + bulletsPrice + ")", GUILayout.Width(120)) && playerMoney >= bulletsPrice && sledLoad + bulletsWeight <= sledCapacity))
 		{
 			playerMoney -= bulletsPrice;
+			bulletsCount = bulletsCount + 1;
+			sledLoad += bulletsWeight;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("BulletsCount", bulletsCount);
 		}
 	}
 	
@@ -610,9 +668,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy 5 ($" + repairkitPrice * 5 + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy 5 ($" + repairKitPrice * 5 + ")", GUILayout.Width(120)) && playerMoney >= repairKitPrice * 5 && sledLoad + repairKitWeight * 5 <= sledCapacity))
 		{
-			playerMoney -= repairkitPrice * 5;
+			playerMoney -= repairKitPrice * 5;
+			repairKitCount = repairKitCount + 5;
+			sledLoad += repairKitWeight * 5;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("RepairKitCount", repairKitCount);
 		}
 	}
 	
@@ -625,9 +689,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy 5 ($" + foodPrice * 5 + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy 5 ($" + foodPrice * 5 + ")", GUILayout.Width(120)) && playerMoney >= foodPrice * 5 && sledLoad + foodWeight * 5 <= sledCapacity))
 		{
 			playerMoney -= foodPrice * 5;
+			foodCount = foodCount + 5;
+			sledLoad += foodWeight * 5;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("FoodCount", foodCount);
 		}
 	}
 	
@@ -640,9 +710,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy 5 ($" + baitPrice * 5 + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy 5 ($" + baitPrice * 5 + ")", GUILayout.Width(120)) && playerMoney >= baitPrice * 5 && sledLoad + baitWeight * 5 <= sledCapacity))
 		{
 			playerMoney -= baitPrice * 5;
+			baitCount = baitCount + 5;
+			sledLoad += baitWeight * 5;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("BaitCount", baitCount);
 		}
 	}
 	
@@ -655,9 +731,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy 5 ($" + bulletsPrice * 5 + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy 5 ($" + bulletsPrice * 5 + ")", GUILayout.Width(120)) && playerMoney >= bulletsPrice * 5 && sledLoad + bulletsWeight * 5 <= sledCapacity))
 		{
 			playerMoney -= bulletsPrice * 5;
+			bulletsCount = bulletsCount + 5;
+			sledLoad += bulletsWeight * 5;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("BulletsCount", bulletsCount);
 		}
 	}
 	
@@ -675,9 +757,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy 10 ($" + repairkitPrice * 10 + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy 10 ($" + repairKitPrice * 10 + ")", GUILayout.Width(120)) && playerMoney >= repairKitPrice * 10 && sledLoad + repairKitWeight * 10 <= sledCapacity))
 		{
-			playerMoney -= repairkitPrice * 10;
+			playerMoney -= repairKitPrice * 10;
+			repairKitCount = repairKitCount + 10;
+			sledLoad += repairKitWeight * 10;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("RepairKitCount", repairKitCount);
 		}
 	}
 	
@@ -690,9 +778,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy 10 ($" + foodPrice * 10 + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy 10 ($" + foodPrice * 10 + ")", GUILayout.Width(120)) && playerMoney >= foodPrice * 10 && sledLoad + foodWeight * 10 <= sledCapacity))
 		{
 			playerMoney -= foodPrice * 10;
+			foodCount = foodCount + 10;
+			sledLoad += foodWeight * 10;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("FoodCount", foodCount);
 		}
 	}
 	
@@ -705,9 +799,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy 10 ($" + baitPrice * 10 + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy 10 ($" + baitPrice * 10 + ")", GUILayout.Width(120)) && playerMoney >= baitPrice * 10 && sledLoad + baitWeight * 10 <= sledCapacity))
 		{
 			playerMoney -= baitPrice * 10;
+			baitCount = baitCount + 10;
+			sledLoad += baitWeight * 10;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("BaitCount", baitCount);
 		}
 	}
 	
@@ -720,9 +820,15 @@ function BrowseWares()
 	
 	if(dogCount > 0)
 	{
-		if(GUILayout.Button("Buy 10 ($" + bulletsPrice * 10 + ")", GUILayout.Width(120)))
+		if((GUILayout.Button("Buy 10 ($" + bulletsPrice * 10 + ")", GUILayout.Width(120)) && playerMoney >= bulletsPrice * 10 && sledLoad + bulletsWeight * 10 <= sledCapacity))
 		{
 			playerMoney -= bulletsPrice * 10;
+			bulletsCount = bulletsCount + 10;
+			sledLoad += bulletsWeight * 10;
+			
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			PlayerPrefs.SetInt("BulletsCount", bulletsCount);
 		}
 	}
 	
