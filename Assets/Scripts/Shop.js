@@ -39,8 +39,6 @@ var medicineCount : int;
 // other sled variables.
 var sledLoad : float;
 var sledCapacity : float;
-var railsHealth : int = 100;
-var basketHealth : int = 100;
 
 // base prices.
 var sledPrice : int = 135;
@@ -240,7 +238,7 @@ function createInventoryWindow()
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	GUILayout.Label("$" + playerMoney.ToString(), GUILayout.Width(80));
-	GUILayout.Label(sledLoad.ToString() + "/" + sledCapacity.ToString(), GUILayout.Width(80));
+	GUILayout.Label(sledLoad.ToString("F1") + "/" + sledCapacity.ToString("F1"), GUILayout.Width(80));
 	GUILayout.Label(dogCount.ToString(), GUILayout.Width(80));
 	GUILayout.Label(fishingPoleCount.ToString(), GUILayout.Width(80));
 	GUILayout.Label(gunCount.ToString(), GUILayout.Width(80));
@@ -421,8 +419,9 @@ function BrowseWares()
     	PlayerPrefs.SetInt("SledCount", sledCount);
     	PlayerPrefs.SetFloat("SledLoad", 0);
     	PlayerPrefs.SetFloat("SledCapacity", 250);
-    	PlayerPrefs.SetInt("RailsHealth", railsHealth);
-    	PlayerPrefs.SetInt("BasketHealth", basketHealth);
+    	PlayerPrefs.SetInt("RunnerHealth", 100);
+    	PlayerPrefs.SetInt("BasketHealth", 100);
+    	PlayerPrefs.SetFloat("SledModifier", 1.0);
 	}
 	
 	GUILayout.FlexibleSpace();

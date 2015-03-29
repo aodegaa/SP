@@ -2,11 +2,18 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Shop.js">
     <Files>
-      <File FileName="Assets\Scripts\Shop.js" Line="827" Column="34" />
+      <File FileName="Assets\Scripts\WindowScript.js" Line="209" Column="35" />
+      <File FileName="Assets\Scripts\Shop.js" Line="422" Column="44" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Assembly-UnityScript" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Shop.js" selected="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

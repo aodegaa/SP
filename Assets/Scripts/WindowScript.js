@@ -1,57 +1,58 @@
 ﻿#pragma strict
 
-static var windowRect : Rect= Rect(0, 0,Screen.width,Screen.height);
+static var windowRect : Rect= Rect(0, 0, 960, 600);
 static var button1clicked : boolean;
 static var button2clicked : boolean;
 static var button3clicked : boolean;
 static var button4clicked : boolean;
 static var button5clicked : boolean;
-static var button6clicked : boolean;
 
-
-static function createManageWindow(){
-	
+static function createManageWindow()
+{
 	GUILayout.BeginVertical();
 	
-	// begin tab area
 	GUILayout.BeginHorizontal();
-	if(ManageScreen.renderTab1){
+	if(ManageScreen.renderTab1)
+	{
 		GUI.enabled=false;
 	}
 	button1clicked = GUILayout.Button("Player");
 	GUI.enabled=true;
 	
-	if(ManageScreen.renderTab2){
+	if(ManageScreen.renderTab2)
+	{
 		GUI.enabled=false;
 	}
 	button2clicked = GUILayout.Button("Dogs");
 	GUI.enabled=true;
-	if(ManageScreen.renderTab3){
+	
+	if(ManageScreen.renderTab3)
+	{
 		GUI.enabled=false;
 	}
-	button3clicked = GUILayout.Button("Sled");
+	button3clicked = GUILayout.Button("Inventory");
 	GUI.enabled=true;
-	if(ManageScreen.renderTab4){
+	
+	if(ManageScreen.renderTab4)
+	{
 		GUI.enabled=false;
 	}
-	button4clicked = GUILayout.Button("Inventory");
+	button4clicked = GUILayout.Button("Options");
 	GUI.enabled=true;
-	if(ManageScreen.renderTab5){
-		GUI.enabled=false;
-	}
-	button5clicked = GUILayout.Button("Options");
-	GUI.enabled=true;
-	button6clicked = GUILayout.Button("X", GUILayout.Width(25));
-	if(button6clicked){
+	
+	button5clicked = GUILayout.Button("X", GUILayout.Width(25));
+	
+	if(button5clicked)
+	{
 		ManageScreen.close=true;
 	}
 	GUILayout.EndHorizontal();
-	// end tab area
 	
 	GUILayout.EndVertical();
 }
 
-static function createPlayerTab(){
+static function createPlayerTab()
+{
 	GUILayout.BeginVertical();
 	GUILayout.Label("health: 100");
 	GUILayout.Label("hunger: 12");
@@ -59,7 +60,8 @@ static function createPlayerTab(){
 	GUILayout.EndVertical();
 }
 
-static function createDogsTab(){
+static function createDogsTab()
+{
 	GUILayout.BeginVertical();
 	for(var i : int =0;i<PlayerPrefs.GetInt("DogCount");i++){
 		if(PlayerPrefs.GetInt("dogIsDead"+i)==0)// the dog isn't dead
@@ -90,32 +92,198 @@ static function createDogsTab(){
 	GUILayout.EndVertical();
 }	
 
-static function createSledTab(){
-	GUILayout.BeginVertical();
-	// still need to write this
-	GUILayout.EndVertical();
-}
+static function createInventoryTab()
+{
+	var fishingPoleWeight : float = 5.0;
+	var gunWeight : float = 2.5;
+	var repairKitWeight : float = 10.0;
+	var foodWeight : float = 1.0;
+	var baitWeight : float = 0.4;
+	var bulletsWeight : float = 0.2;
+	var medicineWeight : float = 4.0;
 
-static function createInventoryTab(){
+	var fishingPoleIcon = Resources.Load("fishingpole");
+	var gunIcon = Resources.Load("gun");
+	var repairKitIcon = Resources.Load("repairkit");
+	var foodIcon = Resources.Load("food");
+	var baitIcon = Resources.Load("bait");
+	var bulletsIcon = Resources.Load("bullets");
+	var medicineIcon = Resources.Load("medicine");
+	var sledgraphicIcon = Resources.Load("sledgraphic");
+	
+	var sledLoad : float = PlayerPrefs.GetFloat("SledLoad");
+	var sledCapacity : float = PlayerPrefs.GetFloat("SledCapacity");
+	var basketHealth : int = PlayerPrefs.GetInt("BasketHealth");
+	var runnerHealth : int = PlayerPrefs.GetInt("RunnerHealth");
+	var sledModifier : float = PlayerPrefs.GetFloat("SledModifier");
+	var repairKitCount : int = PlayerPrefs.GetInt("RepairKitCount");
+
 	GUILayout.BeginVertical();
 	
-	// sled
+	// labels.
 	GUILayout.BeginHorizontal();
-	GUILayout.Label("Sled: ", GUILayout.Width(120));
-	if(PlayerPrefs.GetInt("WorkingSled")==0) GUILayout.Label("working", GUILayout.Width(120));
-	else GUILayout.Label("broken", GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Name", GUILayout.Width(120));
+	GUILayout.Label("", GUILayout.Width(120));
+	GUILayout.Label("Quantity", GUILayout.Width(120));
+	GUILayout.Label("Total Weight", GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
-	// health packs
+	// fishing pole.
 	GUILayout.BeginHorizontal();
-	GUILayout.Label("Health Packs: ", GUILayout.Width(120));
-	GUILayout.Label(PlayerPrefs.GetInt("HealthPackCount").ToString(), GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Fishing Pole", GUILayout.Width(120));
+	GUILayout.Label(fishingPoleIcon, GUILayout.Width(120));
+	GUILayout.Label(PlayerPrefs.GetInt("FishingPoleCount").ToString(), GUILayout.Width(120));
+	GUILayout.Label((PlayerPrefs.GetInt("FishingPoleCount") * fishingPoleWeight).ToString(), GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
-	// food 
+	// gun.
 	GUILayout.BeginHorizontal();
-	GUILayout.Label("Food: ", GUILayout.Width(120));
-	GUILayout.Label(PlayerPrefs.GetInt("FoodCount").ToString() +" lbs", GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Gun", GUILayout.Width(120));
+	GUILayout.Label(gunIcon, GUILayout.Width(120));
+	GUILayout.Label(PlayerPrefs.GetInt("GunCount").ToString(), GUILayout.Width(120));
+	GUILayout.Label((PlayerPrefs.GetInt("GunCount") * gunWeight).ToString(), GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	// repair kits.
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Repair Kit", GUILayout.Width(120));
+	GUILayout.Label(repairKitIcon, GUILayout.Width(120));
+	GUILayout.Label(PlayerPrefs.GetInt("RepairKitCount").ToString(), GUILayout.Width(120));
+	GUILayout.Label((PlayerPrefs.GetInt("RepairKitCount") * repairKitWeight).ToString(), GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	// food.
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Food", GUILayout.Width(120));
+	GUILayout.Label(foodIcon, GUILayout.Width(120));
+	GUILayout.Label(PlayerPrefs.GetInt("FoodCount").ToString(), GUILayout.Width(120));
+	GUILayout.Label((PlayerPrefs.GetInt("FoodCount") * foodWeight).ToString(), GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	// bait.
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Bait", GUILayout.Width(120));
+	GUILayout.Label(baitIcon, GUILayout.Width(120));
+	GUILayout.Label(PlayerPrefs.GetInt("BaitCount").ToString(), GUILayout.Width(120));
+	GUILayout.Label((PlayerPrefs.GetInt("BaitCount") * baitWeight).ToString(), GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	// bullets.
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Bullets", GUILayout.Width(120));
+	GUILayout.Label(bulletsIcon, GUILayout.Width(120));
+	GUILayout.Label(PlayerPrefs.GetInt("BulletsCount").ToString(), GUILayout.Width(120));
+	GUILayout.Label((PlayerPrefs.GetInt("BulletsCount") * bulletsWeight).ToString(), GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	// medicine.
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Medicine", GUILayout.Width(120));
+	GUILayout.Label(medicineIcon, GUILayout.Width(120));
+	GUILayout.Label(PlayerPrefs.GetInt("MedicineCount").ToString(), GUILayout.Width(120));
+	GUILayout.Label((PlayerPrefs.GetInt("MedicineCount") * medicineWeight).ToString(), GUILayout.Width(120));
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("");
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label(sledgraphicIcon);
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Sled Load: " + sledLoad.ToString("F1") + "/" + sledCapacity.ToString("F1"));
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Basket Health: " + basketHealth.ToString());
+	GUILayout.Label("", GUILayout.Width(10));
+	if(GUILayout.Button("Use Repair Kit", GUILayout.MaxWidth(120)))
+	{
+		if(basketHealth < 100 && repairKitCount > 0)
+		{
+			if(basketHealth == 0)
+			{
+				basketHealth += 10;
+				sledCapacity = 250.0;
+				PlayerPrefs.SetFloat("SledCapacity", sledCapacity);
+			}
+			
+			if(basketHealth <= 90)
+			{
+				basketHealth += 10;
+			}
+			
+			else
+			{
+				basketHealth = 100;
+			}
+			
+			repairKitCount--;
+			PlayerPrefs.SetInt("BasketHealth", basketHealth);
+			PlayerPrefs.SetInt("RepairKitCount", repairKitCount);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+		}
+	}
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Runner Health: " + runnerHealth.ToString());
+	GUILayout.Label("", GUILayout.Width(10));
+	if(GUILayout.Button("Use Repair Kit", GUILayout.MaxWidth(120)))
+	{
+		if(runnerHealth < 100 && repairKitCount > 0)
+		{
+			if(runnerHealth == 0)
+			{
+				runnerHealth += 10;
+				sledModifier = 1.0;
+				PlayerPrefs.SetFloat("SledModifier", sledModifier);
+			}
+		
+			if(runnerHealth <= 90)
+			{
+				runnerHealth += 10;
+			}
+			
+			else
+			{
+				runnerHealth = 100;
+			}
+			
+			repairKitCount--;
+			sledLoad -= repairKitWeight;
+			PlayerPrefs.SetInt("RepairKitCount", repairKitCount);
+			PlayerPrefs.SetInt("RunnerHealth", runnerHealth);
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+		}
+	}
+	
+	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
 	GUILayout.EndVertical();
@@ -171,8 +339,6 @@ static function restWindow(){
 	GUILayout.EndHorizontal();
 	GUILayout.EndVertical();
 }
-
-// static variables associated with viewMapWindow()
 
 // viewMapWindow
 static function viewMapWindow()
