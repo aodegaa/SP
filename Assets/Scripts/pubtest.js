@@ -218,7 +218,7 @@ function CreateCharacter()
     	easy = true;
     	medium = false;
     	hard = false;
-    	PlayerPrefs.SetInt("Difficulty", 1);
+    	PlayerPrefs.SetString("Difficulty", "Easy");
     }
     GUI.enabled=true;
     
@@ -231,7 +231,7 @@ function CreateCharacter()
     	easy = false;
     	medium = true;
     	hard = false;
-    	PlayerPrefs.SetInt("Difficulty", 2);
+    	PlayerPrefs.SetString("Difficulty", "Medium");
     }
     GUI.enabled=true;
     
@@ -244,7 +244,7 @@ function CreateCharacter()
     	easy = false;
     	medium = false;
     	hard = true;
-    	PlayerPrefs.SetInt("Difficulty", 3);
+    	PlayerPrefs.SetString("Difficulty", "Hard");
     }
     GUI.enabled=true;
     GUILayout.EndHorizontal();
@@ -278,10 +278,18 @@ function CreateCharacter()
      
     if(submitted)
     {
-        PlayerPrefs.SetString("FirstName", firstName);
-        PlayerPrefs.SetString("LastName", lastName);
+        PlayerPrefs.SetString("PlayerName", firstName);
+        PlayerPrefs.SetInt("PlayerHealth", 100);
+        PlayerPrefs.SetInt("PlayerHunger", 0);
+        PlayerPrefs.SetInt("PlayerFatigue", 0);
         PlayerPrefs.SetInt("Registration", 1);
+        
+        PlayerPrefs.SetInt("HealthyPopulation", 499);
+        PlayerPrefs.SetInt("SickPopulation", 1);
+        PlayerPrefs.SetInt("DeceasedPopulation", 0);
+        
         renderCreateCharacter = false;
+        
         pubMessage = "If you manage to make it back, stop by for a drink on me.";
     }
      

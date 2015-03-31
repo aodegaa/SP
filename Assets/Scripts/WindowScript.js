@@ -53,11 +53,53 @@ static function createManageWindow()
 
 static function createPlayerTab()
 {
+	var playerName : String = PlayerPrefs.GetString("PlayerName");
+	var playerHealth : int = PlayerPrefs.GetInt("PlayerHealth");
+	var playerHunger : int = PlayerPrefs.GetInt("PlayerHunger");
+	var playerFatigue : int = PlayerPrefs.GetInt("PlayerFatigue");
+	var difficultyChoice : String = PlayerPrefs.GetString("Difficulty");
+	var healthyPopulation : int = PlayerPrefs.GetInt("HealthyPopulation");
+	var sickPopulation : int = PlayerPrefs.GetInt("SickPopulation");
+	var deceasedPopulation : int = PlayerPrefs.GetInt("DeceasedPopulation");
+	
+	
+	
+	var playerProfilePicture = Resources.Load("playerprofile");
+	
+	GUILayout.BeginHorizontal();
 	GUILayout.BeginVertical();
-	GUILayout.Label("health: 100");
-	GUILayout.Label("hunger: 12");
-	GUILayout.Label("fatigue: 2");
+	GUILayout.Label("");
+	GUILayout.Label(playerName);
+	GUILayout.Label(playerProfilePicture);
+	GUILayout.Label("Health");
+	GUILayout.Label(playerHealth.ToString());
+	GUILayout.Label("");
+	GUILayout.Label("Hunger");
+	GUILayout.Label(playerHunger.ToString());
+	GUILayout.Label("");
+	GUILayout.Label("Fatigue");
+	GUILayout.Label(playerFatigue.ToString());
 	GUILayout.EndVertical();
+	GUILayout.FlexibleSpace();
+	GUILayout.BeginVertical();
+	GUILayout.Label("");
+	GUILayout.Label("Difficulty");
+	GUILayout.Label(difficultyChoice);
+	GUILayout.Label("");
+	GUILayout.Label("");
+	GUILayout.Label("Townspeople");
+	GUILayout.Label("");
+	GUILayout.Label("Healthy");
+	GUILayout.Label(healthyPopulation.ToString());
+	GUILayout.Label("");
+	GUILayout.Label("Sick");
+	GUILayout.Label(sickPopulation.ToString());
+	GUILayout.Label("");
+	GUILayout.Label("Deceased");
+	GUILayout.Label(deceasedPopulation.ToString());
+	
+	GUILayout.EndVertical();
+	GUILayout.EndHorizontal();
 }
 
 static function createDogsTab()
