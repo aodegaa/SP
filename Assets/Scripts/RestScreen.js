@@ -14,6 +14,10 @@ function FixedUpdate(){
 	if(WindowScript.beginRest){
 		if(WindowScript.restTime>0){
 			WindowScript.restTime--;
+			var tempTime : gameTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
+			tempTime.init(PlayerPrefs.GetString("Game Time"));
+			tempTime.addHour(1);
+			PlayerPrefs.SetString("Game Time", tempTime.ToString());
 		}
 		else{
 			WindowScript.timeScale = 0;

@@ -15,16 +15,22 @@ function Update(){
 
 function Start(){
 	PlayerPrefs.SetInt("PreviousScene", Application.loadedLevel);
-	WindowScript.theTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
-	WindowScript.theTime.init(townDate+" "+townTime);
+	if(!PlayerPrefs.HasKey("Game Time")){
+		var theTime : gameTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
+		theTime.init(townDate+" "+townTime);
+		PlayerPrefs.SetString("Game Time",theTime.ToString());
+	}
+	
 }
 
 function FixedUpdate(){
 	if(WindowScript.beginRest){
 		if(WindowScript.restTime>0){
 			WindowScript.restTime--;
-			WindowScript.theTime.addHour(1);
-			Debug.Log(WindowScript.theTime.ToString());
+			var tempTime : gameTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
+			tempTime.init(PlayerPrefs.GetString("Game Time"));
+			tempTime.addHour(1);
+			PlayerPrefs.SetString("Game Time", tempTime.ToString());
 		}
 		else{
 			WindowScript.timeScale = 0;
@@ -81,14 +87,16 @@ function TownInformation()
 	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
-	GUILayout.Label(townDate);
+	// the current date
+	GUILayout.Label(PlayerPrefs.GetString("Game Time").Substring(0,PlayerPrefs.GetString("Game Time").Length-5));
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	GUILayout.Label(myClock);
-	GUILayout.Label(townTime);
+	// the current time
+	GUILayout.Label(PlayerPrefs.GetString("Game Time").Substring(PlayerPrefs.GetString("Game Time").Length-5));
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
