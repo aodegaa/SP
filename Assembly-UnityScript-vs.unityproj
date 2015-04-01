@@ -49,10 +49,9 @@
      <Compile Include="Assets\Scripts\AvalancheScript.js" />
      <Compile Include="Assets\Scripts\Dog.js" />
      <Compile Include="Assets\Scripts\Intro.js" />
-     <Compile Include="Assets\Scripts\Inventory.js" />
      <Compile Include="Assets\Scripts\ManageScreen.js" />
      <Compile Include="Assets\Scripts\Musher.js" />
-     <Compile Include="Assets\Scripts\Player.js" />
+     <Compile Include="Assets\Scripts\Pub.js" />
      <Compile Include="Assets\Scripts\RestScreen.js" />
      <Compile Include="Assets\Scripts\Shop.js" />
      <Compile Include="Assets\Scripts\TimeScript.js" />
@@ -60,17 +59,12 @@
      <Compile Include="Assets\Scripts\ViewMap.js" />
      <Compile Include="Assets\Scripts\ViewMapScreen.js" />
      <Compile Include="Assets\Scripts\WindowScript.js" />
-     <Compile Include="Assets\Scripts\arrayvariabletest.js" />
      <Compile Include="Assets\Scripts\gameTime.js" />
      <Compile Include="Assets\Scripts\icefishessss.js" />
      <Compile Include="Assets\Scripts\mapppp.js" />
-     <Compile Include="Assets\Scripts\pubtest.js" />
      <Compile Include="Assets\Scripts\switchToNextScene.js" />
-     <Compile Include="Assets\Scripts\switchToOptionsScene.js" />
-     <Compile Include="Assets\Scripts\switchToPreviousScene.js" />
      <Compile Include="Assets\Scripts\testScene.js" />
      <Compile Include="Assets\Scripts\towntest.js" />
-     <Compile Include="Assets\Scripts\variabletest.js" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
