@@ -1,18 +1,29 @@
 ﻿#pragma strict
-var playerHealth : int = 100;
+
+private var distanceToNextTown : int = 1000;
 private var windowRect0 : Rect;
-var count :int =0;
-Time.timeScale=0;
+var eventWindow : Rect = Rect (0, 0, 960, 600);
 
-function Start () {
-playerHealth++;
+var eventUp : boolean = false;
+var eventChance : int;
+var rollEvent : int;
+
+var count : int = 0;
+Time.timeScale = 0;
+
+function Start() 
+{
+	distanceToNextTown++;
 }
 
-function FixedUpdate(){
-	playerHealth--;
+function FixedUpdate()
+{
+	distanceToNextTown--;
+	BadShit();
 }
 
-function OnGUI(){
+function OnGUI()
+{
 	var screenWidth = Screen.width;
     var screenHeight = Screen.height;
      
@@ -24,22 +35,80 @@ function OnGUI(){
     // Postion the window in the center of the screen.
     windowRect0 = Rect( windowX, windowY, windowWidth, windowHeight );
  
-    GUILayout.Window( 0, windowRect0, windowCreation, "Player health status");
+    GUILayout.Window( 0, windowRect0, windowCreation, "AUSTRALIAN ADVERTISING!!!");
+    showEvent();
 }
 
-function windowCreation(){
+function showEvent()
+{
+	if(eventUp)
+	{
+		eventWindow = GUI.Window(99, eventWindow, myEvent, "");
+	}
+}
+
+function myEvent()
+{
 	GUILayout.BeginVertical();
+			GUILayout.Label("");
+				GUILayout.Label("");
+					GUILayout.Label("");
+					GUILayout.Label("");
+			GUILayout.Label("");
+				GUILayout.Label("");
+					GUILayout.Label("");
+	GUILayout.FlexibleSpace();
 	GUILayout.BeginHorizontal();
-	GUILayout.Label("Player health: ");
-	GUILayout.Label(playerHealth.ToString());
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("DRINK FOSTERS MATE");
+	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	GUILayout.BeginHorizontal();
-	if(GUILayout.Button("Start")){
+	GUILayout.FlexibleSpace();
+	if(GUILayout.Button("YEAH MATE", GUILayout.Width(160)))
+	{
+		eventUp = false;
+		Time.timeScale = .02;
+	}
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.EndVertical();
+}
+
+function BadShit()
+{
+	eventChance = 8;
+	rollEvent = Random.Range(0, 101);
+	
+	if(rollEvent <= eventChance)
+	{
+		Time.timeScale = 0;
+		eventUp = true;
+	}
+	
+}
+
+function windowCreation()
+{
+	GUILayout.BeginVertical();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label(distanceToNextTown.ToString());
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	
+	if(GUILayout.Button("Start"))
+	{
 		// start
 		Time.timeScale = .02;
 
 	}
-	if(GUILayout.Button("Stop")){
+	if(GUILayout.Button("Stop"))
+	{
 		// stop
 		Time.timeScale = 0;
 	}

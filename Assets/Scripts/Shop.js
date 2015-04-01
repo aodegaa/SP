@@ -4,15 +4,15 @@
 private var townInfoWindow : Rect = Rect(10, 10, 160, 70);
 private var shopDialogWindow : Rect = Rect(240, 10, 480, 60);
 private var shopChoicesWindow : Rect = Rect(10, 90, 160, 110);
-private var inventoryWindow : Rect = Rect(100, 500, 760, 80);
+private var inventoryWindow : Rect = Rect(80, 500, 800, 80);
+private var dogPopUpWindow : Rect = Rect (0, 0, 960, 600);
 //
 
-private var dogPopUpWindow : Rect = Rect (0, 0, 960, 600);
-
+//
 var townName : String = "Beginnings Burg";
 var townTime : String = "13:00";
 var townDate : String = "June 6th, 1969";
-
+//
 
 //
 var isBrowsing : boolean = false;
@@ -41,27 +41,26 @@ var sledLoad : float;
 var sledCapacity : float;
 
 // base prices.
-var sledPrice : int = 135;
-var dogPrice : int = 55;
-var foodPrice : int = 5;
-var repairKitPrice : int = 15;
-var fishingPolePrice : int = 30;
-var baitPrice : int = 3;
-var gunPrice : int = 40;
-var bulletsPrice : int = 1;
+private var sledPrice : int = 120;
+private var dogPrice : int = 50;
+private var foodPrice : int = 5;
+private var repairKitPrice : int = 12;
+private var fishingPolePrice : int = 30;
+private var baitPrice : int = 3;
+private var gunPrice : int = 40;
+private var bulletsPrice : int = 1;
 //
 
 // item weights
 var fishingPoleWeight : float = 5.0;
 var gunWeight : float = 2.5;
-var repairKitWeight : float = 10.0;
+var repairKitWeight : float = 6.0;
 var foodWeight : float = 1.0;
 var baitWeight : float = 0.4;
 var bulletsWeight : float = 0.2;
 var medicineWeight : float = 4.0;
-// ???
 var packageWeight : float;
-
+//
 
 // array to store the newly bought dogs
 static var dogs = new Array();
@@ -217,7 +216,7 @@ function createInventoryWindow()
 	var baitIcon = Resources.Load("bait");
 	var gunIcon = Resources.Load("gun");
 	var bulletsIcon = Resources.Load("bullets");
-	// TODO = add Medicine //
+	var medicineIcon = Resources.Load("medicine");
 
 	GUILayout.BeginVertical();
 	
@@ -231,7 +230,8 @@ function createInventoryWindow()
 	GUILayout.Label(repairKitIcon, GUILayout.Width(80));
 	GUILayout.Label(foodIcon, GUILayout.Width(80));
 	GUILayout.Label(baitIcon, GUILayout.Width(80));
-	GUILayout.Label(bulletsIcon);
+	GUILayout.Label(bulletsIcon, GUILayout.Width(80));
+	GUILayout.Label(medicineIcon);
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
@@ -245,15 +245,15 @@ function createInventoryWindow()
 	GUILayout.Label(repairKitCount.ToString(), GUILayout.Width(80));
 	GUILayout.Label(foodCount.ToString(), GUILayout.Width(80));
 	GUILayout.Label(baitCount.ToString(), GUILayout.Width(80));
-	GUILayout.Label(bulletsCount.ToString());
+	GUILayout.Label(bulletsCount.ToString(), GUILayout.Width(80));
+	GUILayout.Label(medicineCount.ToString());
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
    
     GUILayout.EndVertical();
 }
 
-
-function NameDogWindow ()
+function NameDogWindow()
 {
 	var sleddogIcon = Resources.Load("sleddog");
 	var additionalDog : Dog = ScriptableObject.CreateInstance("Dog") as Dog;
@@ -349,7 +349,7 @@ function BrowseWares()
 	GUILayout.BeginVertical();
 	GUILayout.Label("Sled", GUILayout.Width(80));
 	GUILayout.Label(sledIcon, GUILayout.Width(80));
-	GUILayout.Label("A sturdy vehicles pulled by dogs", GUILayout.MaxWidth(120));
+	GUILayout.Label("A sturdy vehicle pulled by dogs.", GUILayout.MaxWidth(120));
 	GUILayout.EndVertical();
 	
 	GUILayout.FlexibleSpace();
@@ -359,7 +359,7 @@ function BrowseWares()
 	{
 		GUILayout.Label("Dog", GUILayout.Width(80));
 		GUILayout.Label(dogIcon, GUILayout.Width(80));
-		GUILayout.Label("Dogs bred especially for travel. You must feed them if you want them to perform well.", GUILayout.MaxWidth(120));
+		GUILayout.Label("Dogs bred especially for travel. Each dog eats between 2 and 3 lbs of food per day.", GUILayout.MaxWidth(120));
 	}
 	
 	else
@@ -503,7 +503,7 @@ function BrowseWares()
 	{
 		GUILayout.Label("Repair Kit", GUILayout.Width(80));
 		GUILayout.Label(repairKitIcon, GUILayout.Width(80));
-		GUILayout.Label("Slightly improves sled health.", GUILayout.MaxWidth(120));
+		GUILayout.Label("Slightly improves the condition of your sled's components.", GUILayout.MaxWidth(120));
 	}
 	
 	else
@@ -521,7 +521,7 @@ function BrowseWares()
 	{
 		GUILayout.Label("Food", GUILayout.Width(80));
 		GUILayout.Label(foodIcon, GUILayout.Width(80));
-		GUILayout.Label("Prevents hunger. Used by player and dogs.", GUILayout.MaxWidth(120));
+		GUILayout.Label("Prevents hunger. Consumed by you and your dogs.", GUILayout.MaxWidth(120));
 	}
 	
 	else

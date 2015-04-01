@@ -180,29 +180,10 @@ function TutorialDialog()
     if(Application.loadedLevel == 4)
 	{
     	GUILayout.Label("Well, it turns out you were serious after all... \n\nHere is $500 to get you started. \n\nUse it to purchase supplies for your journey. I've told the shopkeeper to give you a discount.");
-    	//Initialize Player Inventory.
-    	var playerMoney : int = 500;
-    	var sledCount : int = 0;
-    	var dogCount : int = 0;
-    	var fishingpoleCount : int = 0;
-    	var gunCount : int = 0;
-    	var repairkitCount : int = 0;
-    	var foodCount : int = 0;
-    	var baitCount : int = 0;
-    	var bulletsCount : int = 0;
-    	var medicineCount : int = 0;
     	
-    	//Create PlayerPrefs.
+    	// set money.
+    	var playerMoney : int = 500;
     	PlayerPrefs.SetInt("PlayerMoney", playerMoney);
-    	PlayerPrefs.SetInt("SledCount", sledCount);
-    	PlayerPrefs.SetInt("DogCount", dogCount);
-    	PlayerPrefs.SetInt("FishingPoleCount", fishingpoleCount);
-    	PlayerPrefs.SetInt("GunCount", gunCount);
-    	PlayerPrefs.SetInt("RepairKitCount", repairkitCount);
-    	PlayerPrefs.SetInt("FoodCount", foodCount);
-    	PlayerPrefs.SetInt("BaitCount", baitCount);
-    	PlayerPrefs.SetInt("BulletsCount", bulletsCount);
-    	PlayerPrefs.SetInt("MedicineCount", medicineCount);
     }
     
     if(Application.loadedLevel == 6)
