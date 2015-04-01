@@ -16,8 +16,7 @@ var townDate : String = "June 6th, 1969";
 var pubMessage : String = "Welcome!";
 //
 
-var firstName : String = "First Name";
-var lastName : String = "Last Name";
+private var playerName : String = "Your Name";
 var submitted : boolean = false;
 var renderCreateCharacter : boolean = false;
 
@@ -41,7 +40,10 @@ private var hard : boolean = false;
 //
 function Start()
 {
+    PlayerPrefs.SetString("Difficulty", "Medium");
+	medium = true;
 }
+
 
 function OnGUI()
 {
@@ -87,6 +89,7 @@ function PubChoices()
     		renderCreateCharacter = true;
     	}
     	GUILayout.EndHorizontal();
+    	GUI.enabled=false; // disable everything but registration button
     } 
 	
 	GUILayout.BeginHorizontal();
@@ -179,35 +182,29 @@ function CreateCharacter()
     GUILayout.BeginVertical();
     
        
-    // First Name
+    // Name
     GUILayout.BeginHorizontal();
-    GUILayout.Label("First Name", GUILayout.Width(80));
+    GUILayout.Label("Name: ", GUILayout.Width(80));
     GUI.SetNextControlName("FirstNameText");
-    firstName = GUILayout.TextField( firstName );
+    playerName = GUILayout.TextField( playerName );
     GUILayout.EndHorizontal();
     
            // clear dat default text on click
     if(UnityEngine.Event.current.type == EventType.Repaint){
     	if( GUI.GetNameOfFocusedControl()=="FirstNameText"){
-    		if(firstName=="First Name") firstName = "";
+    		if(playerName=="Your Name") playerName = "";
     	}
     	else{
-    		if( firstName=="") firstName = "First Name";
+    		if( playerName=="") playerName = "Your Name";
     	}
     }
  
      
-    // Last Name
-    GUILayout.BeginHorizontal();
-    GUILayout.Label("Last Name", GUILayout.Width(80));
-    GUI.SetNextControlName("LastNameText");
-    lastName = GUILayout.TextField( lastName );
-    GUILayout.EndHorizontal();
-    
+
     
     // difficulty selection
     GUILayout.BeginHorizontal();
-    GUILayout.Label("Difficulty", GUILayout.Width(80));
+    GUILayout.Label("Difficulty: ", GUILayout.Width(80));
     
     // easy 
     if(easy){
@@ -249,26 +246,7 @@ function CreateCharacter()
     GUI.enabled=true;
     GUILayout.EndHorizontal();
     
-     // clear dat default text on click
-    if(UnityEngine.Event.current.type == EventType.Repaint)
-    {
-    	if(GUI.GetNameOfFocusedControl()=="LastNameText")
-    	{
-    		if(lastName=="Last Name") 
-    		{
-    			lastName = "";
-    		}
-    	}
-    	
-    	else
-    	{
-    		if(lastName=="") 
-    		{
-    			lastName = "Last Name";
-    		}
-    	}
-    }
-    
+
     ///
      
     if (GUILayout.Button("Submit"))
@@ -278,7 +256,7 @@ function CreateCharacter()
      
     if(submitted)
     {
-        PlayerPrefs.SetString("PlayerName", firstName);
+        PlayerPrefs.SetString("PlayerName", playerName);
         PlayerPrefs.SetInt("PlayerHealth", 100);
         PlayerPrefs.SetInt("PlayerHunger", 0);
         PlayerPrefs.SetInt("PlayerFatigue", 0);
