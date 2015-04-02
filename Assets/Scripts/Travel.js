@@ -12,6 +12,18 @@ private var dog6HealthBar : GameObject;
 private var dog7HealthBar : GameObject;
 private var dog8HealthBar : GameObject;
 
+
+// health bars as Slider objects (so they can be controlled in the scripts
+var playerHealthBar : UI.Slider;
+var dog0Health : UI.Slider;
+var dog1Health : UI.Slider;
+var dog2Health : UI.Slider;
+var dog3Health : UI.Slider;
+var dog4Health : UI.Slider;
+var dog5Health : UI.Slider;
+var dog6Health : UI.Slider;
+var dog7Health : UI.Slider;
+
 private var count : int =0;
 
 
@@ -21,6 +33,8 @@ function Start () {
 	Time.timeScale=.02;
 	// initialize player health
 	healthBar = GameObject.Find("PlayerHealthBar");
+	
+
 	
 	// initialize the health bars
 	dog1HealthBar = GameObject.Find("Dog1Health");
@@ -55,6 +69,8 @@ function Update () {
 function FixedUpdate(){
 	currentTime.addHour(1);
 	PlayerPrefs.SetString("Game Time",currentTime.ToString());
+
+
 }
 
 function OnGUI(){
@@ -77,7 +93,7 @@ function renderGraphics(){
 }
 
 // variables for the travel window
-var pauseButtonString = "Stop";
+private var pauseButtonString = "Stop";
 
 // window that spawns all information on the current traveling situation
 function travelInfo(){
