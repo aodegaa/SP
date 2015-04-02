@@ -279,7 +279,7 @@ function NameDogWindow()
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	GUI.SetNextControlName("DogNameText"); // input text field
-    dogName = GUILayout.TextField(dogName, GUILayout.Width(100));
+    dogName = GUILayout.TextField(dogName, 15, GUILayout.Width(100));
     
     // clear text in dog name input field on click
     if(UnityEngine.Event.current.type == EventType.Repaint)

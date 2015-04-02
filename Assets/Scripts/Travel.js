@@ -1,35 +1,54 @@
 ﻿#pragma strict
 private var gameInfoWindow : Rect = Rect(0, Screen.height/2, Screen.width, Screen.height/2);
 private var currentTime : gameTime;
-private var pauseText : String= "Press space to pause";
 private var manage : boolean = false;
+private var healthBar : GameObject;
+private var dog1HealthBar : GameObject;
+private var dog2HealthBar : GameObject;
+private var dog3HealthBar : GameObject;
+private var dog4HealthBar : GameObject;
+private var dog5HealthBar : GameObject;
+private var dog6HealthBar : GameObject;
+private var dog7HealthBar : GameObject;
+private var dog8HealthBar : GameObject;
+
+private var count : int =0;
+
 
 function Start () {
 	currentTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
 	currentTime.init(PlayerPrefs.GetString("Game Time"));
 	Time.timeScale=.02;
+	// initialize player health
+	healthBar = GameObject.Find("PlayerHealthBar");
+	
+	// initialize the health bars
+	dog1HealthBar = GameObject.Find("Dog1Health");
+	dog2HealthBar = GameObject.Find("Dog2Health");
+	dog3HealthBar = GameObject.Find("Dog3Health");
+	dog4HealthBar = GameObject.Find("Dog4Health");
+	dog5HealthBar = GameObject.Find("Dog5Health");
+	dog6HealthBar = GameObject.Find("Dog6Health");
+	dog7HealthBar = GameObject.Find("Dog7Health");
+	dog8HealthBar = GameObject.Find("Dog8Health");
+	
 
+	
 }
 
 function Update () {
-	if(Input.GetKeyDown(KeyCode.Return)){
-		// spawn manage window and pause the game
-		pauseText = "Press space to unpause";
-		Time.timeScale=0;
-		manage = true; // set manage screen flag
-	}
-	if(Input.GetKeyDown(KeyCode.Space)){
-		// time is already paused, so unpause
-		if(Time.timeScale==0){
-			pauseText = "Press space to pause";
-			Time.timeScale=.02;
-		}
-		// time isn't paused, so pause it
-		else{
-			pauseText = "Press space to unpause";
-			Time.timeScale=0;
-		}
-	}
+	healthBar.SetActive(!manage); // deactivate the health bar while the manage overlay is active
+	
+	// activate health bars for alive dogs (as long as the manage screen is not displayed
+	dog1HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth0") && !manage);
+	dog2HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth1") && !manage);
+	dog3HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth2") && !manage);
+	dog4HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth3") && !manage);
+	dog5HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth4") && !manage);
+	dog6HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth5") && !manage);
+	dog7HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth6") && !manage);
+	dog8HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth7") && !manage);
+
 
 }
 
@@ -53,7 +72,7 @@ function renderGraphics(){
 		}
 	}
 	else{
-		gameInfoWindow = GUILayout.Window(1, gameInfoWindow, travelInfo,"Press enter to assess the situation");		
+		gameInfoWindow = GUILayout.Window(1, gameInfoWindow, travelInfo,"");		
 	}
 }
 
@@ -82,19 +101,39 @@ function travelInfo(){
 		manage = true;
 	}
 	GUILayout.EndHorizontal();
-	GUILayout.BeginHorizontal();
-	GUILayout.Label("",	GUILayout.Height(Screen.height/2-80),GUILayout.Width(1));
 	
+	
+	GUILayout.BeginHorizontal();	
 	GUILayout.BeginVertical();
 	GUILayout.Label("Next Town: Undead Burg (distance away?)"); // will need to update with actual town information when added
 	GUILayout.Label(PlayerPrefs.GetString("Game Time"));
 	GUILayout.Label("Pace: (the current pace here)");
 	GUILayout.Label("Rations: (current ration level)");
-	
+	GUILayout.Label("Player Health: "); // replace with actual player's health
 	GUILayout.EndVertical();
 	
+	
+	// info on dogs
+	GUILayout.BeginVertical();
+	GUILayout.BeginHorizontal();
+	if(PlayerPrefs.HasKey("dogHealth0"))	GUILayout.Label(PlayerPrefs.GetString("dogName0"));
+	if(PlayerPrefs.HasKey("dogHealth1"))	GUILayout.Label(PlayerPrefs.GetString("dogName1"), GUILayout.Width(250));;
 	GUILayout.EndHorizontal();
-	GUILayout.Label(pauseText);
+	GUILayout.BeginHorizontal();
+	if(PlayerPrefs.HasKey("dogHealth2"))	GUILayout.Label(PlayerPrefs.GetString("dogName2"));
+	if(PlayerPrefs.HasKey("dogHealth3"))	GUILayout.Label(PlayerPrefs.GetString("dogName3"), GUILayout.Width(250));
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	if(PlayerPrefs.HasKey("dogHealth4"))	GUILayout.Label(PlayerPrefs.GetString("dogName4"));
+	if(PlayerPrefs.HasKey("dogHealth5"))	GUILayout.Label(PlayerPrefs.GetString("dogName5"), GUILayout.Width(250));
+	GUILayout.EndHorizontal();
+	GUILayout.BeginHorizontal();
+	if(PlayerPrefs.HasKey("dogHealth6"))	GUILayout.Label(PlayerPrefs.GetString("dogName6"));
+	if(PlayerPrefs.HasKey("dogHealth7"))	GUILayout.Label(PlayerPrefs.GetString("dogName7"), GUILayout.Width(250));
+	GUILayout.EndHorizontal();
 	GUILayout.EndVertical();
-;
+	
+	GUILayout.EndVertical();
+	GUILayout.EndVertical();
 }
