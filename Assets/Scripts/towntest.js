@@ -41,12 +41,6 @@ function FixedUpdate(){
 
 function OnGUI() 
 {
-	if(Application.loadedLevel == 2 || Application.loadedLevel == 4 || Application.loadedLevel == 6)
-	{
-	var tutorialWindow = Rect(Screen.width/2 - 75, Screen.height/2 - 75, 150, 150);
-    tutorialWindow= GUILayout.Window(99, tutorialWindow, TutorialDialog, "The Mayor");
-    } 
-
 	renderTabs();	
 }
 
@@ -76,6 +70,12 @@ function renderTabs(){
 	
 		var playerChoicesWindow : Rect = Rect(10, 90, 120, 140);
 		playerChoicesWindow = GUI.Window(1, playerChoicesWindow, PlayerChoices, "");
+		
+		if(Application.loadedLevel == 2 || Application.loadedLevel == 4 || Application.loadedLevel == 6)
+		{
+			var tutorialWindow = Rect(Screen.width/2 - 75, Screen.height/2 - 75, 150, 150);
+    		tutorialWindow= GUILayout.Window(99, tutorialWindow, TutorialDialog, "The Mayor");
+    	} 
 	}
 }
 

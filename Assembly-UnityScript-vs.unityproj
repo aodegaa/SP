@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AvalancheScript.js" />
      <Compile Include="Assets\Scripts\Dog.js" />
+     <Compile Include="Assets\Scripts\HealthBarTest.js" />
      <Compile Include="Assets\Scripts\Intro.js" />
      <Compile Include="Assets\Scripts\ManageScreen.js" />
      <Compile Include="Assets\Scripts\Musher.js" />
@@ -56,6 +57,7 @@
      <Compile Include="Assets\Scripts\Shop.js" />
      <Compile Include="Assets\Scripts\TimeScript.js" />
      <Compile Include="Assets\Scripts\Title.js" />
+     <Compile Include="Assets\Scripts\Travel.js" />
      <Compile Include="Assets\Scripts\ViewMap.js" />
      <Compile Include="Assets\Scripts\ViewMapScreen.js" />
      <Compile Include="Assets\Scripts\WindowScript.js" />
