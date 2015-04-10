@@ -7,6 +7,7 @@ var manage : boolean;
 var rest : boolean;
 var viewMap : boolean;
 var leaveTown : boolean;
+var map : Map;
 
 
 function Update(){
@@ -21,6 +22,15 @@ function Start(){
 		PlayerPrefs.SetString("Game Time",theTime.ToString());
 	}
 	
+	// initialize the map
+	map = ScriptableObject.CreateInstance("Map") as Map;
+	// no current city found
+	if(!PlayerPrefs.HasKey("Current City")){
+		// so set the current city to the starting city
+		PlayerPrefs.SetInt("Current City",1);
+	}
+	// initialize the map with current city.
+	map.init(PlayerPrefs.GetInt("Current City"));
 }
 
 function FixedUpdate(){
@@ -41,6 +51,8 @@ function FixedUpdate(){
 
 function OnGUI() 
 {
+
+
 	renderTabs();	
 }
 
@@ -63,6 +75,23 @@ function renderTabs(){
 			RestScreen.close = false;
 		}
 	}
+	else if(leaveTown){
+	// check to see if the player has a choice on where to go next
+		if(map.getCityByID(map.currentCity).getDestinations(0).length>1){
+			var nextCityWindow : Rect = Rect(Screen.width/2-120,Screen.height/2-100,240,200);
+			nextCityWindow = GUI.Window(2,nextCityWindow,chooseCity,"Where would you like to travel next?");
+		}
+		// if they don't, set the destination for them, send them on their way
+		// since this call is confusing: get the current city from the map
+		// get the paths leading out of that city
+		// since there's only 1, 
+		// set its destination city as the next city and it's distance as the travel distance
+		else{
+			var path : Path = map.getCityByID(map.currentCity).getDestinations(0)[0];
+			PlayerPrefs.SetInt("Next City", path.endCity.id);
+			PlayerPrefs.SetInt("Travel Distance", path.distance);
+		}
+	}	
 	else
 	{
 		var townWindow : Rect = Rect(10, 10, 120, 70);
@@ -74,8 +103,8 @@ function renderTabs(){
 		if(Application.loadedLevel == 2 || Application.loadedLevel == 4 || Application.loadedLevel == 6)
 		{
 			var tutorialWindow = Rect(Screen.width/2 - 75, Screen.height/2 - 75, 150, 150);
-    		tutorialWindow= GUILayout.Window(99, tutorialWindow, TutorialDialog, "The Mayor");
-    	} 
+		    tutorialWindow= GUILayout.Window(99, tutorialWindow, TutorialDialog, "The Mayor");
+	    } 
 	}
 }
 
@@ -198,4 +227,33 @@ function TutorialDialog()
     {
     	GUILayout.Label("Great work. \n\nHopefully these supplies will help you in your journey to Haven. \n\nFor now you should get some rest at the inn, and plan on leaving at dawn." );
     }
+}
+
+private var location : int=-1;
+function chooseCity(){
+	var buttonSelected : boolean = false;
+
+	GUILayout.BeginVertical();
+	var count:int = 0;
+	for(var path : Path in map.getCityByID(map.currentCity).getDestinations(0)){
+		
+		if(location==count){
+			GUI.enabled=false;
+		}
+		if(GUILayout.Button(path.endCity.ToString())){
+			buttonSelected=true;
+			location = count;
+			PlayerPrefs.SetInt("Next City", path.endCity.id);
+			PlayerPrefs.SetInt("Travel Distance", path.distance);
+		}
+		GUI.enabled=true;
+		count++;
+		
+	}
+	if(GUILayout.Button("OK")){
+		if(!(PlayerPrefs.GetInt("Next City")==PlayerPrefs.GetInt("Current City"))){
+			Application.LoadLevel(9);
+		}
+	}
+	GUILayout.EndVertical();
 }
