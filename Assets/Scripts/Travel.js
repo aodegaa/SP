@@ -12,8 +12,6 @@ private var dog6HealthBar : GameObject;
 private var dog7HealthBar : GameObject;
 private var dog8HealthBar : GameObject;
 
-private var map:Map;
-
 
 // health bars as Slider objects (so they can be controlled in the scripts
 var playerHealthBar : UI.Slider;
@@ -32,7 +30,7 @@ private var count : int =0;
 function Start () {
 	currentTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
 	currentTime.init(PlayerPrefs.GetString("Game Time"));
-	Time.timeScale=.01;
+	Time.timeScale=.02;
 	// initialize player health
 	healthBar = GameObject.Find("PlayerHealthBar");
 	
@@ -48,15 +46,7 @@ function Start () {
 	dog7HealthBar = GameObject.Find("Dog7Health");
 	dog8HealthBar = GameObject.Find("Dog8Health");
 	
-	// initialize the map
-	map = ScriptableObject.CreateInstance("Map") as Map;
-	// no current city found
-	if(!PlayerPrefs.HasKey("Current City")){
-		// so set the current city to the starting city
-		PlayerPrefs.SetInt("Current City",1);
-	}
-	// initialize the map with current city.
-	map.init(PlayerPrefs.GetInt("Current City"));
+
 	
 }
 
@@ -79,7 +69,7 @@ function Update () {
 function FixedUpdate(){
 	currentTime.addHour(1);
 	PlayerPrefs.SetString("Game Time",currentTime.ToString());
-	PlayerPrefs.SetInt("Travel Distance", PlayerPrefs.GetInt("Travel Distance")-3);
+
 
 }
 
@@ -117,7 +107,7 @@ function travelInfo(){
 		}
 		else{
 			pauseButtonString="Stop";
-			Time.timeScale=.01;
+			Time.timeScale=.02;
 		}
 	}
 	// pause time while you manage
@@ -131,8 +121,7 @@ function travelInfo(){
 	
 	GUILayout.BeginHorizontal();	
 	GUILayout.BeginVertical();
-	GUILayout.Label("Next Town: "+map.getCityByID(PlayerPrefs.GetInt("Next City")).ToString());
-	GUILayout.Label("Distance to next town:"+PlayerPrefs.GetInt("Travel Distance")+" miles");
+	GUILayout.Label("Next Town: Undead Burg (distance away?)"); // will need to update with actual town information when added
 	GUILayout.Label(PlayerPrefs.GetString("Game Time"));
 	GUILayout.Label("Pace: (the current pace here)");
 	GUILayout.Label("Rations: (current ration level)");
