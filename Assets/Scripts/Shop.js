@@ -16,7 +16,6 @@ var townDate : String = "June 6th, 1969";
 
 //
 var isBrowsing : boolean = false;
-var isTrading : boolean = false;
 var dogPurchased : boolean = false;
 // 
 
@@ -63,14 +62,6 @@ var medicineWeight : float = 4.0;
 var packageWeight : float;
 //
 
-//
-var npcItem1 : int;
-var playerItem1 : int;
-var npcQuantity1 : int;
-var playerItemName1 : String;
-	var npcItemName1 : String;
-	var playerQuantity1 : int;
-
 // array to store the newly bought dogs
 static var dogs = new Array();
 private var dogName : String = "New Dog";
@@ -89,8 +80,6 @@ function Start ()
     medicineCount = PlayerPrefs.GetInt("MedicineCount");
     sledLoad = PlayerPrefs.GetFloat("SledLoad");
     sledCapacity = PlayerPrefs.GetFloat("SledCapacity");
-    
-    SpawnTrades();
 }
 
 function OnGUI()
@@ -135,12 +124,6 @@ function setUpShop()
 		
 		// inventory window.
 		inventoryWindow = GUILayout.Window(3, inventoryWindow, createInventoryWindow, "Player Inventory");
-		
-		if(isTrading)
-		{
-			var tradeWindow : Rect = Rect(240, 80, 480, 130);
-			tradeWindow = GUILayout.Window(4, tradeWindow, TradeWares, "");
-		}
 	}
 	
 }
@@ -178,7 +161,6 @@ function ShopChoices()
 	{
 		shopMessage = "Will that be all?";
 		isBrowsing = true;	
-		isTrading = false;
 	}
 	GUILayout.EndHorizontal();
 	
@@ -186,14 +168,13 @@ function ShopChoices()
 	if(GUILayout.Button("Trades"))
 	{
 		shopMessage="How do these trades sound?";
-		isTrading = true;
+		// TODO = trade logic //
 	}
 	GUILayout.EndHorizontal();
 	
 	GUILayout.BeginHorizontal();
 	if(GUILayout.Button("Leave Store"))
 	{
-		isTrading = false;
 		shopMessage="Goodbye!";
 		
 		if((PlayerPrefs.GetInt("PreviousScene")) == 4)							//if the previous scene was 4, load the scene after this.
@@ -330,106 +311,6 @@ function NameDogWindow()
 	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	GUILayout.EndVertical();
-}
-
-function TradeWares()
-{
-	
-	GUILayout.BeginVertical();
-	
-	GUILayout.BeginHorizontal();
-	GUILayout.Label("Trade 1:");
-	GUILayout.Label("I will give you " + npcQuantity1 + " " + npcItemName1 + " for " + playerQuantity1 + " " + playerItemName1);
-	
-	GUILayout.EndHorizontal();
-	
-	GUILayout.BeginHorizontal();
-	GUILayout.Label("Trade2");
-	GUILayout.EndHorizontal();
-	
-	GUILayout.BeginHorizontal();
-	GUILayout.Label("Trade3");
-	GUILayout.EndHorizontal();
-	
-	GUILayout.EndVertical();
-}
-
-function SpawnTrades()
-{	
-	var playerItem1 : int = Random.Range(0, 7);
-	var npcItem1 : int = Random.Range(0, 7);
-
-	switch(playerItem1)
-	{
-		case 0:
-			playerItemName1 = "fishing pole";
-			playerQuantity1 = Random.Range(1, 3);
-			break;
-		
-		case 1:
-			playerItemName1 = "gun";
-			playerQuantity1 = Random.Range(1, 3);
-			break;
-			
-		case 2:
-			playerItemName1 = "repair kit";
-			playerQuantity1 = Random.Range(1, 5);
-			break;
-			
-		case 3:
-			playerItemName1 = "food";
-			playerQuantity1 = Random.Range(10, 51);
-			break;
-			
-		case 4:
-			playerItemName1 = "bait";
-			playerQuantity1 = Random.Range(10, 51);
-			break;
-			
-		case 5:
-			playerItemName1 = "bullets";
-			playerQuantity1 = Random.Range(10, 101);
-			break;
-			
-		case 6:
-			playerItemName1 = "medicine";
-			playerQuantity1 = Random.Range(1, 3);
-			break;
-	}
-	
-	switch(npcItem1)
-	{
-		case 0:
-			npcItemName1 = "fishing pole";
-			npcQuantity1 = Random.Range(1, 3);
-			break;
-		case 1:
-			npcItemName1 = "gun";
-			npcQuantity1 = Random.Range(1, 3);
-			break;
-		case 2:
-			npcItemName1 = "repair kit";
-			npcQuantity1 = Random.Range(1, 5);
-			break;
-		case 3:
-			npcItemName1 = "food";
-			npcQuantity1 = Random.Range(10, 51);
-			break;
-		case 4:
-			npcItemName1 = "bait";
-			npcQuantity1 = Random.Range(10, 51);
-			break;
-			
-		case 5:
-			npcItemName1 = "bullets";
-			npcQuantity1 = Random.Range(10, 101);
-			break;
-			
-		case 6:
-			npcItemName1 = "money";
-			npcQuantity1 = Random.Range(20, 101);
-			break;
-	}
 }
 
 // major shopping GUI and functionality.
