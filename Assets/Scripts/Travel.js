@@ -72,6 +72,11 @@ function Update () {
 	dog6HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth5") && !manage);
 	dog7HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth6") && !manage);
 	dog8HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth7") && !manage);
+	
+	if(PlayerPrefs.GetInt("Travel Distance")<=0){
+		PlayerPrefs.SetInt("Current City",PlayerPrefs.GetInt("Next City"));
+		Application.LoadLevel(6);
+	}
 
 
 }
@@ -79,7 +84,7 @@ function Update () {
 function FixedUpdate(){
 	currentTime.addHour(1);
 	PlayerPrefs.SetString("Game Time",currentTime.ToString());
-	PlayerPrefs.SetInt("Travel Distance", PlayerPrefs.GetInt("Travel Distance")-3);
+	PlayerPrefs.SetInt("Travel Distance", PlayerPrefs.GetInt("Travel Distance")-20);// TODO: needs to be update to dynamic formula
 
 }
 

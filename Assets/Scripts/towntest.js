@@ -90,6 +90,7 @@ function renderTabs(){
 			var path : Path = map.getCityByID(map.currentCity).getDestinations(0)[0];
 			PlayerPrefs.SetInt("Next City", path.endCity.id);
 			PlayerPrefs.SetInt("Travel Distance", path.distance);
+			Application.LoadLevel(9);
 		}
 	}	
 	else

@@ -39,7 +39,7 @@ currentCity=currentLocation;
 // set the names for each town. this will have to change when we have real names
 // see map for number references
 	town1.init(1, "town 1");
-	town2.init(2, "town 2");
+	town2.init(2, "Undead Burg");
 	town3.init(3, "town 3");
 	town4.init(4, "town 4");
 	town5.init(5, "town 5");
