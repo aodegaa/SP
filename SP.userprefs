@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Shop.js">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\Desktop\SBorges - 2D Unity Project 041115\CS 109 Sample Project\Assets\Scripts\GameData.js">
     <Files>
-      <File FileName="Assets\Scripts\Shop.js" Line="341" Column="27" />
+      <File FileName="..\..\Desktop\SBorges - 2D Unity Project 041115\CS 109 Sample Project\Assets\Scripts\GameData.js" Line="15" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
