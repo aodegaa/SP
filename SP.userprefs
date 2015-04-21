@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\Desktop\SBorges - 2D Unity Project 041115\CS 109 Sample Project\Assets\Scripts\GameData.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WindowScript.js">
     <Files>
-      <File FileName="..\..\Desktop\SBorges - 2D Unity Project 041115\CS 109 Sample Project\Assets\Scripts\GameData.js" Line="15" Column="2" />
+      <File FileName="Assets\Scripts\WindowScript.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

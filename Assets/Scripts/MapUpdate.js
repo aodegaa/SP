@@ -97,8 +97,10 @@ function showMenu(){
 	GUILayout.Label(musherIcon,GUILayout.Height(35),GUILayout.Width(35));
 	GUILayout.Label("symbol");
 	GUILayout.Label("",GUILayout.Width(500));
-	if(GUILayout.Button("X")){
+	if(GUILayout.Button("X"))
+	{
 		Debug.Log("close");
+		Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene"));
 	}
 	GUILayout.EndHorizontal();
 }

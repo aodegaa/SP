@@ -67,7 +67,6 @@
      <Compile Include="Assets\Scripts\WindowScript.js" />
      <Compile Include="Assets\Scripts\gameTime.js" />
      <Compile Include="Assets\Scripts\icefishessss.js" />
-     <Compile Include="Assets\Scripts\mapppp.js" />
      <Compile Include="Assets\Scripts\switchToNextScene.js" />
      <Compile Include="Assets\Scripts\testScene.js" />
      <Compile Include="Assets\Scripts\towntest.js" />

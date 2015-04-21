@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-var townName : String = "Beginnings Burg";
+var townName : String = "Town Name";
 var townTime : String = "13:00";
 var townDate : String = "June 1st, 1969";
 var manage : boolean;
@@ -182,9 +182,7 @@ function PlayerChoices()
 		rest = false;
 		viewMap = true;
 		leaveTown = false;
-		//
-		// Spawn Map Overlay
-		//
+		Application.LoadLevel(10);
 	}
 	GUI.enabled = true;
 	GUILayout.EndHorizontal();

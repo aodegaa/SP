@@ -1,5 +1,4 @@
-﻿
-// City class definition
+﻿// City class definition
 class City extends ScriptableObject{
 	
 	// city has a name, and a unique Cityeger identifier to show which city it is
@@ -47,9 +46,8 @@ class City extends ScriptableObject{
 		return previous;
 	}
 
-	function ToString():String{
+	function ToString():String
+	{
 		return this.cityName;
 	}
-	
-	
 }
