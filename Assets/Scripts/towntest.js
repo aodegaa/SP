@@ -10,8 +10,9 @@ var leaveTown : boolean;
 var map : Map;
 
 
-function Update(){
-	Time.timeScale = WindowScript.timeScale;
+function Update()
+{
+	//Time.timeScale = WindowScript.timeScale; // shit
 }
 
 function Start(){
@@ -33,16 +34,22 @@ function Start(){
 	map.init(PlayerPrefs.GetInt("Current City"));
 }
 
-function FixedUpdate(){
-	if(WindowScript.beginRest){
-		if(WindowScript.restTime>0){
+function FixedUpdate()
+{
+	if(WindowScript.beginRest)
+	{
+		if(WindowScript.restTime>0)
+		{
+			Time.timeScale = WindowScript.timeScale; //change
 			WindowScript.restTime--;
 			var tempTime : gameTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
 			tempTime.init(PlayerPrefs.GetString("Game Time"));
 			tempTime.addHour(1);
 			PlayerPrefs.SetString("Game Time", tempTime.ToString());
 		}
-		else{
+		
+		else
+		{
 			WindowScript.timeScale = 0;
 			WindowScript.beginRest = false;
 		}
@@ -75,9 +82,11 @@ function renderTabs(){
 			RestScreen.close = false;
 		}
 	}
-	else if(leaveTown){
+	else if(leaveTown)
+	{
 	// check to see if the player has a choice on where to go next
-		if(map.getCityByID(map.currentCity).getDestinations(0).length>1){
+		if(map.getCityByID(map.currentCity).getDestinations(0).length>1)
+		{
 			var nextCityWindow : Rect = Rect(Screen.width/2-120,Screen.height/2-100,240,200);
 			nextCityWindow = GUI.Window(2,nextCityWindow,chooseCity,"Where would you like to travel next?");
 		}
@@ -86,13 +95,15 @@ function renderTabs(){
 		// get the paths leading out of that city
 		// since there's only 1, 
 		// set its destination city as the next city and it's distance as the travel distance
-		else{
+		else
+		{
 			var path : Path = map.getCityByID(map.currentCity).getDestinations(0)[0];
 			PlayerPrefs.SetInt("Next City", path.endCity.id);
 			PlayerPrefs.SetInt("Travel Distance", path.distance);
 			Application.LoadLevel(9);
 		}
 	}	
+	
 	else
 	{
 		var townWindow : Rect = Rect(10, 10, 120, 70);

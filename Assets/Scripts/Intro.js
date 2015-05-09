@@ -9,7 +9,7 @@ function Start()
 
 function Update()
 {
-	Time.timeScale = 1.0;
+	//Time.timeScale = 1.0;
 	
 	// scrolls position of attached item upwards
 	transform.localPosition.y += 25 * Time.deltaTime;
