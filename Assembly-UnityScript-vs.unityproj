@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Path.js" />
      <Compile Include="Assets\Scripts\Pub.js" />
      <Compile Include="Assets\Scripts\RestScreen.js" />
+     <Compile Include="Assets\Scripts\SceneFade.js" />
      <Compile Include="Assets\Scripts\Shop.js" />
      <Compile Include="Assets\Scripts\TimeScript.js" />
      <Compile Include="Assets\Scripts\Title.js" />
