@@ -39,11 +39,13 @@ class City extends ScriptableObject{
 	
 	// get destinations returns destinations in the forward direction for direction=0
 	// and in the backwards direction for direction=1
-	function getDestinations(direction:int){
-		if(direction==0){
-			return next;
+	function getDestinations(){
+		if(PlayerPrefs.HasKey("Direction")){
+			if(PlayerPrefs.GetInt("Direction")==1){
+				return previous;
+			}
 		}
-		return previous;
+		return next;
 	}
 
 	function ToString():String

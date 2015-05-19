@@ -85,7 +85,7 @@ function renderTabs(){
 	else if(leaveTown)
 	{
 	// check to see if the player has a choice on where to go next
-		if(map.getCityByID(map.currentCity).getDestinations(0).length>1)
+		if(map.getCityByID(map.currentCity).getDestinations().length>1)
 		{
 			var nextCityWindow : Rect = Rect(Screen.width/2-120,Screen.height/2-100,240,200);
 			nextCityWindow = GUI.Window(2,nextCityWindow,chooseCity,"Where would you like to travel next?");
@@ -97,7 +97,7 @@ function renderTabs(){
 		// set its destination city as the next city and it's distance as the travel distance
 		else
 		{
-			var path : Path = map.getCityByID(map.currentCity).getDestinations(0)[0];
+			var path : Path = map.getCityByID(map.currentCity).getDestinations()[0];
 			PlayerPrefs.SetInt("Next City", path.endCity.id);
 			PlayerPrefs.SetInt("Travel Distance", path.distance);
 			Application.LoadLevel(9);
@@ -245,8 +245,16 @@ function chooseCity(){
 
 	GUILayout.BeginVertical();
 	var count:int = 0;
-	for(var path : Path in map.getCityByID(map.currentCity).getDestinations(0)){
+	for(var path : Path in map.getCityByID(map.currentCity).getDestinations()){
+	// make the avalanche check first
+	// make sure they aren't in town 22
+	if(map.currentCity==22){
+		// if they are, see if the avalanche happened
+		if(PlayerPrefs.GetInt("Avalanche")==1 && path.endCity.id==14){
 		
+		}
+		else{ 	// if not, go ahead and create the button
+
 		if(location==count){
 			GUI.enabled=false;
 		}
@@ -258,6 +266,23 @@ function chooseCity(){
 		}
 		GUI.enabled=true;
 		count++;
+		}
+	}
+	else{
+	if(location==count){
+			GUI.enabled=false;
+		}
+		if(GUILayout.Button(path.endCity.ToString())){
+			buttonSelected=true;
+			location = count;
+			PlayerPrefs.SetInt("Next City", path.endCity.id);
+			PlayerPrefs.SetInt("Travel Distance", path.distance);
+		}
+		GUI.enabled=true;
+		count++;
+	}
+		
+		
 		
 	}
 	if(GUILayout.Button("OK")){

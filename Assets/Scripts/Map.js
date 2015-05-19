@@ -36,6 +36,18 @@ private var town22: City = ScriptableObject.CreateInstance("City") as City;
 function init(currentLocation : int){
 // set the current location. this will be used to track the player
 currentCity=currentLocation;
+
+// if they are in town 22, change directions so the player can return when they leave
+if(currentCity==22){
+	PlayerPrefs.SetInt("Direction",1);
+}
+
+// make the avalanche check
+// once they are in city 14, the avalanche is inevitable. set it now
+if(currentCity==14){
+	PlayerPrefs.SetInt("Avalanche",1);
+}
+
 // set the names for each town. this will have to change when we have real names
 // see map for number references
 	town1.init(1, "town 1");
@@ -130,13 +142,15 @@ currentCity=currentLocation;
 	town18.setPrevious(town17,mapScale*80);
 	
 	town19.setNext(town20,mapScale*110);
+	town19.setNext(town21,mapScale*120);
 	town19.setPrevious(town18, mapScale*100);
 	
 	town20.setNext(town21,mapScale*110);
 	town20.setPrevious(town19,mapScale*110);
 	
 	town21.setNext(town22,mapScale*130);
-	town21.setPrevious(town21,mapScale*110);
+	town21.setPrevious(town19,mapScale*120);
+	town21.setPrevious(town20,mapScale*110);
 	
 	town22.setPrevious(town10,mapScale*120);
 	town22.setPrevious(town14,mapScale*170);
@@ -242,7 +256,7 @@ function getNextCity(){
 // this function should be called every time the player leaves the city
 // it will return the potential destinations they can choose 
 function leaveCity(direction : int){
-	return getCityByID(currentCity).getDestinations(direction);
+	return getCityByID(currentCity).getDestinations();
 }
 
 }
