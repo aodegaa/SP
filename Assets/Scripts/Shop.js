@@ -1,10 +1,10 @@
 ﻿#pragma strict
 
 // finished windows.
-private var townInfoWindow : Rect = Rect(10, 10, 160, 70);
-private var shopDialogWindow : Rect = Rect(240, 10, 480, 60);
-private var shopChoicesWindow : Rect = Rect(10, 90, 160, 110);
-private var inventoryWindow : Rect = Rect(80, 500, 800, 80);
+private var townInfoWindow : Rect = Rect(5, 10, 160, 70);
+private var shopDialogWindow : Rect = Rect(200, 10, 400, 60);
+private var shopChoicesWindow : Rect = Rect(5, 90, 160, 110);
+private var inventoryWindow : Rect = Rect(5, 518, 600, 60);
 private var dogPopUpWindow : Rect = Rect (0, 0, 960, 600);
 //
 
