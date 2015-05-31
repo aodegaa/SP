@@ -2,43 +2,14 @@
 
 var renderNewGameWarning : boolean = false;
 var drawButtons : boolean = true;
+var titleButtonStyle : GUIStyle;
 
 function OnGUI()
 {
 	if (drawButtons)
 	{
-	
-		// For Testing Purposes - Delete Later
-		if (GUI.Button(Rect((Screen.width/2 - 340), (Screen.height/2), 80, 50), GUIContent("Delete")))
-		{
-			PlayerPrefs.DeleteAll();
-			return;
-		}
-		// For Testing Purposes - Delete Later
-	
-		// if they don't have a save file yet, don't let them continue
-		if (!PlayerPrefs.HasKey("PreviousScene"))
-		{
-		GUI.enabled = false;
-		}
-		// Continue
-		if (GUI.Button(Rect((Screen.width/2 - 340), (Screen.height - 60), 80, 50), GUIContent("Continue")))
-		{
-			Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene"));
-			return;
-		}
-		GUI.enabled = true;
-	
-		// Options
-		if (GUI.Button(Rect((Screen.width/2 + 260), (Screen.height - 60), 80, 50), GUIContent("Options")))
-		{
-			//
-			// Options Overlay Window
-			//
-		}
-	
 		// New Game
-		if (GUI.Button(Rect((Screen.width/2 - 40), (Screen.height - 60), 80, 50), GUIContent("New Game")))
+		if (GUI.Button(Rect((50), (Screen.height/2 + 25), 80, 50), GUIContent("New Game"), titleButtonStyle))
 		{
 			if (PlayerPrefs.HasKey("PreviousScene"))
 			{
@@ -54,12 +25,44 @@ function OnGUI()
 				return;
 			}
 		}
+	
+		// if they don't have a save file yet, don't let them continue
+		if (!PlayerPrefs.HasKey("PreviousScene"))
+		{
+			GUI.enabled = false;
+		}
+		
+		// Continue
+		if (GUI.Button(Rect((50), (Screen.height/2 - 25), 80, 50), GUIContent("Continue"), titleButtonStyle))
+		{
+			Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene"));
+			return;
+		}
+		GUI.enabled = true;
+	
+	
+		// Options
+		if (GUI.Button(Rect((50), (Screen.height/2 + 75), 80, 50), GUIContent("Options"), titleButtonStyle))
+		{
+			//
+			// Options Overlay Window
+			//
+		}
+		
+		// For Testing Purposes - Delete Later
+		if (GUI.Button(Rect((Screen.width/2), (Screen.height - 50), 80, 50), GUIContent("Delete")))
+		{
+			PlayerPrefs.DeleteAll();
+			return;
+		}
+		// For Testing Purposes - Delete Later
+		
 	}
 	
 	// New Game Warning
 	if (renderNewGameWarning)
 	{
-		var newGamePopUpWarning : Rect = Rect((Screen.width/2 - 140), (Screen.height/2 - 50), 280, 100);
+		var newGamePopUpWarning : Rect = Rect((Screen.width/2 - 115), (Screen.height/2 - 50), 280, 100);
 		newGamePopUpWarning = GUI.Window(0, newGamePopUpWarning, NewGameWarningWindow, "Warning");
 	}
 }
@@ -70,10 +73,15 @@ function NewGameWarningWindow()
 	GUILayout.BeginVertical();
 	
 	GUILayout.BeginHorizontal();
-	GUILayout.Label("All previously saved data will be deleted. \nThis cannot be undone.");
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("All previously saved data will be deleted.");
+	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
 	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("This cannot be undone.");
+	GUILayout.FlexibleSpace();
 	GUILayout.EndHorizontal();
 	
 	GUILayout.BeginHorizontal();
@@ -92,6 +100,5 @@ function NewGameWarningWindow()
 		drawButtons = true;
 	}
 	GUILayout.EndHorizontal();
-	
 	GUILayout.EndVertical();
 }
