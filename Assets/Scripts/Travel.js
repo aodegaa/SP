@@ -1,5 +1,5 @@
 ﻿#pragma strict
-private var gameInfoWindow : Rect = Rect(0, Screen.height/2, Screen.width, Screen.height/2);
+private var gameInfoWindow : Rect = Rect(0, 450, Screen.width, 150);
 private var currentTime : gameTime;
 private var manage : boolean = false;
 private var healthBar : GameObject;
@@ -14,6 +14,8 @@ private var dog8HealthBar : GameObject;
 
 private var map:Map;
 
+var travelStyle : GUIStyle;
+var travelStatusStyle : GUIStyle;
 
 // health bars as Slider objects (so they can be controlled in the scripts
 var playerHealthBar : UI.Slider;
@@ -111,61 +113,103 @@ function renderGraphics(){
 private var pauseButtonString = "Stop";
 
 // window that spawns all information on the current traveling situation
-function travelInfo(){
+function travelInfo()
+{
 	GUILayout.BeginVertical();
 	GUILayout.BeginHorizontal();
-	if(GUILayout.Button(pauseButtonString)){
+	GUILayout.Label("", GUILayout.Width(115));
+	GUILayout.Label(PlayerPrefs.GetString("PlayerName"), travelStyle);
+	GUILayout.Label("", GUILayout.Width(120));
+	GUILayout.Label("Next Town: "+map.getCityByID(PlayerPrefs.GetInt("Next City")).ToString(), travelStatusStyle);
+	GUILayout.Label("", GUILayout.Width(200));
+	if(GUILayout.Button(pauseButtonString))
+	{
 		// if your going, stop. otherwise continue
-		if(pauseButtonString=="Stop"){
+		if(pauseButtonString=="Stop")
+		{
 			pauseButtonString="Continue";
 			Time.timeScale=0;
 		}
-		else{
+		else
+		{
 			pauseButtonString="Stop";
 			Time.timeScale=.01;
 		}
 	}
+	GUILayout.Label("", GUILayout.Width(20));
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("", GUILayout.Width(235));
+	GUILayout.Label("Distance To Next Town: " + PlayerPrefs.GetInt("Travel Distance")+" Miles", travelStyle);
+	
+	
 	// pause time while you manage
-	if(GUILayout.Button("Assess the Situation")){
+	if(GUILayout.Button("Manage"))
+	{
 		pauseButtonString="Continue";
 		Time.timeScale=0;
 		manage = true;
 	}
+	GUILayout.Label("", GUILayout.Width(20));
 	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("", GUILayout.Width(10));
+	if(PlayerPrefs.HasKey("dogHealth0"))	
+	{
+		GUILayout.Label(PlayerPrefs.GetString("dogName0"), travelStyle);
+	}
+	
+	if(PlayerPrefs.HasKey("dogHealth1"))	
+	{
+		GUILayout.Label(PlayerPrefs.GetString("dogName1"), travelStyle);
+	}
+	
+	if(PlayerPrefs.HasKey("dogHealth2"))	
+	{
+		GUILayout.Label(PlayerPrefs.GetString("dogName2"), travelStyle);
+	}
+	
+	if(PlayerPrefs.HasKey("dogHealth3"))	
+	{
+		GUILayout.Label(PlayerPrefs.GetString("dogName3"), travelStyle);
+	}
+	
+	GUILayout.Label("", GUILayout.Width(460));
+	GUILayout.EndHorizontal();
+	
+	GUILayout.EndVertical();
 	
 	
 	GUILayout.BeginHorizontal();	
 	GUILayout.BeginVertical();
-	GUILayout.Label("Next Town: "+map.getCityByID(PlayerPrefs.GetInt("Next City")).ToString());
-	GUILayout.Label("Distance to next town:"+PlayerPrefs.GetInt("Travel Distance")+" miles");
 	GUILayout.Label(PlayerPrefs.GetString("Game Time"));
 	GUILayout.Label("Pace: (the current pace here)");
 	GUILayout.Label("Rations: (current ration level)");
-	GUILayout.Label("Player Health: "); // replace with actual player's health
 	GUILayout.EndVertical();
 	
 	
 	// info on dogs
 	GUILayout.BeginVertical();
-	GUILayout.BeginHorizontal();
-	if(PlayerPrefs.HasKey("dogHealth0"))	GUILayout.Label(PlayerPrefs.GetString("dogName0"));
-	if(PlayerPrefs.HasKey("dogHealth1"))	GUILayout.Label(PlayerPrefs.GetString("dogName1"), GUILayout.Width(250));;
-	GUILayout.EndHorizontal();
-	GUILayout.BeginHorizontal();
-	if(PlayerPrefs.HasKey("dogHealth2"))	GUILayout.Label(PlayerPrefs.GetString("dogName2"));
-	if(PlayerPrefs.HasKey("dogHealth3"))	GUILayout.Label(PlayerPrefs.GetString("dogName3"), GUILayout.Width(250));
-	GUILayout.EndHorizontal();
 	
 	GUILayout.BeginHorizontal();
-	if(PlayerPrefs.HasKey("dogHealth4"))	GUILayout.Label(PlayerPrefs.GetString("dogName4"));
-	if(PlayerPrefs.HasKey("dogHealth5"))	GUILayout.Label(PlayerPrefs.GetString("dogName5"), GUILayout.Width(250));
-	GUILayout.EndHorizontal();
-	GUILayout.BeginHorizontal();
-	if(PlayerPrefs.HasKey("dogHealth6"))	GUILayout.Label(PlayerPrefs.GetString("dogName6"));
-	if(PlayerPrefs.HasKey("dogHealth7"))	GUILayout.Label(PlayerPrefs.GetString("dogName7"), GUILayout.Width(250));
+	
+	if(PlayerPrefs.HasKey("dogHealth4"))	
+	GUILayout.Label(PlayerPrefs.GetString("dogName4"), travelStyle);
+	
+	if(PlayerPrefs.HasKey("dogHealth5"))	
+	GUILayout.Label(PlayerPrefs.GetString("dogName5"), travelStyle);
+	
+	if(PlayerPrefs.HasKey("dogHealth6"))	
+	GUILayout.Label(PlayerPrefs.GetString("dogName6"), travelStyle);
+	
+	if(PlayerPrefs.HasKey("dogHealth7"))	
+	GUILayout.Label(PlayerPrefs.GetString("dogName7"), travelStyle);
+	
 	GUILayout.EndHorizontal();
 	GUILayout.EndVertical();
 	
-	GUILayout.EndVertical();
+	//GUILayout.EndVertical();
 	GUILayout.EndVertical();
 }
