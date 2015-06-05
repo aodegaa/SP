@@ -12,6 +12,23 @@ private var dog6HealthBar : GameObject;
 private var dog7HealthBar : GameObject;
 private var dog8HealthBar : GameObject;
 
+
+// UI text boxes
+var dog1TextBox : UI.Text;
+var dog2TextBox : UI.Text;
+var dog3TextBox : UI.Text;
+var dog4TextBox : UI.Text;
+var dog5TextBox : UI.Text;
+var dog6TextBox : UI.Text;
+var dog7TextBox : UI.Text;
+var dog8TextBox : UI.Text;
+
+var playerText : UI.Text;
+
+var nextTownText : UI.Text;
+
+var travelInfoText : UI.Text;
+
 private var map:Map;
 
 var travelStyle : GUIStyle;
@@ -19,14 +36,6 @@ var travelStatusStyle : GUIStyle;
 
 // health bars as Slider objects (so they can be controlled in the scripts
 var playerHealthBar : UI.Slider;
-var dog0Health : UI.Slider;
-var dog1Health : UI.Slider;
-var dog2Health : UI.Slider;
-var dog3Health : UI.Slider;
-var dog4Health : UI.Slider;
-var dog5Health : UI.Slider;
-var dog6Health : UI.Slider;
-var dog7Health : UI.Slider;
 
 private var count : int =0;
 
@@ -75,7 +84,44 @@ function Update () {
 	dog7HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth6") && !manage);
 	dog8HealthBar.SetActive(PlayerPrefs.HasKey("dogHealth7") && !manage);
 	
+	// fill in the text boxes for living dogs (as long as the manage screen is not displayed
+	if(PlayerPrefs.HasKey("dogHealth0") && !manage){
+		dog1TextBox.text=PlayerPrefs.GetString("dogName0");
+	}
+	if(PlayerPrefs.HasKey("dogHealth1") && !manage){
+		dog2TextBox.text=PlayerPrefs.GetString("dogName1");
+	}
+	if(PlayerPrefs.HasKey("dogHealth2") && !manage){
+		dog3TextBox.text=PlayerPrefs.GetString("dogName2");
+	}
+	if(PlayerPrefs.HasKey("dogHealth3") && !manage){
+		dog4TextBox.text=PlayerPrefs.GetString("dogName3");
+	}
+	if(PlayerPrefs.HasKey("dogHealth4") && !manage){
+		dog5TextBox.text=PlayerPrefs.GetString("dogName4");
+	}
+	if(PlayerPrefs.HasKey("dogHealth5") && !manage){
+		dog6TextBox.text=PlayerPrefs.GetString("dogName5");
+	}
+	if(PlayerPrefs.HasKey("dogHealth6") && !manage){
+		dog7TextBox.text=PlayerPrefs.GetString("dogName6");
+	}
+	if(PlayerPrefs.HasKey("dogHealth7") && !manage){
+		dog8TextBox.text=PlayerPrefs.GetString("dogName7");
+	}
+	
+	// set player name
+	playerText.text=PlayerPrefs.GetString("PlayerName");
+	
+	// set next town/distance to next town
+	nextTownText.text="Next Town: "+map.getCityByID(PlayerPrefs.GetInt("Next City")).ToString()+"\n"+"Distance To Next Town: " + PlayerPrefs.GetInt("Travel Distance")+" miles";
+	
+	// set travel info
+	travelInfoText.text=PlayerPrefs.GetString("Game Time")+"\n"+"Pace: (current pace here)\nRations: (current rations here)";
+	
+	// load the next city if the travel distance is less than 0
 	if(PlayerPrefs.GetInt("Travel Distance")<=0){
+		PlayerPrefs.SetInt("TravelDistance",0); // make sure it doesn't drop below 0. that looks weird
 		PlayerPrefs.SetInt("Current City",PlayerPrefs.GetInt("Next City"));
 		Application.LoadLevel(6);
 	}
@@ -93,7 +139,8 @@ function FixedUpdate(){
 function OnGUI(){
 	renderGraphics();
 }
-
+// variable to control pausing time
+private var pauseButtonString = "Stop";
 function renderGraphics(){
 	if(manage){
 		if(!ManageScreen.close){
@@ -105,12 +152,26 @@ function renderGraphics(){
 		}
 	}
 	else{
-		gameInfoWindow = GUILayout.Window(1, gameInfoWindow, travelInfo,"");		
+		// gameInfoWindow = GUILayout.Window(1, gameInfoWindow, travelInfo,"");
+		if(GUI.Button(Rect(Screen.width-75, Screen.height-100, 75,20),GUIContent(pauseButtonString),travelStyle)){
+			if(pauseButtonString=="Stop"){
+				pauseButtonString="Continue";
+				Time.timeScale=0;
+			}
+			else{
+				pauseButtonString="Stop";
+				Time.timeScale=0.01;
+			}
+		}
+		if(GUI.Button(Rect(Screen.width-75, Screen.height-75, 75,20),GUIContent("Manage"),travelStyle)){
+			pauseButtonString="Continue";
+			Time.timeScale=0;
+			manage = true;
+		}
+
 	}
 }
 
-// variables for the travel window
-private var pauseButtonString = "Stop";
 
 // window that spawns all information on the current traveling situation
 function travelInfo()
@@ -118,9 +179,9 @@ function travelInfo()
 	GUILayout.BeginVertical();
 	GUILayout.BeginHorizontal();
 	GUILayout.Label("", GUILayout.Width(115));
-	GUILayout.Label(PlayerPrefs.GetString("PlayerName"), travelStyle);
+	// GUILayout.Label(PlayerPrefs.GetString("PlayerName"), travelStyle);
 	GUILayout.Label("", GUILayout.Width(120));
-	GUILayout.Label("Next Town: "+map.getCityByID(PlayerPrefs.GetInt("Next City")).ToString(), travelStatusStyle);
+	// GUILayout.Label("Next Town: "+map.getCityByID(PlayerPrefs.GetInt("Next City")).ToString(), travelStatusStyle);
 	GUILayout.Label("", GUILayout.Width(200));
 	if(GUILayout.Button(pauseButtonString))
 	{
@@ -141,8 +202,8 @@ function travelInfo()
 	
 	GUILayout.BeginHorizontal();
 	GUILayout.Label("", GUILayout.Width(235));
-	GUILayout.Label("Distance To Next Town: " + PlayerPrefs.GetInt("Travel Distance")+" Miles", travelStyle);
-	
+	// GUILayout.Label("Distance To Next Town: " + PlayerPrefs.GetInt("Travel Distance")+" Miles", travelStyle);
+	GUILayout.Label("");
 	
 	// pause time while you manage
 	if(GUILayout.Button("Manage"))
@@ -156,26 +217,7 @@ function travelInfo()
 	
 	GUILayout.BeginHorizontal();
 	GUILayout.Label("", GUILayout.Width(10));
-	if(PlayerPrefs.HasKey("dogHealth0"))	
-	{
-		GUILayout.Label(PlayerPrefs.GetString("dogName0"), travelStyle);
-	}
-	
-	if(PlayerPrefs.HasKey("dogHealth1"))	
-	{
-		GUILayout.Label(PlayerPrefs.GetString("dogName1"), travelStyle);
-	}
-	
-	if(PlayerPrefs.HasKey("dogHealth2"))	
-	{
-		GUILayout.Label(PlayerPrefs.GetString("dogName2"), travelStyle);
-	}
-	
-	if(PlayerPrefs.HasKey("dogHealth3"))	
-	{
-		GUILayout.Label(PlayerPrefs.GetString("dogName3"), travelStyle);
-	}
-	
+
 	GUILayout.Label("", GUILayout.Width(460));
 	GUILayout.EndHorizontal();
 	
@@ -184,31 +226,11 @@ function travelInfo()
 	
 	GUILayout.BeginHorizontal();	
 	GUILayout.BeginVertical();
-	GUILayout.Label(PlayerPrefs.GetString("Game Time"));
-	GUILayout.Label("Pace: (the current pace here)");
-	GUILayout.Label("Rations: (current ration level)");
+	// 	GUILayout.Label(PlayerPrefs.GetString("Game Time"));
+	// GUILayout.Label("Pace: (the current pace here)");
+	// GUILayout.Label("Rations: (current ration level)");
 	GUILayout.EndVertical();
 	
-	
-	// info on dogs
-	GUILayout.BeginVertical();
-	
-	GUILayout.BeginHorizontal();
-	
-	if(PlayerPrefs.HasKey("dogHealth4"))	
-	GUILayout.Label(PlayerPrefs.GetString("dogName4"), travelStyle);
-	
-	if(PlayerPrefs.HasKey("dogHealth5"))	
-	GUILayout.Label(PlayerPrefs.GetString("dogName5"), travelStyle);
-	
-	if(PlayerPrefs.HasKey("dogHealth6"))	
-	GUILayout.Label(PlayerPrefs.GetString("dogName6"), travelStyle);
-	
-	if(PlayerPrefs.HasKey("dogHealth7"))	
-	GUILayout.Label(PlayerPrefs.GetString("dogName7"), travelStyle);
-	
-	GUILayout.EndHorizontal();
-	GUILayout.EndVertical();
 	
 	//GUILayout.EndVertical();
 	GUILayout.EndVertical();
