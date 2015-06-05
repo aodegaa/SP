@@ -129,11 +129,23 @@ function Update () {
 
 }
 
+var popupwindow : Rect = Rect(Screen.width/2-100,Screen.height/2-50,200,50); // avalanche popup window
+var popup : boolean = false;
 function FixedUpdate(){
 	currentTime.addHour(1);
 	PlayerPrefs.SetString("Game Time",currentTime.ToString());
 	PlayerPrefs.SetInt("Travel Distance", PlayerPrefs.GetInt("Travel Distance")-20);// TODO: needs to be update to dynamic formula
+	
 
+	// avalanche check
+	if(PlayerPrefs.GetInt("Current City")==14 && PlayerPrefs.GetInt("Direction")==0 && PlayerPrefs.GetInt("Travel Distance")<100){
+		// the player just triggered the avalanche
+		popup=true;
+	}
+	if(PlayerPrefs.GetInt("Current City")==22 && PlayerPrefs.GetInt("Direction")==1 && PlayerPrefs.GetInt("Travel Distance")<70 && PlayerPrefs.GetInt("Next City")==14){
+		// the player just triggered the avalanche
+		popup=true;
+	}	
 }
 
 function OnGUI(){
@@ -150,6 +162,10 @@ function renderGraphics(){
 			manage = false;
 			ManageScreen.close = false;
 		}
+	}
+	else if(popup){
+		Time.timeScale=0;
+		popupwindow = GUILayout.Window(0,popupwindow, avalancheWindow, "");	
 	}
 	else{
 		// gameInfoWindow = GUILayout.Window(1, gameInfoWindow, travelInfo,"");
@@ -170,6 +186,16 @@ function renderGraphics(){
 		}
 
 	}
+
+}
+
+function avalancheWindow(){
+	GUILayout.BeginVertical();
+	GUILayout.Label("You hear a deep rumbling...\noh no! an avalanche! Prepare yourself, you'll have to outrun it if you want to survive!");
+	if(GUILayout.Button("ready")){
+		Application.LoadLevel(11);
+	}
+	GUILayout.EndVertical();
 }
 
 

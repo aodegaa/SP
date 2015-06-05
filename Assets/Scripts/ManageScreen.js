@@ -9,8 +9,8 @@ static var close : boolean = false;
 
 static function createManageWindow()
 {
-	var myWindow : Rect = Rect(0, 0, 960, 50);
-	var overlayWindow : Rect = Rect(0, 50, 960, 550);
+	var myWindow : Rect = Rect(0, 0, Screen.width, 50);
+	var overlayWindow : Rect = Rect(0, 50, Screen.width, 550);
 	
 	if(WindowScript.button1clicked)
 	{

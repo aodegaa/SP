@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-static var windowRect : Rect= Rect(0, 0, 960, 600);
+static var windowRect : Rect= Rect(0, 0, Screen.width, Screen.height);
 static var button1clicked : boolean;
 static var button2clicked : boolean;
 static var button3clicked : boolean;

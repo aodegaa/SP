@@ -1,10 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Travel.js">
     <Files>
-      <File FileName="Assets\Scripts\Travel.js" Line="186" Column="28" />
-      <File FileName="Assets\Scripts\Title.js" Line="76" Column="28" />
-      <File FileName="Assets\Scripts\Pub.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\WindowScript.js" Line="19" Column="37" />
+      <File FileName="Assets\Scripts\Travel.js" Line="64" Column="26" />
+      <File FileName="Assets\Scripts\Map.js" Line="48" Column="31" />
+      <File FileName="Assets\Scripts\AvalancheScript.js" Line="19" Column="1" />
+      <File FileName="Assets\Scripts\Musher.js" Line="10" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
