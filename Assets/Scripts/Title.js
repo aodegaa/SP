@@ -9,7 +9,7 @@ function OnGUI()
 	if (drawButtons)
 	{
 		// New Game
-		if (GUI.Button(Rect((50), (Screen.height/2 + 25), 80, 50), GUIContent("New Game"), titleButtonStyle))
+		if (GUI.Button(Rect((50), (Screen.height/2 + 20), 80, 50), GUIContent("New Game"), titleButtonStyle))
 		{
 			if (PlayerPrefs.HasKey("PreviousScene"))
 			{
@@ -33,7 +33,7 @@ function OnGUI()
 		}
 		
 		// Continue
-		if (GUI.Button(Rect((50), (Screen.height/2 - 25), 80, 50), GUIContent("Continue"), titleButtonStyle))
+		if (GUI.Button(Rect((50), (Screen.height/2 - 30), 80, 50), GUIContent("Continue"), titleButtonStyle))
 		{
 			Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene"));
 			return;
@@ -42,7 +42,7 @@ function OnGUI()
 	
 	
 		// Options
-		if (GUI.Button(Rect((50), (Screen.height/2 + 75), 80, 50), GUIContent("Options"), titleButtonStyle))
+		if (GUI.Button(Rect((50), (Screen.height/2 + 70), 80, 50), GUIContent("Options"), titleButtonStyle))
 		{
 			//
 			// Options Overlay Window
