@@ -1,6 +1,7 @@
 ﻿#pragma strict
 
 private var buttonText : String = "Skip";
+var introButtonStyle : GUIStyle;
 
 function Start()
 {
@@ -17,13 +18,13 @@ function Update()
 	// adjust based on time taken for all text to pass
 	if (Time.timeSinceLevelLoad >= 41)
 	{
-		buttonText = "Continue";
+		buttonText = "Next";
 	}
 }
 
 function OnGUI()
 {
-	if (GUI.Button(Rect((Screen.width - 110),(Screen.height - 70), 80, 50),GUIContent(buttonText)))
+	if (GUI.Button(Rect((Screen.width - 100),(Screen.height - 70), 60, 50),GUIContent(buttonText), introButtonStyle))
 	{
 		Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene") + 1);
 	}
