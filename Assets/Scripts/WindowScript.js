@@ -51,6 +51,31 @@ static function createManageWindow()
 	GUILayout.EndVertical();
 }
 
+// used for creating an event that has only one outcome.
+// the player can only view the event and close the notification by clicking ok
+static function createEventWindow(){
+	GUILayout.BeginVertical();
+	GUILayout.Label("An event that happened goes here. The only way to close it is to hit ok");
+	EventScreen.close = GUILayout.Button("OK");
+	GUILayout.EndVertical();
+}
+
+// used for creating an event for multiple options
+// the player can choose from multiple options
+static function createOptionEventWindow(){
+	
+
+	GUILayout.BeginVertical();
+	GUILayout.Label("An event that happened goes here. The player can choice below from the various options");
+	GUILayout.BeginHorizontal();
+	EventScreen.option1 = GUILayout.Button("Option1");
+	EventScreen.option2 = GUILayout.Button("Option2");
+	EventScreen.option3 = GUILayout.Button("Option3");
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+
+}
+
 static function createPlayerTab()
 {
 	var playerName : String = PlayerPrefs.GetString("PlayerName");
