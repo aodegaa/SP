@@ -8,7 +8,8 @@ var buttonContent : String = "Wait...";
 
 function Start()
 {
-	targetTime = Random.Range(1, 11);
+	Time.timeScale = 1.0;
+	targetTime = Random.Range(1, 6);
 }
 
 function OnGUI() 

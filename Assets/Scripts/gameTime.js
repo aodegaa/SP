@@ -1,12 +1,13 @@
-﻿class gameTime extends ScriptableObject{
-	
+﻿class gameTime extends ScriptableObject
+{
 	var month: String;
 	var day : int;
 	var year : int;
 	var hours : int;
 	var minutes : int;
 	
-	function init(newMonth:String, newDay:int, newYear:int, newHours:int, newMinutes:int){
+	function init(newMonth:String, newDay:int, newYear:int, newHours:int, newMinutes:int)
+	{
 		month = newMonth;
 		day = newDay;
 		year = newYear;
@@ -14,46 +15,55 @@
 		minutes = newMinutes;
 	}
 	
-	function isLeapYear(theYear:int):boolean{
-		return false;
-	}
-	
 	// add one month
-	function addMonth(){
-		switch(month){
+	function addMonth()
+	{
+		switch(month)
+		{
 			case "January":
 				month = "February";
 				break;
+				
 			case "February":
 				month = "March";
 				break;
+			
 			case "March":
 				month = "April";
 				break;
+			
 			case "April":
 				month = "May";
 				break;
+			
 			case "May":
 				month = "June";
 				break;
+			
 			case "June":
 				month = "July";
 				break;
+			
 			case "July":
 				month = "August";
 				break;
+			
 			case "August":
 				month = "September";
 				break;
+			
 			case "September":
 				month = "October";
 				break;
+			
 			case "October":
 				month = "November";
 				break;
+			
 			case "November":
 				month = "December";
 				break;
+			
 			case "December":
 				month = "January";
 				year++;
@@ -61,48 +71,60 @@
 		}
 	}
 	
-	function addHour(hrs:int){
-		for(var i:int;i<hrs;i++){
+	function addHour(hrs:int)
+	{
+		for(var i:int;i<hrs;i++)
+		{
 			// make sure hours can't go over 23
-			if(hours<23){
+			if(hours<23)
+			{
 				hours++;
 			}
-			else{
+			
+			else
+			{
 				// rollover the hours
 				// increase the days
 				// but first make sure the days are good for the month
-				switch(month){
+				switch(month)
+				{
 					case "February":
-						if(isLeapYear(year)){
-							if(day<29){
-								day++;
-							}
-							else{
-								addMonth();
-								day = 1;
-							}
-						}
-						break;
-					case "April":
-						
-					case "June":
-						
-					case "September":
-						
-					case "November":
-						if(day<30){
+						if(day<28)
+						{
 							day++;
 						}
-						else{
+							
+						else
+						{
+							addMonth();
+							day = 1;
+						}
+						break;
+						
+					case "April":	
+					case "June":	
+					case "September":	
+					case "November":
+						if(day<30)
+						{
+							day++;
+						}
+						
+						else
+						{
 							addMonth();
 							day=1;
 						}
 						break;
+					
 					default:
-						if(day<31){
+						if(day<31)
+						{
 							day++;
 						}
-						else{
+						
+						else
+						{
 							addMonth();
 							day=1;
 						}
@@ -124,7 +146,8 @@
 		]),int.Parse(strhrmn[1]));
 	}
 	
-	function ToString() : String{
+	function ToString() : String
+	{
 	// put the correct ending on the day
 		var temp : String;
 		switch (day)

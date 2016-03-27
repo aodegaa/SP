@@ -20,6 +20,7 @@ function OnGUI()
 			else
 			{
 				PlayerPrefs.DeleteAll();
+				PlayerPrefs.SetInt("TownID", 1);
 				PlayerPrefs.SetInt("PreviousScene", Application.loadedLevel);
 				Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene") + 1);
 				return;

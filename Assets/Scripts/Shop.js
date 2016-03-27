@@ -356,7 +356,7 @@ function TradeWares()
 
 function SpawnTrades()
 {	
-	var playerItem1 : int = Random.Range(0, 7);
+	var playerItem1 : int = Random.Range(0, 7);if (PlayerPrefs.HasKey("PreviousScene"))
 	var npcItem1 : int = Random.Range(0, 7);
 
 	switch(playerItem1)

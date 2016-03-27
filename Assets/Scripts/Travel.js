@@ -131,10 +131,11 @@ function Update () {
 
 var popupwindow : Rect = Rect(Screen.width/2-100,Screen.height/2-50,200,50); // avalanche popup window
 var popup : boolean = false;
+
 function FixedUpdate(){
 	currentTime.addHour(1);
 	PlayerPrefs.SetString("Game Time",currentTime.ToString());
-	PlayerPrefs.SetInt("Travel Distance", PlayerPrefs.GetInt("Travel Distance")-20);// TODO: needs to be update to dynamic formula
+	PlayerPrefs.SetInt("Travel Distance", PlayerPrefs.GetInt("Travel Distance")-5);// TODO: needs to be update to dynamic formula
 	
 
 	// avalanche check

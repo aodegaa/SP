@@ -12,7 +12,6 @@ var map : Map;
 
 function Update()
 {
-	//Time.timeScale = WindowScript.timeScale; // shit
 }
 
 function Start(){
@@ -224,14 +223,14 @@ function TutorialDialog()
     	GUILayout.Label("You plan to make the journey to Haven for the cure and want my help? \n\nRegister at the pub and I'll take you seriously.");
     }
     
-    if(Application.loadedLevel == 4)
-	{
-    	GUILayout.Label("Well, it turns out you were serious after all... \n\nHere is $500 to get you started. \n\nUse it to purchase supplies for your journey. I've told the shopkeeper to give you a discount.");
+   // if(Application.loadedLevel == 4)
+//	{
+    //	GUILayout.Label("Well, it turns out you were serious after all... \n\nHere is $500 to get you started. \n\nUse it to purchase supplies for your journey. I've told the shopkeeper to give you a discount.");
     	
-    	// set money.
-    	var playerMoney : int = 500;
-    	PlayerPrefs.SetInt("PlayerMoney", playerMoney);
-    }
+  //  	// set money.
+ //   	var playerMoney : int = 500;
+ //   	PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+ //   }
     
     if(Application.loadedLevel == 6)
     {
@@ -240,12 +239,16 @@ function TutorialDialog()
 }
 
 private var location : int=-1;
-function chooseCity(){
+
+function chooseCity()
+{
 	var buttonSelected : boolean = false;
 
 	GUILayout.BeginVertical();
+	
 	var count:int = 0;
-	for(var path : Path in map.getCityByID(map.currentCity).getDestinations()){
+	for(var path : Path in map.getCityByID(map.currentCity).getDestinations())
+	{
 	// make the avalanche check first
 	// make sure they aren't in town 22
 	if(map.currentCity==22){
@@ -285,8 +288,10 @@ function chooseCity(){
 		
 		
 	}
-	if(GUILayout.Button("OK")){
-		if(!(PlayerPrefs.GetInt("Next City")==PlayerPrefs.GetInt("Current City"))){
+	if(GUILayout.Button("OK"))
+	{
+		if(!(PlayerPrefs.GetInt("Next City")==PlayerPrefs.GetInt("Current City")))
+		{
 			Application.LoadLevel(9);
 		}
 	}
