@@ -1,12 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\icefishessss.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ShopFunctionality.js">
     <Files>
-      <File FileName="Assets\Scripts\TownGUI.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\towntest.js" Line="10" Column="15" />
-      <File FileName="Assets\Scripts\RestScreen.js" Line="12" Column="1" />
-      <File FileName="Assets\Scripts\gameTime.js" Line="18" Column="2" />
-      <File FileName="Assets\Scripts\icefishessss.js" Line="54" Column="3" />
+      <File FileName="Assets\Scripts\Shop.js" Line="448" Column="46" />
+      <File FileName="Assets\Scripts\ShopFunctionality.js" Line="114" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

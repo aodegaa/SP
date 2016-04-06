@@ -10,13 +10,12 @@ var leaveTown : boolean;
 var map : Map;
 
 
-function Update()
-{
-}
 
-function Start(){
+function Start()
+{
 	PlayerPrefs.SetInt("PreviousScene", Application.loadedLevel);
-	if(!PlayerPrefs.HasKey("Game Time")){
+	if(!PlayerPrefs.HasKey("Game Time"))
+	{
 		var theTime : gameTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
 		theTime.init(townDate+" "+townTime);
 		PlayerPrefs.SetString("Game Time",theTime.ToString());
@@ -58,11 +57,11 @@ function FixedUpdate()
 function OnGUI() 
 {
 
-
 	renderTabs();	
 }
 
-function renderTabs(){
+function renderTabs()
+{
 	if(manage){
 		if(!ManageScreen.close){
 	 		ManageScreen.createManageWindow();

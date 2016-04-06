@@ -3,11 +3,14 @@
 var musher : GameObject;
 var map : Map;
 
-function Start () {
+function Start () 
+{
 	musher = GameObject.Find("Musher");
 	map = ScriptableObject.CreateInstance("Map") as Map;
 	map.init(PlayerPrefs.GetInt("Current City"));
-	switch(PlayerPrefs.GetInt("Current City")){
+	
+	switch(PlayerPrefs.GetInt("Current City"))
+	{
 		case 1:
 			musher.transform.Translate(Vector3(-7.5,0,0));
 			break;
@@ -81,22 +84,22 @@ function Start () {
 	
 }
 
-function Update () {
 
-}
-
-function OnGUI(){
+function OnGUI()
+{
 	var menuWindow : Rect = Rect(0,-12,Screen.width,30);
 	menuWindow = GUILayout.Window(0,menuWindow,showMenu,"");
 }
 
-function showMenu(){
+function showMenu()
+{
 	var musherIcon = Resources.Load("TinyMusher");
 	GUILayout.BeginHorizontal();
 	GUILayout.Label("Current location indicated by",GUILayout.Width(170));
 	GUILayout.Label(musherIcon,GUILayout.Height(35),GUILayout.Width(35));
 	GUILayout.Label("symbol");
 	GUILayout.Label("",GUILayout.Width(500));
+	
 	if(GUILayout.Button("X"))
 	{
 		Debug.Log("close");
