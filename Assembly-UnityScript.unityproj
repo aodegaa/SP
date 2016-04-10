@@ -75,9 +75,9 @@
      <Compile Include="Assets\Scripts\ViewMap.js" />
      <Compile Include="Assets\Scripts\ViewMapScreen.js" />
      <Compile Include="Assets\Scripts\WindowScript.js" />
+     <Compile Include="Assets\Scripts\dogFood.js" />
      <Compile Include="Assets\Scripts\gameTime.js" />
      <Compile Include="Assets\Scripts\icefishessss.js" />
-     <Compile Include="Assets\Scripts\switchToNextScene.js" />
      <Compile Include="Assets\Scripts\towntest.js" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
