@@ -11,6 +11,11 @@
 //
 // weather overlays
 
+
+// default time/date if not set yet
+var townTime : String = "13:00";
+var townDate : String = "June 1st, 1969";
+
 private var townName : String;
 var townNameStyle : GUIStyle;
 private var townID : int;
@@ -24,6 +29,14 @@ var leaveTownButtonStyle : GUIStyle;
 function Start() 
 {
 	GetTownName();
+	
+	// check for preset time. set the time if it isn't set yet.
+	if(!PlayerPrefs.HasKey("Game Time"))
+	{
+		var theTime : gameTime = ScriptableObject.CreateInstance("gameTime") as gameTime;
+		theTime.init(townDate+" "+townTime);
+		PlayerPrefs.SetString("Game Time",theTime.ToString());
+	}
 }
 
 function Update() 
@@ -34,6 +47,10 @@ function Update()
 function OnGUI()
 {
 	GUI.Label(Rect(350, 10, 100, 100), GUIContent(townName), townNameStyle);
+	
+	// create time window, set to be in top right hand corner of the screen
+	var townWindow : Rect = Rect(Screen.width-120, 0, 120, 65);
+	townWindow = GUI.Window(5, townWindow, TownInformation,"Current Time");
 
 	if (GUI.Button(Rect((Screen.width - 700), (Screen.height - 40), 60, 50), GUIContent(manageButtonText), manageButtonStyle))
 	{
@@ -44,6 +61,31 @@ function OnGUI()
 	{
 
 	}
+}
+
+// used to display the date and time, with an image of a clock
+function TownInformation()
+{
+	var myClock = Resources.Load("clock");
+
+	GUILayout.BeginVertical();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	// the current date
+	GUILayout.Label(PlayerPrefs.GetString("Game Time").Substring(0,PlayerPrefs.GetString("Game Time").Length-5));
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label(myClock);
+	// the current time
+	GUILayout.Label(PlayerPrefs.GetString("Game Time").Substring(PlayerPrefs.GetString("Game Time").Length-5));
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	
+	GUILayout.EndVertical();
 }
 
 function GetTownName()
