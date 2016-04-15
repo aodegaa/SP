@@ -1,131 +1,111 @@
 ﻿#pragma strict
 
+private var dog1Name : String = "Dog's Name";
 private var playerName : String = "Your Name";
 
+var sealIcon : Texture2D;
 var submitted : boolean = false;
 
-private var easy : boolean = false;
-private var medium : boolean = false;
-private var hard : boolean = false;
+//difficulties
+var difficultyText : String = "Difficult";
+var normalMode : boolean = true;
+var challengeMode : boolean = false;
 
-function Start () 
-{
-
-}
-
-function Update () 
-{
-
-}
 
 function OnGUI()
 {
-
-CharacterCreation();
-
+	CharacterCreation();
 }
 
 function CharacterCreation()
 {
+    GUI.SetNextControlName("DogNameText");
+    dog1Name = GUI.TextField(Rect (285, 330, 100, 20), dog1Name, 12);
 
-    GUILayout.BeginVertical();
-    
-       
-    // Name
-    GUILayout.BeginHorizontal();
-    GUILayout.Label("Name: ", GUILayout.Width(80));
-    GUI.SetNextControlName("FirstNameText");
-    playerName = GUILayout.TextField( playerName );
-    GUILayout.EndHorizontal();
-    
-           // clear dat default text on click
-    if(UnityEngine.Event.current.type == EventType.Repaint)
+	if(UnityEngine.Event.current.type == EventType.Repaint)
     {
-    	if( GUI.GetNameOfFocusedControl()=="FirstNameText")
+    	if(GUI.GetNameOfFocusedControl() == "DogNameText")
     	{
-    		if(playerName=="Your Name") playerName = "";
+    		if(dog1Name=="Dog's Name") 
+    		{
+    			dog1Name = "";
+    		}
     	}
+    	
     	else
     	{
-    		if( playerName=="") playerName = "Your Name";
+    		if( dog1Name=="") 
+    		{
+    			dog1Name = "Dog's Name";
+    		}
     	}
     }
- 
-     
 
+    GUI.SetNextControlName("PlayerNameText");
+	playerName = GUI.TextField(Rect (225, 520, 100, 20), playerName, 12);
     
-    // difficulty selection
-    GUILayout.BeginHorizontal();
-    GUILayout.Label("Difficulty: ", GUILayout.Width(80));
-    
-    // easy - $1000 starting
-    if(easy)
+    if(UnityEngine.Event.current.type == EventType.Repaint)
     {
-        GUI.enabled=false;
-    }
+    	if(GUI.GetNameOfFocusedControl() == "PlayerNameText")
+    	{
+    		if(playerName == "Your Name") 
+    		{
+    			playerName = "";
+    		}
+    	}
+    	
+    	else
+    	{
+    		if( playerName == "") 
+    		{
+    			playerName = "Your Name";
+    		}
+    	}
+    }    
     
-    if(GUILayout.Button("Easy"))
+    if(GUI.Button(Rect (200, 290, 100, 20),(difficultyText)))
     {
-    	easy = true;
-    	medium = false;
-    	hard = false;
-    	PlayerPrefs.SetString("Difficulty", "Easy");
-    	PlayerPrefs.SetInt("PlayerMoney", 1000);
+    	if(difficultyText == "Difficult")
+    	{	
+    		normalMode = false;
+    		challengeMode = true;
+    		difficultyText = "Impossible";
+    	}
+    	
+    	else if(difficultyText == "Impossible")
+    	{
+    		normalMode = true;
+    		challengeMode = false;
+    		difficultyText = "Difficult";
+    	}
     }
-    GUI.enabled=true;
-    
-    // medium - $500 starting
-    if(medium)
-    {
-        GUI.enabled=false;
-    }
-    
-    if(GUILayout.Button("Medium"))
-    {
-    	easy = false;
-    	medium = true;
-    	hard = false;
-    	PlayerPrefs.SetString("Difficulty", "Medium");
-    	PlayerPrefs.SetInt("PlayerMoney", 500);
-    }
-    GUI.enabled=true;
-    
-    // hard - $250 starting
-    if(hard)
-    {
-   		GUI.enabled=false;
-    }
-   
-    if(GUILayout.Button("Hard"))
-    {
-    	easy = false;
-    	medium = false;
-    	hard = true;
-    	PlayerPrefs.SetString("Difficulty", "Hard");
-    	PlayerPrefs.SetInt("PlayerMoney", 250);
-    }
-    GUI.enabled=true;
-    
-    GUILayout.EndHorizontal();
-    
-
-    ///
      
-    if (GUILayout.Button("Submit"))
+    if(GUI.Button(Rect (450, 480, 100, 20),("Submit")))
     {
         submitted = true;
     }
      
     if(submitted)
     {
+    	GUI.Box(Rect (450, 450, 100, 95), sealIcon);
+    
         PlayerPrefs.SetString("PlayerName", playerName);
-        PlayerPrefs.SetInt("PlayerHealth", 100);
-        PlayerPrefs.SetInt("PlayerHunger", 0);
+		//dog1 name
         
-        PlayerPrefs.SetInt("HealthyPopulation", 999);
-        PlayerPrefs.SetInt("SickPopulation", 1);
-        PlayerPrefs.SetInt("DeceasedPopulation", 0);
-    }
-     
-    GUILayout.EndVertical();
-   }
+        if(normalMode)
+        {
+        	//normal mode money
+        	//normal mode player health / hunger
+        	//normal mode dog1 health / hunger
+        	//normal mode town population - less population = less medicine needed
+        }
+        
+        if(challengeMode)
+        {
+        	//challenge mode money
+        	//challenge mode player health / hunger
+        	//challenge mode dog1 health / hunger
+        	//challenge mode town population - more population = more medicine needed
+        }
+	}
+}

@@ -7,5 +7,5 @@ function Start()
 
 function OnMouseDown() 
 {
-	Application.LoadLevel("10Map");
+	Application.LoadLevel("08Map");
 }

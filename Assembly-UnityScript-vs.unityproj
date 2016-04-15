@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\GoToStore.js" />
      <Compile Include="Assets\Scripts\GoToTavern.js" />
      <Compile Include="Assets\Scripts\HealthBarTest.js" />
+     <Compile Include="Assets\Scripts\InnFunctionality.js" />
      <Compile Include="Assets\Scripts\Intro.js" />
      <Compile Include="Assets\Scripts\ManageScreen.js" />
      <Compile Include="Assets\Scripts\Map.js" />
