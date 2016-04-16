@@ -7,5 +7,5 @@ function Start()
 
 function OnMouseDown() 
 {
-	Application.LoadLevel("05Shop");
+	Application.LoadLevel("04Shop");
 }

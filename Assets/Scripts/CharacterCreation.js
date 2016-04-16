@@ -120,8 +120,10 @@ function CharacterCreation()
         PlayerPrefs.SetInt("DogHealth1", 100);
         PlayerPrefs.SetInt("DogHunger1", 100);
 		PlayerPrefs.SetInt("DogCount", 1);
+		
+		PlayerPrefs.SetInt("TownID", 1);
         
         yield WaitForSeconds(4);
-        Application.LoadLevel("03townconcept");
+        Application.LoadLevel("03townconcept");		//change later
 	}
 }
