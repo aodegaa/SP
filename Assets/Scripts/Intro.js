@@ -24,6 +24,6 @@ function OnGUI()
 {
 	if (GUI.Button(Rect((Screen.width - 100),(Screen.height - 70), 60, 50),GUIContent(buttonText), introButtonStyle))
 	{
-		Application.LoadLevel(PlayerPrefs.GetInt("PreviousScene") + 1);
+		Application.LoadLevel("02CharacterCreation");
 	}
 }

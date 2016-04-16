@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-private var dog1Name : String = "Dog's Name";
+private var dogName1 : String = "Dog's Name";
 private var playerName : String = "Your Name";
 
 var sealIcon : Texture2D;
@@ -12,6 +12,11 @@ var normalMode : boolean = true;
 var challengeMode : boolean = false;
 
 
+function Start()
+{
+	PlayerPrefs.SetInt("PreviousScene", Application.loadedLevel);
+}
+
 function OnGUI()
 {
 	CharacterCreation();
@@ -20,23 +25,23 @@ function OnGUI()
 function CharacterCreation()
 {
     GUI.SetNextControlName("DogNameText");
-    dog1Name = GUI.TextField(Rect (285, 330, 100, 20), dog1Name, 12);
+    dogName1 = GUI.TextField(Rect (285, 330, 100, 20), dogName1, 12);
 
 	if(UnityEngine.Event.current.type == EventType.Repaint)
     {
     	if(GUI.GetNameOfFocusedControl() == "DogNameText")
     	{
-    		if(dog1Name=="Dog's Name") 
+    		if(dogName1 == "Dog's Name") 
     		{
-    			dog1Name = "";
+    			dogName1 = "";
     		}
     	}
     	
     	else
     	{
-    		if( dog1Name=="") 
+    		if( dogName1 == "") 
     		{
-    			dog1Name = "Dog's Name";
+    			dogName1 = "Dog's Name";
     		}
     	}
     }
@@ -87,25 +92,36 @@ function CharacterCreation()
      
     if(submitted)
     {
-    	GUI.Box(Rect (450, 450, 100, 95), sealIcon);
-    
-        PlayerPrefs.SetString("PlayerName", playerName);
-		//dog1 name
-        
-        if(normalMode)
+    	if(normalMode)
         {
-        	//normal mode money
-        	//normal mode player health / hunger
-        	//normal mode dog1 health / hunger
-        	//normal mode town population - less population = less medicine needed
+        	PlayerPrefs.SetInt("PlayerMoney", 1000);
+        	
+        	PlayerPrefs.SetInt("TownPopulation", 400);
+        	
+        	PlayerPrefs.SetInt("KarmaModifier", 10);
         }
         
         if(challengeMode)
         {
-        	//challenge mode money
-        	//challenge mode player health / hunger
-        	//challenge mode dog1 health / hunger
-        	//challenge mode town population - more population = more medicine needed
+        	PlayerPrefs.SetInt("PlayerMoney", 500);
+        	
+        	PlayerPrefs.SetInt("TownPopulation", 800);
+        	
+        	PlayerPrefs.SetInt("KarmaModifier", -10);
         }
+    
+    	GUI.Box(Rect (450, 450, 100, 95), sealIcon);	//change later
+    
+        PlayerPrefs.SetString("PlayerName", playerName);
+		PlayerPrefs.SetInt("PlayerHealth", 100);
+        PlayerPrefs.SetInt("PlayerHunger", 100);
+        
+        PlayerPrefs.SetString("DogName1", dogName1); 	
+        PlayerPrefs.SetInt("DogHealth1", 100);
+        PlayerPrefs.SetInt("DogHunger1", 100);
+		PlayerPrefs.SetInt("DogCount", 1);
+        
+        yield WaitForSeconds(4);
+        Application.LoadLevel("03townconcept");
 	}
 }

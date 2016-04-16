@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterCreation.js">
     <Files>
-      <File FileName="Assets\Scripts\CharacterCreation.js" Line="14" Column="1" />
-      <File FileName="Assets\Scripts\Intro.js" Line="25" Column="16" />
+      <File FileName="Assets\Scripts\CharacterCreation.js" Line="124" Column="31" />
+      <File FileName="Assets\Scripts\Intro.js" Line="8" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
