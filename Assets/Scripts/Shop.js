@@ -536,8 +536,8 @@ function BrowseWares()
 		sledCount = sledCount + 1;
 		PlayerPrefs.SetInt("PlayerMoney", playerMoney);
     	PlayerPrefs.SetInt("SledCount", sledCount);
-    	PlayerPrefs.SetFloat("SledLoad", 0);
-    	PlayerPrefs.SetFloat("SledCapacity", 250);
+    	PlayerPrefs.SetFloat("SledLoad", 0.0);
+    	PlayerPrefs.SetFloat("SledCapacity", 250.0);
     	PlayerPrefs.SetInt("RunnerHealth", 100);
     	PlayerPrefs.SetInt("BasketHealth", 100);
     	PlayerPrefs.SetFloat("SledModifier", 1.0);

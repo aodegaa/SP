@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\CharacterCreation.js" />
      <Compile Include="Assets\Scripts\City.js" />
      <Compile Include="Assets\Scripts\Dog.js" />
+     <Compile Include="Assets\Scripts\Event.js" />
      <Compile Include="Assets\Scripts\EventScreen.js" />
      <Compile Include="Assets\Scripts\GoToInn.js" />
      <Compile Include="Assets\Scripts\GoToMap.js" />

@@ -112,17 +112,37 @@ function CharacterCreation()
     
     	GUI.Box(Rect (450, 450, 100, 95), sealIcon);	//change later
     
+    	//player
         PlayerPrefs.SetString("PlayerName", playerName);
 		PlayerPrefs.SetInt("PlayerHealth", 100);
         PlayerPrefs.SetInt("PlayerHunger", 100);
         
+        
+        //dog1
         PlayerPrefs.SetString("DogName1", dogName1); 	
         PlayerPrefs.SetInt("DogHealth1", 100);
         PlayerPrefs.SetInt("DogHunger1", 100);
 		PlayerPrefs.SetInt("DogCount", 1);
 		
+		//sled
+		PlayerPrefs.SetFloat("SledLoad", 0.0);
+    	PlayerPrefs.SetFloat("SledCapacity", 250.0);
+    	PlayerPrefs.SetInt("RunnerHealth", 100);
+    	PlayerPrefs.SetInt("BasketHealth", 100);
+    	PlayerPrefs.SetFloat("SledModifier", 1.0);
+    	
+    	//inventory
+    	PlayerPrefs.SetInt("FoodCount", 0);
+    	PlayerPrefs.SetInt("FirewoodCount", 0);
+    	PlayerPrefs.SetInt("RepairKitCount", 0);
+    	PlayerPrefs.SetInt("DogBootyCount", 0);
+    	PlayerPrefs.SetInt("BaitCount", 0);
+    	PlayerPrefs.SetInt("BulletsCount", 0);
+    	
+		//starting town
 		PlayerPrefs.SetInt("TownID", 1);
         
+        //wait a few seconds and change scene
         yield WaitForSeconds(4);
         Application.LoadLevel("03townconcept");		//change later
 	}
