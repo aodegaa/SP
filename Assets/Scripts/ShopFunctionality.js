@@ -60,6 +60,8 @@ var shopFoodWindow : Rect = Rect(250, 50, 300, 260);
 var shopFirewoodWindow : Rect = Rect(250, 50, 300, 260);
 var shopRepairKitWindow : Rect = Rect(250, 50, 300, 260);
 var shopDogBootiesWindow : Rect = Rect(250, 50, 300, 260);
+var shopBaitWindow : Rect = Rect(250, 50, 300, 260);
+var shopBulletsWindow : Rect = Rect(250, 50, 300, 260);
 //
 
 
@@ -166,10 +168,12 @@ function SetUpShop()
 	
 	if(buyingBait)
 	{
+		shopBaitWindow = GUI.Window(8, shopBaitWindow, CreateBaitWindow, "");
 	}
 	
 	if(buyingBullets)
 	{
+		shopBulletsWindow = GUI.Window(9, shopBulletsWindow, CreateBulletsWindow, "");
 	}
 
 }
@@ -325,9 +329,72 @@ function CreateDogWindow()
 	
 	if(GUILayout.Button("Buy."))
 	{
-		// add dog to team, 
-		// dogcount++
-		// remove player money
+		if(dogCount < 8 && playerMoney >= dogPrice)
+		{
+			dogCount = dogCount + 1;
+			PlayerPrefs.SetInt("DogCount", dogCount);
+			
+			if(!PlayerPrefs.HasKey("DogName1"))
+			{
+				PlayerPrefs.SetString("DogName1", dogName);
+				PlayerPrefs.SetInt("DogHealth1", 100);
+				PlayerPrefs.SetInt("DogHunger1", 100);
+			}
+			
+			if(!PlayerPrefs.HasKey("DogName2"))
+			{
+				PlayerPrefs.SetString("DogName2", dogName);
+				PlayerPrefs.SetInt("DogHealth2", 100);
+				PlayerPrefs.SetInt("DogHunger2", 100);
+			}
+			
+			if(!PlayerPrefs.HasKey("DogName3"))
+			{
+				PlayerPrefs.SetString("DogName3", dogName);
+				PlayerPrefs.SetInt("DogHealth3", 100);
+				PlayerPrefs.SetInt("DogHunger3", 100);
+			}
+			
+			if(!PlayerPrefs.HasKey("DogName4"))
+			{
+				PlayerPrefs.SetString("DogName4", dogName);
+				PlayerPrefs.SetInt("DogHealth4", 100);
+				PlayerPrefs.SetInt("DogHunger4", 100);
+			}
+			
+			if(!PlayerPrefs.HasKey("DogName5"))
+			{
+				PlayerPrefs.SetString("DogName5", dogName);
+				PlayerPrefs.SetInt("DogHealth5", 100);
+				PlayerPrefs.SetInt("DogHunger5", 100);
+			}
+			
+			if(!PlayerPrefs.HasKey("DogName6"))
+			{
+				PlayerPrefs.SetString("DogName6", dogName);
+				PlayerPrefs.SetInt("DogHealth6", 100);
+				PlayerPrefs.SetInt("DogHunger6", 100);
+			}
+
+			if(!PlayerPrefs.HasKey("DogName7"))
+			{
+				PlayerPrefs.SetString("DogName7", dogName);
+				PlayerPrefs.SetInt("DogHealth7", 100);
+				PlayerPrefs.SetInt("DogHunger7", 100);
+			}
+			
+			if(!PlayerPrefs.HasKey("DogName8"))
+			{
+				PlayerPrefs.SetString("DogName8", dogName);
+				PlayerPrefs.SetInt("DogHealth8", 100);
+				PlayerPrefs.SetInt("DogHunger8", 100);
+			}
+			
+			playerMoney = playerMoney - dogPrice;
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			
+			dogName = "New Dog";
+		}
 	}
 	GUILayout.EndHorizontal();
 	
@@ -335,6 +402,7 @@ function CreateDogWindow()
 	GUILayout.Label("Remaining Spots: " + (8 - dogCount) + ".");
 	if(GUILayout.Button("Back."))
 	{
+		dogName = "New Dog";
 		buyingDog = false;
 	}
 	GUILayout.EndHorizontal();
@@ -409,9 +477,13 @@ function CreateFoodWindow()
 		if(playerMoney >= (quantity * foodPrice) && sledCapacity >= sledLoad + (quantity * foodWeight))
 		{
 			playerMoney = playerMoney - (quantity * foodPrice);		//update money
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			
 			sledLoad = sledLoad + (quantity * foodWeight);	//update weight
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
 			
 			foodCount = foodCount + quantity;	//update player stock
+			PlayerPrefs.SetInt("FoodCount", foodCount);
 			
 			if(quantity > 0)
 			{
@@ -502,9 +574,13 @@ function CreateFirewoodWindow()
 		if(playerMoney >= (quantity * firewoodPrice) && sledCapacity >= sledLoad + (quantity * firewoodWeight))
 		{
 			playerMoney = playerMoney - (quantity * firewoodPrice);		//update money
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			
 			sledLoad = sledLoad + (quantity * firewoodWeight);	//update weight
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
 			
 			firewoodCount = firewoodCount + quantity;	//update player stock
+			PlayerPrefs.SetInt("FirewoodCount", firewoodCount);
 			
 			if(quantity > 0)
 			{
@@ -595,9 +671,13 @@ function CreateRepairKitWindow()
 		if(playerMoney >= (quantity * repairkitPrice) && sledCapacity >= sledLoad + (quantity * repairkitWeight))
 		{
 			playerMoney = playerMoney - (quantity * repairkitPrice);		//update money
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			
 			sledLoad = sledLoad + (quantity * repairkitWeight);	//update weight
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
 			
 			repairkitCount = repairkitCount + quantity;	//update player stock
+			PlayerPrefs.SetInt("RepairKitCount", repairkitCount);
 			
 			if(quantity > 0)
 			{
@@ -688,9 +768,13 @@ function CreateDogBootiesWindow()
 		if(playerMoney >= (quantity * dogbootiesPrice) && sledCapacity >= sledLoad + (quantity * dogbootiesWeight))
 		{
 			playerMoney = playerMoney - (quantity * dogbootiesPrice);		//update money
-			sledLoad = sledLoad + (quantity * dogbootiesWeight);	//update weight
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
 			
-			dogbootyCount = dogCount + quantity;	//update player stock
+			sledLoad = sledLoad + (quantity * dogbootiesWeight);	//update weight
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			
+			dogbootyCount = dogbootyCount + quantity;	//update player stock
+			PlayerPrefs.SetInt("DogBootyCount", dogbootyCount);
 			
 			if(quantity > 0)
 			{
@@ -708,6 +792,200 @@ function CreateDogBootiesWindow()
 	{
 		quantity = 1;
 		buyingDogBooties = false;
+	}
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}
+
+function CreateBaitWindow()
+{
+	var itemImage = Resources.Load("storebait"); // change
+
+	GUILayout.BeginVertical();
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Bait");
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label(itemImage);
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("A thick juicy worm.\nA must-have if you plan to catch fish.");
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	if(GUILayout.Button("<|"))
+	{
+		if(quantity <= 10)
+		{
+			quantity = 0;
+		}
+		
+		else 
+		{
+			quantity = quantity - 10;
+		}
+	}
+	
+	if(GUILayout.Button("<-"))
+	{
+		if(quantity == 0)
+		{
+			quantity = 0;
+		}
+		
+		else 
+		{
+			quantity--;
+		}
+	}
+	
+	GUILayout.Box(quantity.ToString());
+	
+	if(GUILayout.Button("->"))
+	{
+		quantity++;
+	}
+	
+	if(GUILayout.Button("|>"))
+	{
+		quantity = quantity + 10;
+	}
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("Total Price: $"  + quantity * baitPrice + ".");
+	
+	if(GUILayout.Button("Buy."))
+	{
+		//make sure they can afford it and store it
+		if(playerMoney >= (quantity * baitPrice) && sledCapacity >= sledLoad + (quantity * baitWeight))
+		{
+			playerMoney = playerMoney - (quantity * baitPrice);		//update money
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			
+			sledLoad = sledLoad + (quantity * baitWeight);	//update weight
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			
+			baitCount = baitCount + quantity;	//update player stock
+			PlayerPrefs.SetInt("BaitCount", baitCount);
+			
+			if(quantity > 0)
+			{
+				Debug.Log("Ka-Ching!");
+				//play sound ka-ching!
+			}
+		}
+		
+	}
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("Total Weight: "  + quantity * baitWeight + " lbs.");
+	if(GUILayout.Button("Back."))
+	{
+		quantity = 1;
+		buyingBait = false;
+	}
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}
+
+function CreateBulletsWindow()
+{
+	var itemImage = Resources.Load("storebullets"); // change
+
+	GUILayout.BeginVertical();
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("Bullets");
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	GUILayout.Label(itemImage);
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("A 10-pack of bullets.\nMight help in a dangerous situation.");
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	if(GUILayout.Button("<|"))
+	{
+		if(quantity <= 10)
+		{
+			quantity = 0;
+		}
+		
+		else 
+		{
+			quantity = quantity - 10;
+		}
+	}
+	
+	if(GUILayout.Button("<-"))
+	{
+		if(quantity == 0)
+		{
+			quantity = 0;
+		}
+		
+		else 
+		{
+			quantity--;
+		}
+	}
+	
+	GUILayout.Box(quantity.ToString());
+	
+	if(GUILayout.Button("->"))
+	{
+		quantity++;
+	}
+	
+	if(GUILayout.Button("|>"))
+	{
+		quantity = quantity + 10;
+	}
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("Total Price: $"  + quantity * bulletsPrice + ".");
+	
+	if(GUILayout.Button("Buy."))
+	{
+		//make sure they can afford it and store it
+		if(playerMoney >= (quantity * bulletsPrice) && sledCapacity >= sledLoad + (quantity * bulletsWeight))
+		{
+			playerMoney = playerMoney - (quantity * bulletsPrice);		//update money
+			PlayerPrefs.SetInt("PlayerMoney", playerMoney);
+			
+			sledLoad = sledLoad + (quantity * bulletsWeight);	//update weight
+			PlayerPrefs.SetFloat("SledLoad", sledLoad);
+			
+			bulletsCount = bulletsCount + quantity;	//update player stock
+			PlayerPrefs.SetInt("BulletsCount", bulletsCount);
+			
+			if(quantity > 0)
+			{
+				Debug.Log("Ka-Ching!");
+				//play sound ka-ching!
+			}
+		}
+		
+	}
+	GUILayout.EndHorizontal();
+	
+	GUILayout.BeginHorizontal();
+	GUILayout.Label("Total Weight: "  + quantity * bulletsWeight + " lbs.");
+	if(GUILayout.Button("Back."))
+	{
+		quantity = 1;
+		buyingBullets = false;
 	}
 	GUILayout.EndHorizontal();
 	GUILayout.EndVertical();
