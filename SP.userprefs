@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ShopFunctionality.js">
     <Files>
-      <File FileName="Assets\Scripts\ShopFunctionality.js" Line="405" Column="23" />
+      <File FileName="Assets\Scripts\ShopFunctionality.js" Line="186" Column="28" />
       <File FileName="Assets\Scripts\CharacterCreation.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

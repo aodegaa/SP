@@ -183,6 +183,7 @@ function CreateShopOptionsWindow()
 	GUILayout.BeginVertical();
 	GUILayout.FlexibleSpace();
 	GUILayout.Label("If you've got the coin, \nI've got what you need.", shopOptionsWindowDialogStyle);
+	GUILayout.FlexibleSpace();
 	GUILayout.BeginHorizontal();
 	GUILayout.FlexibleSpace();
 	if(GUILayout.Button("Buy"))
