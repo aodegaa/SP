@@ -14,7 +14,6 @@ private var eventID : int;
 private var eventWindow : Rect = Rect(Screen.width/2-150, Screen.height/2-50, 300,150);
 var showEvent : boolean = false; // controls whether the event is currently being shown or not.
 var showOutcome : boolean = false; // controls whether the outcome is shown or not.
-
 private var outcomeText : String; // used to display the outcome of events.
 
 function Start(){
@@ -564,3 +563,477 @@ function createEvent4(){
 }
 /***** END EVENT 4 ******/
 
+/***** START EVENT 5 ****/
+// event for hare encounter
+function createEvent5(){
+	GUILayout.BeginVertical();
+	
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("What will you do?");
+	GUILayout.FlexibleSpace();
+	GUILayout.BeginHorizontal();
+	
+	if(GUILayout.Button("Fight")){
+		Debug.Log("Fight!");
+		//TODO: add outcome effect
+		if(PlayerPrefs.GetInt("BulletsCount")>=1){ // player has enough bullets to potentially kill the animal
+		
+			if(eventRoll>=99){
+				// good result
+				outcomeText = "Fast as the rabbit is, you managed to shoot it!!";
+				showOutcome=true;
+				showEvent = false;
+			}
+			else{
+				// bad result
+				outcomeText = "You shot at the hare but it was far too fast.\nIt quickly runs back into the dense shrubs.";
+				showOutcome=true;
+				showEvent = false;
+			}
+		}
+		else{ // he/she doesn't
+			if(eventRoll>=0){
+				// good result
+				outcomeText = "You try to kill the rabbit with some nearby stones,\nbut it quickly dodges away!";
+				showOutcome=true;
+				showEvent = false;
+			}/*
+			else{
+				// bad result
+				outcomeText = "You waste hours trying to chase down the dall sheep\nand are still unable to kill it";
+				showOutcome=true;
+				showEvent = false;
+			}
+			*/
+		}
+	}
+	if(GUILayout.Button("Run Away!")){
+		Debug.Log("...pussy.");
+		// try to run away.
+		if(eventRoll>=20){
+			// good result
+			outcomeText = "You managed to escape from the ferocious hare!\nYour heart is racing.";
+			showOutcome=true;
+			showEvent = false;
+		}
+		else{
+			// bad result
+			outcomeText = "You try to go the other way but your dogs attempt to follow the rabbit!";
+			// TODO: sled damaged/loose supplies
+			showOutcome=true;
+			showEvent = false;
+		}
+	}
+	
+	
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}
+/***** END EVENT 5 ******/
+
+/***** START EVENT 6 ****/
+// event for ptarmigan counter
+function createEvent6(){
+	GUILayout.BeginVertical();
+	
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("What will you do?");
+	GUILayout.FlexibleSpace();
+	GUILayout.BeginHorizontal();
+	
+	if(GUILayout.Button("Fight")){
+		Debug.Log("Fight!");
+		//TODO: add outcome effect
+		if(PlayerPrefs.GetInt("BulletsCount")>=1){ // player has enough bullets to potentially kill the animal
+		
+			if(eventRoll>=20){
+				// good result
+				outcomeText = "You shoot the ptarmigan out of the tree with a single shot!";
+				showOutcome=true;
+				showEvent = false;
+			}
+			else{
+				// bad result
+				outcomeText = "You shoot at the ptarmigan but can not hit it.\nIt flies away startled.";
+				showOutcome=true;
+				showEvent = false;
+			}
+		}
+		else{ // he/she doesn't
+			if(eventRoll>=80){
+				// good result
+				outcomeText = "You manage to hit the ptarmigan with a rather large stone!\nIt drops out of the tree dead.";
+				showOutcome=true;
+				showEvent = false;
+			}
+			else{
+				// bad result
+				outcomeText = "As you are about to throw a stone at the ptarmigan your dogs bark,\nsppoking the ptarmigan! It flies away.";
+				showOutcome=true;
+				showEvent = false;
+			}
+			
+		}
+	}
+	if(GUILayout.Button("Run Away!")){
+		Debug.Log("...pussy.");
+		// try to run away.
+		if(eventRoll>=20){
+			// good result
+			outcomeText = "You turn tail and flee as the vicious ptarmigan stares you down menacingly!";
+			showOutcome=true;
+			showEvent = false;
+		}
+		else{
+			// bad result
+			outcomeText = "You try to run... but your dogs give chase!\nThey run you through the thick woods, damaging the sled.";
+			// TODO: sled damaged/loose supplies
+			showOutcome=true;
+			showEvent = false;
+		}
+	}
+	
+	
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}
+/***** END EVENT 6 ******/
+
+/***** START EVENT 7 ****/
+// event for stray cat encounter
+function createEvent7(){
+	GUILayout.BeginVertical();
+	
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("What will you do?");
+	GUILayout.FlexibleSpace();
+	GUILayout.BeginHorizontal();
+	
+	if(GUILayout.Button("Fight")){
+		Debug.Log("Fight!");
+		//TODO: add outcome effect
+		if(PlayerPrefs.GetInt("BulletsCount")>=1){ // player has enough bullets to potentially kill the animal
+		
+			if(eventRoll>=20){
+				// good result
+				outcomeText = "You manage to shoot the stray cat. You monster!";
+				showOutcome=true;
+				showEvent = false;
+			}
+			else{
+				// bad result
+				outcomeText = "The nimble house cat evades your bullet fire and flees into the woods!";
+				showOutcome=true;
+				showEvent = false;
+			}
+		}
+		else{ // he/she doesn't
+			if(eventRoll>=90){
+				// good result
+				outcomeText = "You attempt to sneak up on the cat to take it down.\nBut it sees you coming and flees!";
+				showOutcome=true;
+				showEvent = false;
+			}
+			else{
+				// bad result
+				outcomeText = "The crazed house cat attacks one of your dogs!\nYou chase the cat away but your dog is injured";
+				showOutcome=true;
+				showEvent = false;
+			}
+			
+		}
+	}
+	if(GUILayout.Button("Run Away!")){
+		Debug.Log("...pussy.");
+		// try to run away.
+		if(eventRoll>=5){
+			// good result
+			outcomeText = "You leave the cat to be and continue on your way.";
+			showOutcome=true;
+			showEvent = false;
+		}
+		else{
+			// bad result
+			outcomeText = "Your dogs refuse to leave. They pursue the cat to no avail\nbut run the sled through thick shrubs, damaging the runners!";
+			// TODO: sled damaged/loose supplies
+			showOutcome=true;
+			showEvent = false;
+		}
+	}
+	
+	
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}
+/***** END EVENT 7 ******/
+
+/***** START EVENT 8 ****/
+// event for reindeer encounter
+function createEvent8(){
+	GUILayout.BeginVertical();
+	
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("What will you do?");
+	GUILayout.FlexibleSpace();
+	GUILayout.BeginHorizontal();
+	
+	if(GUILayout.Button("Fight")){
+		Debug.Log("Fight!");
+		//TODO: add outcome effect
+		if(PlayerPrefs.GetInt("BulletsCount")>=5){ // player has enough bullets to potentially kill the animal
+		
+			if(eventRoll>=20){
+				// good result
+				outcomeText = "You bring the reindeer down without sustaining any injuries!";
+				showOutcome=true;
+				showEvent = false;
+			}
+			else{
+				// bad result
+				outcomeText = "You hit the reindeer, but it's just a flesh wound.\nYou lose precious time tracking it but can not find it!";
+				showOutcome=true;
+				showEvent = false;
+			}
+		}
+		else{ // he/she doesn't
+			if(eventRoll>=50){
+				// good result
+				outcomeText = "With limited ammo, you fail to kill the reindeer.\nIt flees into the woods!";
+				showOutcome=true;
+				showEvent = false;
+			}
+			else{
+				// bad result
+				outcomeText = "With limited ammo, you simply anger the reindeer.\nIt charges, damaging your sled and injuring your dogs before running away!";
+				showOutcome=true;
+				showEvent = false;
+			}
+			
+		}
+	}
+	if(GUILayout.Button("Run Away!")){
+		Debug.Log("...pussy.");
+		// try to run away.
+		if(eventRoll>=20){
+			// good result
+			outcomeText = "You leave the reindeer alone and continue on the path.";
+			showOutcome=true;
+			showEvent = false;
+		}
+		else{
+			// bad result
+			outcomeText = "You turn to leave the reindeer alone, but he charges at you!";
+			// TODO: sled damaged/loose supplies/ and/or dogs/player injured.
+			showOutcome=true;
+			showEvent = false;
+		}
+	}
+	
+	
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}
+/***** END EVENT 8 ******/
+
+/***** START EVENT 9 ****/
+// event for squirrel encounter
+function createEvent9(){
+	GUILayout.BeginVertical();
+	
+	GUILayout.FlexibleSpace();
+	GUILayout.Label("What will you do?");
+	GUILayout.FlexibleSpace();
+	GUILayout.BeginHorizontal();
+	
+	if(GUILayout.Button("Fight")){
+		Debug.Log("Fight!");
+		//TODO: add outcome effect
+		if(PlayerPrefs.GetInt("BulletsCount")>=1){ // player has enough bullets to potentially kill the animal
+		
+			if(eventRoll>=20){
+				// good result
+				outcomeText = "Although the squirrel is quite nimble you manage to shoot it!";
+				showOutcome=true;
+				showEvent = false;
+			}
+			else{
+				// bad result
+				var temp : int = PlayerPrefs.GetInt("BulletsCount");
+				if(temp>5){
+					outcomeText = "Your fire 5 bullets but are unable to shoot the squirrel!";
+					PlayerPrefs.SetInt("BulletsCount", temp-5);
+				}
+				else{
+					outcomeText = "You fire "+temp+" bullets but are unable to shoot the squirrel!";
+					PlayerPrefs.SetInt("BulletsCount", 0);
+				}
+				showOutcome=true;
+				showEvent = false;
+			}
+		}
+		else{ // he/she doesn't
+			if(eventRoll>=80){
+				// good result
+				outcomeText = "You manage to kill the squirrel without any ammo!";
+				showOutcome=true;
+				showEvent = false;
+			}
+			else{
+				// bad result
+				outcomeText = "You fail to kill the squirrel! Your dogs seem disappointed in you...";
+				showOutcome=true;
+				showEvent = false;
+			}
+			
+		}
+	}
+	if(GUILayout.Button("Run Away!")){
+		Debug.Log("...pussy.");
+		// try to run away.
+		if(eventRoll>=5){
+			// good result
+			outcomeText = "You fle in terror at the sight of the scary squirrel!";
+			showOutcome=true;
+			showEvent = false;
+		}
+		else{
+			// bad result
+			outcomeText = "Your dogs are so ashamed at running from a squirrel they slow their pace to match their mood.";
+			// TODO: pace slows
+			showOutcome=true;
+			showEvent = false;
+		}
+	}
+	
+	
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}
+/***** END EVENT 9 ******/
+
+/***** START EVENT 10 ***/
+// other dog team encounter
+//TODO: code in or scrap event 10
+/***** END EVENT 10 ****/
+
+/**** START EVENT 11 ***/
+// robbers attack/steal from you
+function createEvent11(){
+	GUILayout.BeginVertical();
+	GUILayout.FlexibleSpace();
+	if(eventRoll>=90){
+		// really good
+		GUILayout.Label("Your team intimidates the robbers and they decide to leave you be!");
+
+	}
+	else if(eventRoll>=30 && eventRoll <90){
+		// not bad
+		GUILayout.Label("The robbers attack and make off with some of your supplies!");
+		//TODO: lose supplies
+
+	}
+	else{
+		// bad
+		GUILayout.Label("The robbers attack you and your team, injuring you and your dogs!\nThey leave you bleeding and take off with some of your supplies");
+		//TODO: player/dog(s) injured and supplies lost.
+
+	}
+	GUILayout.FlexibleSpace();
+	GUILayout.BeginHorizontal();
+	if(GUILayout.Button("OK")){
+		showOutcome=false;
+		showEvent=false;
+	}
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}	
+
+/**** START EVENT 12 ***/
+// trader joe encounter
+function createEvent12(){
+	GUILayout.BeginVertical();
+	GUILayout.Label("Not yet implemented");
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	// TODO: add in trading capabilities with trader joe.
+	if(GUILayout.Button("OK")){
+		showOutcome=false;
+		showEvent=false;
+	}
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}	
+/**** END EVENT 12 ****/
+
+/**** START EVENT 13 ***/
+// Heavy fog rolls in
+function createEvent13(){
+	GUILayout.BeginVertical();
+	GUILayout.Label("What will you do?");
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	if(GUILayout.Button("Wait it out")){
+		//TODO: time passes, weather effect leaves
+		outcomeText = "You hunker down and wait out the weather.";
+		showOutcome=true;
+		showEvent=false;
+	}
+	if(GUILayout.Button("Try to mush on")){
+		if(eventRoll>=30){
+			// good outcome
+			outcomeText = "You try to continue forward. Your pace is slower but the going seems to be ok";
+			showOutcome=true;
+			showEvent=false;
+			//TODO: add in weather effect.
+		}
+		else{
+			// bad outcome
+			outcomeText = "You try to continue forward, but lose your direction in the fog!";
+			showOutcome=true;
+			showEvent=false;
+			//TODO: player is further away from the next village than when they started.
+		}
+	}
+
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}	
+/**** END EVENT 13 ****/
+
+/**** START EVENT 14 ***/
+// Intense sunlight
+function createEvent14(){
+	GUILayout.BeginVertical();
+	GUILayout.Label("What will you do?");
+	GUILayout.BeginHorizontal();
+	GUILayout.FlexibleSpace();
+	if(GUILayout.Button("Wait it out")){
+		//TODO: time passes, weather effect leaves
+		outcomeText = "You set up a temporary camp in the shade and wait it out.";
+		showOutcome=true;
+		showEvent=false;
+	}
+	if(GUILayout.Button("Try to mush on")){
+		if(eventRoll>=30){
+			// good outcome
+			outcomeText = "You try to continue forward. Your pace is slower but the going seems to be ok";
+			showOutcome=true;
+			showEvent=false;
+			//TODO: add in weather effect.
+		}
+		else{
+			// bad outcome
+			outcomeText = "You try to continue forward, but are blinded by the light!\nYou accidentally veer off the trail, damaging your sled.";
+			showOutcome=true;
+			showEvent=false;
+			//TODO: 
+		}
+	}
+
+	GUILayout.FlexibleSpace();
+	GUILayout.EndHorizontal();
+	GUILayout.EndVertical();
+}	
+/**** END EVENT 13 ****/
