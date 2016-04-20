@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\RestScreen.js" />
      <Compile Include="Assets\Scripts\SceneFade.js" />
      <Compile Include="Assets\Scripts\ShopFunctionality.js" />
+     <Compile Include="Assets\Scripts\ShopGUI.js" />
      <Compile Include="Assets\Scripts\TavernGUI.js" />
      <Compile Include="Assets\Scripts\TavernRumors.js" />
      <Compile Include="Assets\Scripts\TimeScript.js" />
