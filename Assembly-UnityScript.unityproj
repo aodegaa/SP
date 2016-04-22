@@ -50,7 +50,6 @@
      <Compile Include="Assets\Scripts\CharacterCreation.js" />
      <Compile Include="Assets\Scripts\City.js" />
      <Compile Include="Assets\Scripts\Event.js" />
-     <Compile Include="Assets\Scripts\EventScreen.js" />
      <Compile Include="Assets\Scripts\GoToInn.js" />
      <Compile Include="Assets\Scripts\GoToMap.js" />
      <Compile Include="Assets\Scripts\GoToStore.js" />
@@ -69,7 +68,6 @@
      <Compile Include="Assets\Scripts\ShopGUI.js" />
      <Compile Include="Assets\Scripts\TavernGUI.js" />
      <Compile Include="Assets\Scripts\TavernRumors.js" />
-     <Compile Include="Assets\Scripts\TimeScript.js" />
      <Compile Include="Assets\Scripts\Title.js" />
      <Compile Include="Assets\Scripts\TownGUI.js" />
      <Compile Include="Assets\Scripts\Travel.js" />

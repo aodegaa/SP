@@ -20,6 +20,8 @@ var townName : String;
 var townNameStyle : GUIStyle;
 private var townID : int;
 
+var storeDateTimeStyle : GUIStyle;
+
 private var manageButtonText : String = "Check The Situation";
 var manageButtonStyle : GUIStyle;
 
@@ -46,11 +48,11 @@ function Update()
 
 function OnGUI()
 {
-	GUI.Label(Rect(200, 10, 100, 100), GUIContent(townName), townNameStyle);
+	GUI.Label(Rect(Screen.width/2 - 100, 20, 200, 20), GUIContent(townName), townNameStyle);
 	
 	// create time window, set to be in top right hand corner of the screen
 	var townWindow : Rect = Rect(Screen.width-120, 0, 120, 65);
-	townWindow = GUI.Window(5, townWindow, TownInformation,"Current Time");
+	townWindow = GUI.Window(5, townWindow, TownInformation,"");
 
 	if (GUI.Button(Rect((Screen.width - 700), (Screen.height - 40), 60, 50), GUIContent(manageButtonText), manageButtonStyle))
 	{
@@ -58,7 +60,7 @@ function OnGUI()
 
 	if (GUI.Button(Rect((Screen.width - 260), (Screen.height - 40), 60, 50), GUIContent(leaveStoreButtonText), leaveStoreButtonStyle))
 	{
-
+		Application.LoadLevel("03TownScene");
 	}
 }
 

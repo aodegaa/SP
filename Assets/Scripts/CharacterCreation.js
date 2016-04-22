@@ -144,6 +144,6 @@ function CharacterCreation()
         
         //wait a few seconds and change scene
         yield WaitForSeconds(4);
-        Application.LoadLevel("03townconcept");		//change later
+        Application.LoadLevel("03TownScene");		//change later
 	}
 }

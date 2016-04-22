@@ -1,9 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WindowScript.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Intro.js">
     <Files>
-      <File FileName="Assets\Scripts\ManageScreen.js" Line="12" Column="2" />
-      <File FileName="Assets\Scripts\WindowScript.js" Line="421" Column="2" />
+      <File FileName="Assets\Scripts\ShopGUI.js" Line="55" Column="59" />
+      <File FileName="Assets\Scripts\ManageScreen.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\WindowScript.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CharacterCreation.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Intro.js" Line="27" Column="50" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
